@@ -2315,7 +2315,36 @@
   <entry>
     <title>CentOS 终端美化</title>
     <url>/20200905/centos-terminal/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>效果如下</p>
+<p><img src="/images/post/202009/centos-terminal.jpg" alt="&#39;效果图&#39;"></p>
+<a id="more"></a>
+
+<ul>
+<li>安装 <code>git</code>、<code>fonts-powerline</code> 字体和 <code>zsh</code>（已安装可以忽略）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install git fonts-powerline zsh -y</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装 <code>oh-my-zsh</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>切换主题为 <code>agnosterzak</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.oh-my-zsh/themes</span><br><span class="line">wget https://raw.githubusercontent.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterzak.zsh-theme</span><br></pre></td></tr></table></figure>
+
+<p>编辑 <code>~/.zshrc</code> 文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>找到 <code>ZSH_THEME</code> 字段，将值设置为 <code>agnosterzak</code></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">.....</span><br><span class="line"><span class="attr">ZSH_THEME</span>=agnosterzak</span><br><span class="line">.....</span><br></pre></td></tr></table></figure>
+
+<p>重新生效配置即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
       <categories>
         <category>教程</category>
       </categories>
