@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.esprodrigo.cn/"/>
-  <updated>2020-08-30T01:27:03.443Z</updated>
+  <updated>2020-09-05T14:03:28.927Z</updated>
   <id>https://www.esprodrigo.cn/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CentOS 终端美化</title>
+    <link href="https://www.esprodrigo.cn/20200905/centos-terminal/"/>
+    <id>https://www.esprodrigo.cn/20200905/centos-terminal/</id>
+    <published>2020-09-05T14:02:30.000Z</published>
+    <updated>2020-09-05T14:03:28.927Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="教程" scheme="https://www.esprodrigo.cn/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+      <category term="美化" scheme="https://www.esprodrigo.cn/tags/%E7%BE%8E%E5%8C%96/"/>
+    
+      <category term="终端" scheme="https://www.esprodrigo.cn/tags/%E7%BB%88%E7%AB%AF/"/>
+    
+      <category term="教程" scheme="https://www.esprodrigo.cn/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>中文文案排版指南</title>
