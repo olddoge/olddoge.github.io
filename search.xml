@@ -31,296 +31,6 @@
       </tags>
   </entry>
   <entry>
-    <title>中文文案排版指南</title>
-    <url>/20200829/chinese-copywrite-guide/</url>
-    <content><![CDATA[<h1 id="中文文案排版指南"><a href="#中文文案排版指南" class="headerlink" title="中文文案排版指南"></a>中文文案排版指南</h1><p>统一中文文案、排版的相关用法，降低团队成员之间的沟通成本，增强网站气质。</p>
-<hr>
-<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><p>「有研究显示，打字的时候不喜欢在中文和英文之间加空格的人，感情路都走得很辛苦，有七成的比例会在 34 岁的时候跟自己不爱的人结婚，而其余三成的人最后只能把遗产留给自己的猫。 毕竟爱情跟书写都需要适时地留白。</p>
-<p>与大家共勉之。」——<a href="https://github.com/vinta/pangu.js" target="_blank" rel="noopener">vinta/paranoid-auto-spacing</a></p>
-<a id="more"></a>
-
-<h3 id="中英文之间需要增加空格"><a href="#中英文之间需要增加空格" class="headerlink" title="中英文之间需要增加空格"></a>中英文之间需要增加空格</h3><p>正确：</p>
-<blockquote>
-<p>在 LeanCloud 上，数据存储是围绕 <code>AVObject</code> 进行的。</p>
-</blockquote>
-<p>错误：</p>
-<blockquote>
-<p>在LeanCloud上，数据存储是围绕<code>AVObject</code>进行的。</p>
-<p>在 LeanCloud上，数据存储是围绕<code>AVObject</code> 进行的。</p>
-</blockquote>
-<p>完整的正确用法：</p>
-<blockquote>
-<p>在 LeanCloud 上，数据存储是围绕 <code>AVObject</code> 进行的。 每个 <code>AVObject</code> 都包含了与 JSON 兼容的 key-value 对应的数据。 数据是 schema-free 的，你不需要在每个 <code>AVObject</code> 上提前指定存在哪些键，只要直接设定对应的 key-value 即可。</p>
-</blockquote>
-<p>例外：「豆瓣FM」等产品名词，按照官方所定义的格式书写。</p>
-<h3 id="中文与数字之间需要增加空格"><a href="#中文与数字之间需要增加空格" class="headerlink" title="中文与数字之间需要增加空格"></a>中文与数字之间需要增加空格</h3><p>正确：</p>
-<blockquote>
-<p>今天出去买菜花了 5000 元。</p>
-</blockquote>
-<p>错误：</p>
-<blockquote>
-<p>今天出去买菜花了 5000元。</p>
-<p>今天出去买菜花了5000元。</p>
-</blockquote>
-<h3 id="数字与单位之间需要增加空格"><a href="#数字与单位之间需要增加空格" class="headerlink" title="数字与单位之间需要增加空格"></a>数字与单位之间需要增加空格</h3><p>正确：</p>
-<blockquote>
-<p>我家的光纤入屋宽频有 10 Gbps，SSD 一共有 20 TB</p>
-</blockquote>
-<p>错误：</p>
-<blockquote>
-<p>我家的光纤入屋宽频有 10Gbps，SSD 一共有 20TB</p>
-</blockquote>
-<p>例外：度 / 百分比与数字之间不需要增加空格：</p>
-<p>正确：</p>
-<blockquote>
-<p>今天是 233° 的高温。</p>
-<p>新 MacBook Pro 有 15% 的 CPU 性能提升。</p>
-</blockquote>
-<p>错误：</p>
-<blockquote>
-<p>今天是 233 ° 的高温。</p>
-<p>新 MacBook Pro 有 15 % 的 CPU 性能提升。</p>
-</blockquote>
-<h3 id="全角标点与其他字符之间不加空格"><a href="#全角标点与其他字符之间不加空格" class="headerlink" title="全角标点与其他字符之间不加空格"></a>全角标点与其他字符之间不加空格</h3><p>正确：</p>
-<blockquote>
-<p>刚刚买了一部 iPhone，好开心！</p>
-</blockquote>
-<p>错误：</p>
-<blockquote>
-<p>刚刚买了一部 iPhone ，好开心！</p>
-<p>刚刚买了一部 iPhone， 好开心！</p>
-</blockquote>
-<h3 id="用-text-spacing-来挽救？"><a href="#用-text-spacing-来挽救？" class="headerlink" title="用 text-spacing 来挽救？"></a>用 <code>text-spacing</code> 来挽救？</h3><p>CSS Text Module Level 4 的 <a href="https://www.w3.org/TR/css-text-4/#text-spacing-property" target="_blank" rel="noopener"><code>text-spacing</code></a> 和 Microsoft 的 <a href="http://msdn.microsoft.com/en-us/library/ie/ms531164(v=vs.85).aspx" target="_blank" rel="noopener"><code>-ms-text-autospace</code></a> 可以实现自动为中英文之间增加空白。不过目前并未普及，另外在其他应用场景，例如 macOS、iOS、Windows 等用户介面目前并不存在这个特性，所以请继续保持随手加空格的习惯。</p>
-<h2 id="标点符号"><a href="#标点符号" class="headerlink" title="标点符号"></a>标点符号</h2><h3 id="不重复使用标点符号"><a href="#不重复使用标点符号" class="headerlink" title="不重复使用标点符号"></a>不重复使用标点符号</h3><p>正确：</p>
-<blockquote>
-<p>德国队竟然战胜了巴西队！</p>
-<p>她竟然对你说「喵」？！</p>
-</blockquote>
-<p>错误：</p>
-<blockquote>
-<p>德国队竟然战胜了巴西队！！</p>
-<p>德国队竟然战胜了巴西队！！！！！！！！</p>
-<p>她竟然对你说「喵」？？！！</p>
-<p>她竟然对你说「喵」？！？！？？！！</p>
-</blockquote>
-<h2 id="全角和半角"><a href="#全角和半角" class="headerlink" title="全角和半角"></a>全角和半角</h2><p>不明白什么是全角（全形）与半角（半形）符号？请查看维基百科词条『<a href="http://zh.wikipedia.org/wiki/%E5%85%A8%E5%BD%A2%E5%92%8C%E5%8D%8A%E5%BD%A2" target="_blank" rel="noopener">全形和半形</a>』。</p>
-<h3 id="使用全角中文标点"><a href="#使用全角中文标点" class="headerlink" title="使用全角中文标点"></a>使用全角中文标点</h3><p>正确：</p>
-<blockquote>
-<p>嗨！你知道嘛？今天前台的小妹跟我说「喵」了哎！</p>
-<p>核磁共振成像（NMRI）是什么原理都不知道？JFGI！</p>
-</blockquote>
-<p>错误：</p>
-<blockquote>
-<p>嗨! 你知道嘛? 今天前台的小妹跟我说 “喵” 了哎！</p>
-<p>嗨!你知道嘛?今天前台的小妹跟我说”喵”了哎！</p>
-<p>核磁共振成像 (NMRI) 是什么原理都不知道? JFGI!</p>
-<p>核磁共振成像(NMRI)是什么原理都不知道?JFGI!</p>
-</blockquote>
-<h3 id="数字使用半角字符"><a href="#数字使用半角字符" class="headerlink" title="数字使用半角字符"></a>数字使用半角字符</h3><p>正确：</p>
-<blockquote>
-<p>这件蛋糕只卖 1000 元。</p>
-</blockquote>
-<p>错误：</p>
-<blockquote>
-<p>这件蛋糕只卖 １０００ 元。</p>
-</blockquote>
-<p>例外：在设计稿、宣传海报中如出现极少量数字的情形时，为方便文字对齐，是可以使用全形数字的。</p>
-<h3 id="遇到完整的英文整句、特殊名词，其内容使用半角标点"><a href="#遇到完整的英文整句、特殊名词，其内容使用半角标点" class="headerlink" title="遇到完整的英文整句、特殊名词，其内容使用半角标点"></a>遇到完整的英文整句、特殊名词，其内容使用半角标点</h3><p>正确：</p>
-<blockquote>
-<p>贾伯斯那句话是怎么说的？「Stay hungry, stay foolish.」</p>
-<p>推荐你阅读《Hackers &amp; Painters: Big Ideas from the Computer Age》，非常的有趣。</p>
-</blockquote>
-<p>错误：</p>
-<blockquote>
-<p>贾伯斯那句话是怎么说的？「Stay hungry，stay foolish。」</p>
-<p>推荐你阅读《Hackers＆Painters：Big Ideas from the Computer Age》，非常的有趣。</p>
-</blockquote>
-<h2 id="名词"><a href="#名词" class="headerlink" title="名词"></a>名词</h2><h3 id="专有名词使用正确的大小写"><a href="#专有名词使用正确的大小写" class="headerlink" title="专有名词使用正确的大小写"></a>专有名词使用正确的大小写</h3><p>大小写相关用法原属于英文书写范畴，不属于本 wiki 讨论内容，在这里只对部分易错用法进行简述。</p>
-<p>正确：</p>
-<blockquote>
-<p>使用 GitHub 登录</p>
-<p>我们的客户有 GitHub、Foursquare、Microsoft Corporation、Google、Facebook, Inc.。</p>
-</blockquote>
-<p>错误：</p>
-<blockquote>
-<p>使用 github 登录</p>
-<p>使用 GITHUB 登录</p>
-<p>使用 Github 登录</p>
-<p>使用 gitHub 登录</p>
-<p>使用 gｲんĤЦ8 登录</p>
-<p>我们的客户有 github、foursquare、microsoft corporation、google、facebook, inc.。</p>
-<p>我们的客户有 GITHUB、FOURSQUARE、MICROSOFT CORPORATION、GOOGLE、FACEBOOK, INC.。</p>
-<p>我们的客户有 Github、FourSquare、MicroSoft Corporation、Google、FaceBook, Inc.。</p>
-<p>我们的客户有 gitHub、fourSquare、microSoft Corporation、google、faceBook, Inc.。</p>
-<p>我们的客户有 gｲんĤЦ8、ｷouЯƧquﾑгє、๓เςг๏ร๏Ŧt ς๏гק๏гคtเ๏ภn、900913、ƒ4ᄃëв๏๏к, IПᄃ.。</p>
-</blockquote>
-<p>注意：当网页中需要配合整体视觉风格而出现全部大写／小写的情形，HTML 中请使用标淮的大小写规范进行书写；并通过 <code>text-transform: uppercase;</code>／<code>text-transform: lowercase;</code> 对表现形式进行定义。</p>
-<h3 id="不要使用不地道的缩写"><a href="#不要使用不地道的缩写" class="headerlink" title="不要使用不地道的缩写"></a>不要使用不地道的缩写</h3><p>正确：</p>
-<blockquote>
-<p>我们需要一位熟悉 JavaScript、HTML5，至少理解一种框架（如 Backbone.js、AngularJS、React 等）的前端开发者。</p>
-</blockquote>
-<p>错误：</p>
-<blockquote>
-<p>我们需要一位熟悉 Js、h5，至少理解一种框架（如 backbone、angular、RJS 等）的 FED。</p>
-</blockquote>
-<h2 id="争议"><a href="#争议" class="headerlink" title="争议"></a>争议</h2><p>以下用法略带有个人色彩，即：无论是否遵循下述规则，从语法的角度来讲都是<strong>正确</strong>的。</p>
-<h3 id="链接之间增加空格"><a href="#链接之间增加空格" class="headerlink" title="链接之间增加空格"></a>链接之间增加空格</h3><p>用法：</p>
-<blockquote>
-<p>请 <a href="#">提交一个 issue</a> 并分配给相关同事。</p>
-<p>访问我们网站的最新动态，请 <a href="#">点击这里</a> 进行订阅！</p>
-</blockquote>
-<p>对比用法：</p>
-<blockquote>
-<p>请<a href="#">提交一个 issue</a>并分配给相关同事。</p>
-<p>访问我们网站的最新动态，请<a href="#">点击这里</a>进行订阅！</p>
-</blockquote>
-<h3 id="简体中文使用直角引号"><a href="#简体中文使用直角引号" class="headerlink" title="简体中文使用直角引号"></a>简体中文使用直角引号</h3><p>用法：</p>
-<blockquote>
-<p>「老师，『有条不紊』的『紊』是什么意思？」</p>
-</blockquote>
-<p>对比用法：</p>
-<blockquote>
-<p>“老师，‘有条不紊’的‘紊’是什么意思？”</p>
-</blockquote>
-<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><table>
-<thead>
-<tr>
-<th>仓库</th>
-<th>语言</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://github.com/vinta/paranoid-auto-spacing" target="_blank" rel="noopener">vinta/paranoid-auto-spacing</a></td>
-<td>JavaScript</td>
-</tr>
-<tr>
-<td><a href="https://github.com/huei90/pangu.node" target="_blank" rel="noopener">huei90/pangu.node</a></td>
-<td>Node.js</td>
-</tr>
-<tr>
-<td><a href="https://github.com/huacnlee/auto-correct" target="_blank" rel="noopener">huacnlee/auto-correct</a></td>
-<td>Ruby</td>
-</tr>
-<tr>
-<td><a href="https://github.com/sparanoid/space-lover" target="_blank" rel="noopener">sparanoid/space-lover</a></td>
-<td>PHP (WordPress)</td>
-</tr>
-<tr>
-<td><a href="https://github.com/NauxLiu/auto-correct" target="_blank" rel="noopener">nauxliu/auto-correct</a></td>
-<td>PHP</td>
-</tr>
-<tr>
-<td><a href="https://github.com/jxlwqq/chinese-typesetting" target="_blank" rel="noopener">jxlwqq/chinese-typesetting</a></td>
-<td>PHP</td>
-</tr>
-<tr>
-<td><a href="https://github.com/hotoo/pangu.vim" target="_blank" rel="noopener">hotoo/pangu.vim</a></td>
-<td>Vim</td>
-</tr>
-<tr>
-<td><a href="https://github.com/sparanoid/grunt-auto-spacing" target="_blank" rel="noopener">sparanoid/grunt-auto-spacing</a></td>
-<td>Node.js (Grunt)</td>
-</tr>
-<tr>
-<td><a href="https://github.com/hjiang/scripts/blob/master/add-space-between-latin-and-cjk" target="_blank" rel="noopener">hjiang/scripts/add-space-between-latin-and-cjk</a></td>
-<td>Python</td>
-</tr>
-<tr>
-<td><a href="https://github.com/hustcc/hint" target="_blank" rel="noopener">hustcc/hint</a></td>
-<td>Python</td>
-</tr>
-</tbody></table>
-<h2 id="谁在这样做？"><a href="#谁在这样做？" class="headerlink" title="谁在这样做？"></a>谁在这样做？</h2><table>
-<thead>
-<tr>
-<th>网站</th>
-<th>文案</th>
-<th>UGC</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="http://www.apple.com/cn/" target="_blank" rel="noopener">Apple 中国</a></td>
-<td>是</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><a href="http://www.apple.com/hk/" target="_blank" rel="noopener">Apple 香港</a></td>
-<td>是</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><a href="http://www.apple.com/tw/" target="_blank" rel="noopener">Apple 台湾</a></td>
-<td>是</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><a href="http://www.microsoft.com/zh-cn/" target="_blank" rel="noopener">Microsoft 中国</a></td>
-<td>是</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><a href="http://www.microsoft.com/zh-hk/" target="_blank" rel="noopener">Microsoft 香港</a></td>
-<td>是</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><a href="http://www.microsoft.com/zh-tw/" target="_blank" rel="noopener">Microsoft 台湾</a></td>
-<td>是</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><a href="https://leancloud.cn/" target="_blank" rel="noopener">LeanCloud</a></td>
-<td>是</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><a href="https://www.v2ex.com/" target="_blank" rel="noopener">V2EX</a></td>
-<td>是</td>
-<td>是</td>
-</tr>
-<tr>
-<td><a href="http://apple4us.com/" target="_blank" rel="noopener">Apple4us</a></td>
-<td>是</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><a href="https://ruby-china.org/" target="_blank" rel="noopener">Ruby China</a></td>
-<td>是</td>
-<td>标题达成</td>
-</tr>
-<tr>
-<td><a href="https://phphub.org/" target="_blank" rel="noopener">PHPHub</a></td>
-<td>是</td>
-<td>标题达成</td>
-</tr>
-<tr>
-<td><a href="http://sspai.com/" target="_blank" rel="noopener">少数派</a></td>
-<td>是</td>
-<td>N/A</td>
-</tr>
-</tbody></table>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li><a href="http://grammar.about.com/od/punctuationandmechanics/a/Guidelines-For-Using-Capital-Letters.htm" target="_blank" rel="noopener">Guidelines for Using Capital Letters - About.com</a></li>
-<li><a href="http://en.wikipedia.org/wiki/Letter_case" target="_blank" rel="noopener">Letter case - Wikipedia</a></li>
-<li><a href="http://www.oxforddictionaries.com/words/punctuation" target="_blank" rel="noopener">Punctuation - Oxford Dictionaries</a></li>
-<li><a href="https://owl.english.purdue.edu/owl/section/1/6/" target="_blank" rel="noopener">Punctuation - The Purdue OWL</a></li>
-<li><a href="http://www.wikihow.com/Use-English-Punctuation-Correctly" target="_blank" rel="noopener">How to Use English Punctuation Correctly - wikiHow</a></li>
-<li><a href="https://zh.opensuse.org/index.php?title=Help:%E6%A0%BC%E5%BC%8F" target="_blank" rel="noopener">格式 - openSUSE</a></li>
-<li><a href="http://zh.wikipedia.org/wiki/%E5%85%A8%E5%BD%A2%E5%92%8C%E5%8D%8A%E5%BD%A2" target="_blank" rel="noopener">全形和半形 - 维基百科</a></li>
-<li><a href="http://zh.wikipedia.org/wiki/%E5%BC%95%E8%99%9F" target="_blank" rel="noopener">引号 - 维基百科</a></li>
-<li><a href="http://zh.wikipedia.org/wiki/%E7%96%91%E5%95%8F%E9%A9%9A%E5%98%86%E8%99%9F" target="_blank" rel="noopener">疑问惊叹号 - 维基百科</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>文档</category>
-      </categories>
-      <tags>
-        <tag>排版</tag>
-        <tag>写作</tag>
-        <tag>指南</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>PHP 的代码整洁之道（英文原版）</title>
     <url>/20190904/clean-code-php-en/</url>
     <content><![CDATA[<p>Software engineering principles, from Robert C. Martin’s book<br><a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882" target="_blank" rel="noopener"><em>Clean Code</em></a>,<br>adapted for PHP. This is not a style guide. It’s a guide to producing<br>readable, reusable, and refactorable software in PHP.</p>
@@ -809,6 +519,296 @@
       </categories>
       <tags>
         <tag>php</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>中文文案排版指南</title>
+    <url>/20200829/chinese-copywrite-guide/</url>
+    <content><![CDATA[<h1 id="中文文案排版指南"><a href="#中文文案排版指南" class="headerlink" title="中文文案排版指南"></a>中文文案排版指南</h1><p>统一中文文案、排版的相关用法，降低团队成员之间的沟通成本，增强网站气质。</p>
+<hr>
+<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><p>「有研究显示，打字的时候不喜欢在中文和英文之间加空格的人，感情路都走得很辛苦，有七成的比例会在 34 岁的时候跟自己不爱的人结婚，而其余三成的人最后只能把遗产留给自己的猫。 毕竟爱情跟书写都需要适时地留白。</p>
+<p>与大家共勉之。」——<a href="https://github.com/vinta/pangu.js" target="_blank" rel="noopener">vinta/paranoid-auto-spacing</a></p>
+<a id="more"></a>
+
+<h3 id="中英文之间需要增加空格"><a href="#中英文之间需要增加空格" class="headerlink" title="中英文之间需要增加空格"></a>中英文之间需要增加空格</h3><p>正确：</p>
+<blockquote>
+<p>在 LeanCloud 上，数据存储是围绕 <code>AVObject</code> 进行的。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>在LeanCloud上，数据存储是围绕<code>AVObject</code>进行的。</p>
+<p>在 LeanCloud上，数据存储是围绕<code>AVObject</code> 进行的。</p>
+</blockquote>
+<p>完整的正确用法：</p>
+<blockquote>
+<p>在 LeanCloud 上，数据存储是围绕 <code>AVObject</code> 进行的。 每个 <code>AVObject</code> 都包含了与 JSON 兼容的 key-value 对应的数据。 数据是 schema-free 的，你不需要在每个 <code>AVObject</code> 上提前指定存在哪些键，只要直接设定对应的 key-value 即可。</p>
+</blockquote>
+<p>例外：「豆瓣FM」等产品名词，按照官方所定义的格式书写。</p>
+<h3 id="中文与数字之间需要增加空格"><a href="#中文与数字之间需要增加空格" class="headerlink" title="中文与数字之间需要增加空格"></a>中文与数字之间需要增加空格</h3><p>正确：</p>
+<blockquote>
+<p>今天出去买菜花了 5000 元。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>今天出去买菜花了 5000元。</p>
+<p>今天出去买菜花了5000元。</p>
+</blockquote>
+<h3 id="数字与单位之间需要增加空格"><a href="#数字与单位之间需要增加空格" class="headerlink" title="数字与单位之间需要增加空格"></a>数字与单位之间需要增加空格</h3><p>正确：</p>
+<blockquote>
+<p>我家的光纤入屋宽频有 10 Gbps，SSD 一共有 20 TB</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>我家的光纤入屋宽频有 10Gbps，SSD 一共有 20TB</p>
+</blockquote>
+<p>例外：度 / 百分比与数字之间不需要增加空格：</p>
+<p>正确：</p>
+<blockquote>
+<p>今天是 233° 的高温。</p>
+<p>新 MacBook Pro 有 15% 的 CPU 性能提升。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>今天是 233 ° 的高温。</p>
+<p>新 MacBook Pro 有 15 % 的 CPU 性能提升。</p>
+</blockquote>
+<h3 id="全角标点与其他字符之间不加空格"><a href="#全角标点与其他字符之间不加空格" class="headerlink" title="全角标点与其他字符之间不加空格"></a>全角标点与其他字符之间不加空格</h3><p>正确：</p>
+<blockquote>
+<p>刚刚买了一部 iPhone，好开心！</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>刚刚买了一部 iPhone ，好开心！</p>
+<p>刚刚买了一部 iPhone， 好开心！</p>
+</blockquote>
+<h3 id="用-text-spacing-来挽救？"><a href="#用-text-spacing-来挽救？" class="headerlink" title="用 text-spacing 来挽救？"></a>用 <code>text-spacing</code> 来挽救？</h3><p>CSS Text Module Level 4 的 <a href="https://www.w3.org/TR/css-text-4/#text-spacing-property" target="_blank" rel="noopener"><code>text-spacing</code></a> 和 Microsoft 的 <a href="http://msdn.microsoft.com/en-us/library/ie/ms531164(v=vs.85).aspx" target="_blank" rel="noopener"><code>-ms-text-autospace</code></a> 可以实现自动为中英文之间增加空白。不过目前并未普及，另外在其他应用场景，例如 macOS、iOS、Windows 等用户介面目前并不存在这个特性，所以请继续保持随手加空格的习惯。</p>
+<h2 id="标点符号"><a href="#标点符号" class="headerlink" title="标点符号"></a>标点符号</h2><h3 id="不重复使用标点符号"><a href="#不重复使用标点符号" class="headerlink" title="不重复使用标点符号"></a>不重复使用标点符号</h3><p>正确：</p>
+<blockquote>
+<p>德国队竟然战胜了巴西队！</p>
+<p>她竟然对你说「喵」？！</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>德国队竟然战胜了巴西队！！</p>
+<p>德国队竟然战胜了巴西队！！！！！！！！</p>
+<p>她竟然对你说「喵」？？！！</p>
+<p>她竟然对你说「喵」？！？！？？！！</p>
+</blockquote>
+<h2 id="全角和半角"><a href="#全角和半角" class="headerlink" title="全角和半角"></a>全角和半角</h2><p>不明白什么是全角（全形）与半角（半形）符号？请查看维基百科词条『<a href="http://zh.wikipedia.org/wiki/%E5%85%A8%E5%BD%A2%E5%92%8C%E5%8D%8A%E5%BD%A2" target="_blank" rel="noopener">全形和半形</a>』。</p>
+<h3 id="使用全角中文标点"><a href="#使用全角中文标点" class="headerlink" title="使用全角中文标点"></a>使用全角中文标点</h3><p>正确：</p>
+<blockquote>
+<p>嗨！你知道嘛？今天前台的小妹跟我说「喵」了哎！</p>
+<p>核磁共振成像（NMRI）是什么原理都不知道？JFGI！</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>嗨! 你知道嘛? 今天前台的小妹跟我说 “喵” 了哎！</p>
+<p>嗨!你知道嘛?今天前台的小妹跟我说”喵”了哎！</p>
+<p>核磁共振成像 (NMRI) 是什么原理都不知道? JFGI!</p>
+<p>核磁共振成像(NMRI)是什么原理都不知道?JFGI!</p>
+</blockquote>
+<h3 id="数字使用半角字符"><a href="#数字使用半角字符" class="headerlink" title="数字使用半角字符"></a>数字使用半角字符</h3><p>正确：</p>
+<blockquote>
+<p>这件蛋糕只卖 1000 元。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>这件蛋糕只卖 １０００ 元。</p>
+</blockquote>
+<p>例外：在设计稿、宣传海报中如出现极少量数字的情形时，为方便文字对齐，是可以使用全形数字的。</p>
+<h3 id="遇到完整的英文整句、特殊名词，其内容使用半角标点"><a href="#遇到完整的英文整句、特殊名词，其内容使用半角标点" class="headerlink" title="遇到完整的英文整句、特殊名词，其内容使用半角标点"></a>遇到完整的英文整句、特殊名词，其内容使用半角标点</h3><p>正确：</p>
+<blockquote>
+<p>贾伯斯那句话是怎么说的？「Stay hungry, stay foolish.」</p>
+<p>推荐你阅读《Hackers &amp; Painters: Big Ideas from the Computer Age》，非常的有趣。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>贾伯斯那句话是怎么说的？「Stay hungry，stay foolish。」</p>
+<p>推荐你阅读《Hackers＆Painters：Big Ideas from the Computer Age》，非常的有趣。</p>
+</blockquote>
+<h2 id="名词"><a href="#名词" class="headerlink" title="名词"></a>名词</h2><h3 id="专有名词使用正确的大小写"><a href="#专有名词使用正确的大小写" class="headerlink" title="专有名词使用正确的大小写"></a>专有名词使用正确的大小写</h3><p>大小写相关用法原属于英文书写范畴，不属于本 wiki 讨论内容，在这里只对部分易错用法进行简述。</p>
+<p>正确：</p>
+<blockquote>
+<p>使用 GitHub 登录</p>
+<p>我们的客户有 GitHub、Foursquare、Microsoft Corporation、Google、Facebook, Inc.。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>使用 github 登录</p>
+<p>使用 GITHUB 登录</p>
+<p>使用 Github 登录</p>
+<p>使用 gitHub 登录</p>
+<p>使用 gｲんĤЦ8 登录</p>
+<p>我们的客户有 github、foursquare、microsoft corporation、google、facebook, inc.。</p>
+<p>我们的客户有 GITHUB、FOURSQUARE、MICROSOFT CORPORATION、GOOGLE、FACEBOOK, INC.。</p>
+<p>我们的客户有 Github、FourSquare、MicroSoft Corporation、Google、FaceBook, Inc.。</p>
+<p>我们的客户有 gitHub、fourSquare、microSoft Corporation、google、faceBook, Inc.。</p>
+<p>我们的客户有 gｲんĤЦ8、ｷouЯƧquﾑгє、๓เςг๏ร๏Ŧt ς๏гק๏гคtเ๏ภn、900913、ƒ4ᄃëв๏๏к, IПᄃ.。</p>
+</blockquote>
+<p>注意：当网页中需要配合整体视觉风格而出现全部大写／小写的情形，HTML 中请使用标淮的大小写规范进行书写；并通过 <code>text-transform: uppercase;</code>／<code>text-transform: lowercase;</code> 对表现形式进行定义。</p>
+<h3 id="不要使用不地道的缩写"><a href="#不要使用不地道的缩写" class="headerlink" title="不要使用不地道的缩写"></a>不要使用不地道的缩写</h3><p>正确：</p>
+<blockquote>
+<p>我们需要一位熟悉 JavaScript、HTML5，至少理解一种框架（如 Backbone.js、AngularJS、React 等）的前端开发者。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>我们需要一位熟悉 Js、h5，至少理解一种框架（如 backbone、angular、RJS 等）的 FED。</p>
+</blockquote>
+<h2 id="争议"><a href="#争议" class="headerlink" title="争议"></a>争议</h2><p>以下用法略带有个人色彩，即：无论是否遵循下述规则，从语法的角度来讲都是<strong>正确</strong>的。</p>
+<h3 id="链接之间增加空格"><a href="#链接之间增加空格" class="headerlink" title="链接之间增加空格"></a>链接之间增加空格</h3><p>用法：</p>
+<blockquote>
+<p>请 <a href="#">提交一个 issue</a> 并分配给相关同事。</p>
+<p>访问我们网站的最新动态，请 <a href="#">点击这里</a> 进行订阅！</p>
+</blockquote>
+<p>对比用法：</p>
+<blockquote>
+<p>请<a href="#">提交一个 issue</a>并分配给相关同事。</p>
+<p>访问我们网站的最新动态，请<a href="#">点击这里</a>进行订阅！</p>
+</blockquote>
+<h3 id="简体中文使用直角引号"><a href="#简体中文使用直角引号" class="headerlink" title="简体中文使用直角引号"></a>简体中文使用直角引号</h3><p>用法：</p>
+<blockquote>
+<p>「老师，『有条不紊』的『紊』是什么意思？」</p>
+</blockquote>
+<p>对比用法：</p>
+<blockquote>
+<p>“老师，‘有条不紊’的‘紊’是什么意思？”</p>
+</blockquote>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><table>
+<thead>
+<tr>
+<th>仓库</th>
+<th>语言</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://github.com/vinta/paranoid-auto-spacing" target="_blank" rel="noopener">vinta/paranoid-auto-spacing</a></td>
+<td>JavaScript</td>
+</tr>
+<tr>
+<td><a href="https://github.com/huei90/pangu.node" target="_blank" rel="noopener">huei90/pangu.node</a></td>
+<td>Node.js</td>
+</tr>
+<tr>
+<td><a href="https://github.com/huacnlee/auto-correct" target="_blank" rel="noopener">huacnlee/auto-correct</a></td>
+<td>Ruby</td>
+</tr>
+<tr>
+<td><a href="https://github.com/sparanoid/space-lover" target="_blank" rel="noopener">sparanoid/space-lover</a></td>
+<td>PHP (WordPress)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/NauxLiu/auto-correct" target="_blank" rel="noopener">nauxliu/auto-correct</a></td>
+<td>PHP</td>
+</tr>
+<tr>
+<td><a href="https://github.com/jxlwqq/chinese-typesetting" target="_blank" rel="noopener">jxlwqq/chinese-typesetting</a></td>
+<td>PHP</td>
+</tr>
+<tr>
+<td><a href="https://github.com/hotoo/pangu.vim" target="_blank" rel="noopener">hotoo/pangu.vim</a></td>
+<td>Vim</td>
+</tr>
+<tr>
+<td><a href="https://github.com/sparanoid/grunt-auto-spacing" target="_blank" rel="noopener">sparanoid/grunt-auto-spacing</a></td>
+<td>Node.js (Grunt)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/hjiang/scripts/blob/master/add-space-between-latin-and-cjk" target="_blank" rel="noopener">hjiang/scripts/add-space-between-latin-and-cjk</a></td>
+<td>Python</td>
+</tr>
+<tr>
+<td><a href="https://github.com/hustcc/hint" target="_blank" rel="noopener">hustcc/hint</a></td>
+<td>Python</td>
+</tr>
+</tbody></table>
+<h2 id="谁在这样做？"><a href="#谁在这样做？" class="headerlink" title="谁在这样做？"></a>谁在这样做？</h2><table>
+<thead>
+<tr>
+<th>网站</th>
+<th>文案</th>
+<th>UGC</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="http://www.apple.com/cn/" target="_blank" rel="noopener">Apple 中国</a></td>
+<td>是</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.apple.com/hk/" target="_blank" rel="noopener">Apple 香港</a></td>
+<td>是</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.apple.com/tw/" target="_blank" rel="noopener">Apple 台湾</a></td>
+<td>是</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.microsoft.com/zh-cn/" target="_blank" rel="noopener">Microsoft 中国</a></td>
+<td>是</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.microsoft.com/zh-hk/" target="_blank" rel="noopener">Microsoft 香港</a></td>
+<td>是</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.microsoft.com/zh-tw/" target="_blank" rel="noopener">Microsoft 台湾</a></td>
+<td>是</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="https://leancloud.cn/" target="_blank" rel="noopener">LeanCloud</a></td>
+<td>是</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="https://www.v2ex.com/" target="_blank" rel="noopener">V2EX</a></td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td><a href="http://apple4us.com/" target="_blank" rel="noopener">Apple4us</a></td>
+<td>是</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="https://ruby-china.org/" target="_blank" rel="noopener">Ruby China</a></td>
+<td>是</td>
+<td>标题达成</td>
+</tr>
+<tr>
+<td><a href="https://phphub.org/" target="_blank" rel="noopener">PHPHub</a></td>
+<td>是</td>
+<td>标题达成</td>
+</tr>
+<tr>
+<td><a href="http://sspai.com/" target="_blank" rel="noopener">少数派</a></td>
+<td>是</td>
+<td>N/A</td>
+</tr>
+</tbody></table>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="http://grammar.about.com/od/punctuationandmechanics/a/Guidelines-For-Using-Capital-Letters.htm" target="_blank" rel="noopener">Guidelines for Using Capital Letters - About.com</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Letter_case" target="_blank" rel="noopener">Letter case - Wikipedia</a></li>
+<li><a href="http://www.oxforddictionaries.com/words/punctuation" target="_blank" rel="noopener">Punctuation - Oxford Dictionaries</a></li>
+<li><a href="https://owl.english.purdue.edu/owl/section/1/6/" target="_blank" rel="noopener">Punctuation - The Purdue OWL</a></li>
+<li><a href="http://www.wikihow.com/Use-English-Punctuation-Correctly" target="_blank" rel="noopener">How to Use English Punctuation Correctly - wikiHow</a></li>
+<li><a href="https://zh.opensuse.org/index.php?title=Help:%E6%A0%BC%E5%BC%8F" target="_blank" rel="noopener">格式 - openSUSE</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%85%A8%E5%BD%A2%E5%92%8C%E5%8D%8A%E5%BD%A2" target="_blank" rel="noopener">全形和半形 - 维基百科</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%BC%95%E8%99%9F" target="_blank" rel="noopener">引号 - 维基百科</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E7%96%91%E5%95%8F%E9%A9%9A%E5%98%86%E8%99%9F" target="_blank" rel="noopener">疑问惊叹号 - 维基百科</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>文档</category>
+      </categories>
+      <tags>
+        <tag>排版</tag>
+        <tag>写作</tag>
+        <tag>指南</tag>
       </tags>
   </entry>
   <entry>
@@ -1662,64 +1662,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用秘钥远程登录服务器</title>
-    <url>/20200906/ssh-login/</url>
-    <content><![CDATA[<p>使用秘钥认证登陆服务器，免去密码登陆。使得服务器登陆更安全，本文操作在 Mac OS 下进行， Windows 原理类似</p>
-<a id="more"></a>
-
-<h3 id="在本地客户机创建公钥（有公钥可以忽略）"><a href="#在本地客户机创建公钥（有公钥可以忽略）" class="headerlink" title="在本地客户机创建公钥（有公钥可以忽略）"></a>在本地客户机创建公钥（有公钥可以忽略）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C  <span class="string">'注释文字'</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/post/202009/ssh-01.png" alt=""></p>
-<h3 id="将创建好的公钥文件复制到-SSH-服务器上"><a href="#将创建好的公钥文件复制到-SSH-服务器上" class="headerlink" title="将创建好的公钥文件复制到 SSH 服务器上"></a>将创建好的公钥文件复制到 SSH 服务器上</h3><p>方式有很多种，不一一赘述了，本质是将公钥文件的内容写入到服务器对应用户的 <code>.ssh/authorized_kyes</code> 文件中</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
-
-<p><code>id_rsa.pub</code> 为你的客户机公钥文件</p>
-<p>现在，SSH 登陆服务器就不用再输入密码了</p>
-<h3 id="配置快捷登陆"><a href="#配置快捷登陆" class="headerlink" title="配置快捷登陆"></a>配置快捷登陆</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim ~/.ssh/config</span><br></pre></td></tr></table></figure>
-
-<p>创建此配置文件，方便快速登陆 ssh</p>
-<p>文件内容如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Host          <span class="built_in">alias</span> <span class="comment">#自定义别名</span></span><br><span class="line">HostName      hostname  <span class="comment">#替换为你的ssh服务器ip或domain</span></span><br><span class="line">Port          port <span class="comment">#ssh服务器端口，默认为22</span></span><br><span class="line">User          user <span class="comment">#ssh服务器用户名</span></span><br><span class="line">IdentityFile  ~/.ssh/id_rsa <span class="comment">#第一个步骤生成的公钥文件对应的私钥文件</span></span><br></pre></td></tr></table></figure>
-
-<p>后续只要输入 <code>ssh [设定的别名]</code> 即可登陆服务器</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>SSH</tag>
-        <tag>远程登录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Windows 终端美化</title>
-    <url>/20200906/windows-zsh/</url>
-    <content><![CDATA[<p>效果如下</p>
-<p><img src="/images/post/202009/win10-terminal.jpg" alt="&#39;效果图&#39;"></p>
-<a id="more"></a>
-
-<p>本方案是修改 Windows 系统下的 PowerShell，添加 oh-my-posh 的主体框架</p>
-<h3 id="先安装-powerline-字体，避免出现显示字符不正确的问题"><a href="#先安装-powerline-字体，避免出现显示字符不正确的问题" class="headerlink" title="先安装 powerline 字体，避免出现显示字符不正确的问题"></a>先安装 powerline 字体，避免出现显示字符不正确的问题</h3><p>下载地址：<a href="https://github.com/powerline/fonts" target="_blank" rel="noopener">powerline/fonts</a></p>
-<h3 id="执行下列命令安装-posh-git-和-oh-my-posh-模块"><a href="#执行下列命令安装-posh-git-和-oh-my-posh-模块" class="headerlink" title="执行下列命令安装 posh-git 和 oh-my-posh 模块"></a>执行下列命令安装 <code>posh-git</code> 和 <code>oh-my-posh</code> 模块</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">Install-Module posh-git -Scope CurrentUser </span><br><span class="line">Install-Module oh-my-posh -Scope CurrentUser</span><br></pre></td></tr></table></figure>
-
-<h3 id="新增-PowerShell-配置文件"><a href="#新增-PowerShell-配置文件" class="headerlink" title="新增 PowerShell 配置文件"></a>新增 PowerShell 配置文件</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!(Test-<span class="built_in">Path</span> -<span class="built_in">Path</span> $PROFILE )) &#123; New-Item -<span class="built_in">Type</span> File -<span class="built_in">Path</span> $PROFILE -Force &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改配置文件增加下列内容"><a href="#修改配置文件增加下列内容" class="headerlink" title="修改配置文件增加下列内容"></a>修改配置文件增加下列内容</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">notepad $PROFILE</span><br></pre></td></tr></table></figure>
-
-<p>添加下列内容</p>
-<figure class="highlight coq"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Import</span>-<span class="keyword">Module</span> posh-git </span><br><span class="line"><span class="keyword">Import</span>-<span class="keyword">Module</span> oh-my-posh </span><br><span class="line"><span class="keyword">Set</span>-Theme Paradox</span><br></pre></td></tr></table></figure>
-<p>其中 <code>Set-Theme</code> 就是设置主题，按 <code>Tab</code> 键会自动补齐主题名称，这里推荐 <code>agnoster</code> 主题</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>美化</tag>
-        <tag>终端</tag>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>PHP 资源大全中文版</title>
     <url>/20200517/php-resource/</url>
     <content><![CDATA[<h1 id="PHP-资源大全中文版"><a href="#PHP-资源大全中文版" class="headerlink" title="PHP 资源大全中文版"></a>PHP 资源大全中文版</h1><p>我想很多程序员应该记得 GitHub 上有一个 Awesome - XXX 系列的资源整理。<a href="https://github.com/ziadoz/awesome-php" target="_blank" rel="noopener">awesome-php</a> 就是 ziadoz 发起维护的 PHP 资源列表，内容包括：库、框架、模板、安全、代码分析、日志、第三方库、配置工具、Web 工具、书籍、电子书、经典博文等。</p>
@@ -2398,6 +2340,64 @@
       <tags>
         <tag>php</tag>
         <tag>资源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows 终端美化</title>
+    <url>/20200906/windows-zsh/</url>
+    <content><![CDATA[<p>效果如下</p>
+<p><img src="/images/post/202009/win10-terminal.jpg" alt="&#39;效果图&#39;"></p>
+<a id="more"></a>
+
+<p>本方案是修改 Windows 系统下的 PowerShell，添加 oh-my-posh 的主体框架</p>
+<h3 id="先安装-powerline-字体，避免出现显示字符不正确的问题"><a href="#先安装-powerline-字体，避免出现显示字符不正确的问题" class="headerlink" title="先安装 powerline 字体，避免出现显示字符不正确的问题"></a>先安装 powerline 字体，避免出现显示字符不正确的问题</h3><p>下载地址：<a href="https://github.com/powerline/fonts" target="_blank" rel="noopener">powerline/fonts</a></p>
+<h3 id="执行下列命令安装-posh-git-和-oh-my-posh-模块"><a href="#执行下列命令安装-posh-git-和-oh-my-posh-模块" class="headerlink" title="执行下列命令安装 posh-git 和 oh-my-posh 模块"></a>执行下列命令安装 <code>posh-git</code> 和 <code>oh-my-posh</code> 模块</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">Install-Module posh-git -Scope CurrentUser </span><br><span class="line">Install-Module oh-my-posh -Scope CurrentUser</span><br></pre></td></tr></table></figure>
+
+<h3 id="新增-PowerShell-配置文件"><a href="#新增-PowerShell-配置文件" class="headerlink" title="新增 PowerShell 配置文件"></a>新增 PowerShell 配置文件</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!(Test-<span class="built_in">Path</span> -<span class="built_in">Path</span> $PROFILE )) &#123; New-Item -<span class="built_in">Type</span> File -<span class="built_in">Path</span> $PROFILE -Force &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改配置文件增加下列内容"><a href="#修改配置文件增加下列内容" class="headerlink" title="修改配置文件增加下列内容"></a>修改配置文件增加下列内容</h3><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line">notepad $PROFILE</span><br></pre></td></tr></table></figure>
+
+<p>添加下列内容</p>
+<figure class="highlight coq"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Import</span>-<span class="keyword">Module</span> posh-git </span><br><span class="line"><span class="keyword">Import</span>-<span class="keyword">Module</span> oh-my-posh </span><br><span class="line"><span class="keyword">Set</span>-Theme Paradox</span><br></pre></td></tr></table></figure>
+<p>其中 <code>Set-Theme</code> 就是设置主题，按 <code>Tab</code> 键会自动补齐主题名称，这里推荐 <code>agnoster</code> 主题</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>美化</tag>
+        <tag>终端</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用秘钥远程登录服务器</title>
+    <url>/20200906/ssh-login/</url>
+    <content><![CDATA[<p>使用秘钥认证登陆服务器，免去密码登陆。使得服务器登陆更安全，本文操作在 Mac OS 下进行， Windows 原理类似</p>
+<a id="more"></a>
+
+<h3 id="在本地客户机创建公钥（有公钥可以忽略）"><a href="#在本地客户机创建公钥（有公钥可以忽略）" class="headerlink" title="在本地客户机创建公钥（有公钥可以忽略）"></a>在本地客户机创建公钥（有公钥可以忽略）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C  <span class="string">'注释文字'</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/post/202009/ssh-01.png" alt=""></p>
+<h3 id="将创建好的公钥文件复制到-SSH-服务器上"><a href="#将创建好的公钥文件复制到-SSH-服务器上" class="headerlink" title="将创建好的公钥文件复制到 SSH 服务器上"></a>将创建好的公钥文件复制到 SSH 服务器上</h3><p>方式有很多种，不一一赘述了，本质是将公钥文件的内容写入到服务器对应用户的 <code>.ssh/authorized_kyes</code> 文件中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p><code>id_rsa.pub</code> 为你的客户机公钥文件</p>
+<p>现在，SSH 登陆服务器就不用再输入密码了</p>
+<h3 id="配置快捷登陆"><a href="#配置快捷登陆" class="headerlink" title="配置快捷登陆"></a>配置快捷登陆</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim ~/.ssh/config</span><br></pre></td></tr></table></figure>
+
+<p>创建此配置文件，方便快速登陆 ssh</p>
+<p>文件内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Host          <span class="built_in">alias</span> <span class="comment">#自定义别名</span></span><br><span class="line">HostName      hostname  <span class="comment">#替换为你的ssh服务器ip或domain</span></span><br><span class="line">Port          port <span class="comment">#ssh服务器端口，默认为22</span></span><br><span class="line">User          user <span class="comment">#ssh服务器用户名</span></span><br><span class="line">IdentityFile  ~/.ssh/id_rsa <span class="comment">#第一个步骤生成的公钥文件对应的私钥文件</span></span><br></pre></td></tr></table></figure>
+
+<p>后续只要输入 <code>ssh [设定的别名]</code> 即可登陆服务器</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>SSH</tag>
+        <tag>远程登录</tag>
       </tags>
   </entry>
 </search>
