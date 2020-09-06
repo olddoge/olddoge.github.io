@@ -20,17 +20,23 @@
     var CONFIG = {"hostname":"www.esprodrigo.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":240,"display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="苟利国家生死以岂因祸福避趋之">
-<meta property="og:type" content="website">
-<meta property="og:title" content="@ $imple $v@ri@ble">
-<meta property="og:url" content="https://www.esprodrigo.cn/archives/2020/09/index.html">
+  <meta name="description" content="使用秘钥认证登陆服务器，免去密码登陆。使得服务器登陆更安全，本文操作在 Mac OS 下进行， Windows 原理类似">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用秘钥远程登录服务器">
+<meta property="og:url" content="https://www.esprodrigo.cn/20200906/ssh-login/index.html">
 <meta property="og:site_name" content="@ $imple $v@ri@ble">
-<meta property="og:description" content="苟利国家生死以岂因祸福避趋之">
+<meta property="og:description" content="使用秘钥认证登陆服务器，免去密码登陆。使得服务器登陆更安全，本文操作在 Mac OS 下进行， Windows 原理类似">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.esprodrigo.cn/images/post/202009/ssh-01.png">
+<meta property="article:published_time" content="2020-09-06T07:19:22.000Z">
+<meta property="article:modified_time" content="2020-09-06T07:30:57.967Z">
 <meta property="article:author" content="#David">
+<meta property="article:tag" content="SSH">
+<meta property="article:tag" content="远程登录">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.esprodrigo.cn/images/post/202009/ssh-01.png">
 
-<link rel="canonical" href="https://www.esprodrigo.cn/archives/2020/09/">
+<link rel="canonical" href="https://www.esprodrigo.cn/20200906/ssh-login/">
 
 
 <script id="page-configurations">
@@ -38,12 +44,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | @ $imple $v@ri@ble</title>
+  <title>使用秘钥远程登录服务器 | @ $imple $v@ri@ble</title>
   
 
 
@@ -181,90 +187,125 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 8 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.esprodrigo.cn/20200906/ssh-login/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="#David">
+      <meta itemprop="description" content="苟利国家生死以<br>岂因祸福避趋之">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="@ $imple $v@ri@ble">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用秘钥远程登录服务器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-06 15:19:22 / 修改时间：15:30:57" itemprop="dateCreated datePublished" datetime="2020-09-06T15:19:22+08:00">2020-09-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+
+          <span title="post.wordcount">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-edit"></i>
+              </span>
+              <span class="post-meta-item-text">
+                字数统计 267 字
+              </span>
+          </span>
+          <span title="post.min2read">
+            <span class="post-meta-item-icon">
+                <i class="fa fa-clock"></i>
+              </span>
+            <span class="post-meta-item-text">
+            阅读时长 1 分钟
+            </span>
+          </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
-    </div>
+        <p>使用秘钥认证登陆服务器，免去密码登陆。使得服务器登陆更安全，本文操作在 Mac OS 下进行， Windows 原理类似</p>
+<a id="more"></a>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<h3 id="在本地客户机创建公钥（有公钥可以忽略）"><a href="#在本地客户机创建公钥（有公钥可以忽略）" class="headerlink" title="在本地客户机创建公钥（有公钥可以忽略）"></a>在本地客户机创建公钥（有公钥可以忽略）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C  <span class="string">'注释文字'</span></span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-06T15:19:22+08:00"
-              content="2020-09-06">
-          09-06
-        </time>
-      </div>
+<p><img src="/images/post/202009/ssh-01.png" alt=""></p>
+<h3 id="将创建好的公钥文件复制到-SSH-服务器上"><a href="#将创建好的公钥文件复制到-SSH-服务器上" class="headerlink" title="将创建好的公钥文件复制到 SSH 服务器上"></a>将创建好的公钥文件复制到 SSH 服务器上</h3><p>方式有很多种，不一一赘述了，本质是将公钥文件的内容写入到服务器对应用户的 <code>.ssh/authorized_kyes</code> 文件中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/20200906/ssh-login/" itemprop="url">
-            <span itemprop="name">使用秘钥远程登录服务器</span>
-          </a>
-      </div>
+<p><code>id_rsa.pub</code> 为你的客户机公钥文件</p>
+<p>现在，SSH 登陆服务器就不用再输入密码了</p>
+<h3 id="配置快捷登陆"><a href="#配置快捷登陆" class="headerlink" title="配置快捷登陆"></a>配置快捷登陆</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.ssh/config</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+<p>创建此配置文件，方便快速登陆 ssh</p>
+<p>文件内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host          <span class="built_in">alias</span> <span class="comment">#自定义别名</span></span><br><span class="line">HostName      hostname  <span class="comment">#替换为你的ssh服务器ip或domain</span></span><br><span class="line">Port          port <span class="comment">#ssh服务器端口，默认为22</span></span><br><span class="line">User          user <span class="comment">#ssh服务器用户名</span></span><br><span class="line">IdentityFile  ~/.ssh/id_rsa <span class="comment">#第一个步骤生成的公钥文件对应的私钥文件</span></span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-06T14:56:02+08:00"
-              content="2020-09-06">
-          09-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/20200906/windows-zsh/" itemprop="url">
-            <span itemprop="name">Windows 终端美化</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-05T22:02:30+08:00"
-              content="2020-09-05">
-          09-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/20200905/centos-terminal/" itemprop="url">
-            <span itemprop="name">CentOS 终端美化</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<p>后续只要输入 <code>ssh [设定的别名]</code> 即可登陆服务器</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/SSH/" rel="tag"><i class="fa fa-tag"></i> SSH</a>
+              <a href="/tags/%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95/" rel="tag"><i class="fa fa-tag"></i> 远程登录</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/20200906/windows-zsh/" rel="prev" title="Windows 终端美化">
+      <i class="fa fa-chevron-left"></i> Windows 终端美化
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
@@ -317,6 +358,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#在本地客户机创建公钥（有公钥可以忽略）"><span class="nav-number">1.</span> <span class="nav-text">在本地客户机创建公钥（有公钥可以忽略）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将创建好的公钥文件复制到-SSH-服务器上"><span class="nav-number">2.</span> <span class="nav-text">将创建好的公钥文件复制到 SSH 服务器上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置快捷登陆"><span class="nav-number">3.</span> <span class="nav-text">配置快捷登陆</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
