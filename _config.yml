@@ -14,7 +14,7 @@ timezone: 'Asia/Shanghai'
 # URL
 ## 在此处设置您的网站网址。例如，如果您使用 GitHub Page，则将 url 设置为 'https://username.github.io/project'
 url: http://example.com
-permalink: :year:month-:hash/ #:year/:month/:day/:title/
+permalink: :year/:month/:hash/ #:year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
@@ -31,7 +31,7 @@ i18n_dir: :lang
 skip_render:
 
 # 写作
-new_post_name: :title.md # 新帖子的文件名
+new_post_name: :year/:month/:title.md # 新帖子的文件名 支持子文件夹
 default_layout: post
 titlecase: false # 将 title 转换为 titlecase
 external_link:
@@ -40,7 +40,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: false  # 生成文章的时候同时生成对应的文件夹
 relative_link: false
 future: true
 highlight:
@@ -121,7 +121,7 @@ deploy:
   - type: git
     repo:
       gitee: https://gitee.com/olddoge/matthew  # 无page服务，纯备份
-      github: https://github.com/olddoge/olddoge.github.io  # 国内无法访问
+      # github: https://github.com/olddoge/olddoge.github.io  # 国内无法访问
     branch: master
   # Rsync 部署到云服务器
   # 需安装 npm install hexo-deployer-rsync --save
