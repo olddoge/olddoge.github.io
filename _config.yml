@@ -125,10 +125,3 @@ deploy:
     branch: master
   # Rsync 部署到云服务器
   # 需安装 npm install hexo-deployer-rsync --save
-  - type: rsync
-    host: 120.27.133.113
-    user: root
-    port: 9222
-    root: /mnt/www/matthew  # 云服务器根目录
-    delete: true  # 删除旧文件
-    verbose: true # 显示调试信息
