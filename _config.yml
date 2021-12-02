@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # 站点
-title: Matthew's Note
+title: あかいしゅういち's Note
 subtitle: 'あいうえお'
 description: ''
 keywords:
-author: Matthew Murdock
+author: 赤井秀一
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
@@ -121,7 +121,7 @@ deploy:
   - type: git
     repo:
       gitee: https://gitee.com/olddoge/matthew  # 无page服务，纯备份
-      github: https://github.com/olddoge/olddoge.github.io  # 国内无法访问
+      # github: https://github.com/olddoge/olddoge.github.io  # 国内无法访问
     branch: master
   # Rsync 部署到云服务器
   # 需安装 npm install hexo-deployer-rsync --save

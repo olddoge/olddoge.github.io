@@ -1,7 +1,7 @@
 ---
 title: HTTP API 设计指南
 date: 2021-11-16 11:37:12
-tags: [API, HTTP, REST, 设计指南]
+tags: [API, HTTP, RESTful, 设计指南]
 categories: 指南
 description: HTTP API 设计指南
 ---
