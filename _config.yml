@@ -120,8 +120,9 @@ search:
 deploy:
   - type: git
     repo:
+      alicloud: ssh://root@120.27.133.113:9222/mnt/gitrepo/MatthewBlog  # 自己的服务器
       gitee: https://gitee.com/olddoge/matthew  # 无page服务，纯备份
-      # github: https://github.com/olddoge/olddoge.github.io  # 国内无法访问
+      github: https://github.com/olddoge/olddoge.github.io  # 国内无法访问
     branch: master
   # Rsync 部署到云服务器
   # 需安装 npm install hexo-deployer-rsync --save
