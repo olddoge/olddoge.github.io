@@ -3,10 +3,11 @@ title: ThinkPHP5.1 实现 ThinkPHP3.1 的 SessionDB 类
 date: 2021-11-14 19:14:59
 tags: [PHP, ThinkPHP]
 categories: PHP
+description:
 ---
 
 `ThinkPHP5.1` 实现 `ThinkPHP3.1` 的 `SessionDB` 类，完成 `Session` 写入到 `MySQL` 的操作
-
+<!--more-->
 # 第一种实现
 
 ## 建表语句

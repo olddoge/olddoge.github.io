@@ -3,6 +3,7 @@ title: Linux 常用命令
 date: 2021-11-14 19:00:56
 tags: [Linux]
 categories: Linux
+description:
 ---
 
 
@@ -16,7 +17,7 @@ tar -zcvf [压缩包名字].tgz [要压缩的文件或路径]
 tar -zxvf [文件名]
 
 ```
-
+<!--more-->
 ### 软连接
 ```shell
 # 创建软连接

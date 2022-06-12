@@ -3,6 +3,7 @@ title: 在 ThinkPHP5.1 中使用 blade 模板
 date: 2021-12-01 09:20:34
 tags: [PHP, ThinkPHP]
 categories: PHP
+description:
 ---
 
 `composer` 安装 `blade` 包
@@ -10,7 +11,7 @@ categories: PHP
 ```shell
 composer require terranc/think-blade
 ```
-
+<!--more-->
 在 `config.php` 中修改对应配置
 
 ```php

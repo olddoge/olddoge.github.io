@@ -3,7 +3,7 @@ title: ThinkPHP 3.2 字母函数指南
 date: 2021-11-13 21:12:29
 tags: [PHP, ThinkPHP]
 categories: PHP
-description: ThinkPHP 3.2 字母函数指南
+description:
 ---
 
 # A 方法
@@ -15,7 +15,7 @@ description: ThinkPHP 3.2 字母函数指南
 $User = A('User');
 $User = A('Admin://User');
 ```
-
+<!--more-->
 实例化控制器后，就可以调用该控制器中的方法，不过需要注意的情况是，在跨项目调用的情况下，如果你的操作方法 有针对当前控制器的特殊变量操作，会有一些未知的问题，所以，一般来说，官方建议需要公共调用的控制器层单独开发，不要有太多的依赖关系。
 
 # B 方法
@@ -197,17 +197,17 @@ I('变量类型.变量名',['默认值'],['过滤方法'])
 
 变量类型是指请求方式或者输入类型，包括：
 
-|方式|说明|
-|:--:|:--:|
-|get| 获取 GET 参数|
-|post|	获取 POST 参数|
-|param |	自动判断请求类型获取 GET、POST 或者 PUT 参数|
-|request|	获取 REQUEST 参数|
-|put	|获取 PUT 参数|
-|session	|获取 $_SESSION 参数|
-|cookie	|获取 $_COOKIE 参数|
-|server	|获取 $_SERVER 参数|
-|globals	|获取 $GLOBALS 参数|
+|  方式   |                     说明                     |
+| :-----: | :------------------------------------------: |
+|   get   |                获取 GET 参数                 |
+|  post   |                获取 POST 参数                |
+|  param  | 自动判断请求类型获取 GET、POST 或者 PUT 参数 |
+| request |              获取 REQUEST 参数               |
+|   put   |                获取 PUT 参数                 |
+| session |             获取 $_SESSION 参数              |
+| cookie  |              获取 $_COOKIE 参数              |
+| server  |              获取 $_SERVER 参数              |
+| globals |              获取 $GLOBALS 参数              |
 
 注意：变量类型不区分大小写。变量名则严格区分大小写。
 

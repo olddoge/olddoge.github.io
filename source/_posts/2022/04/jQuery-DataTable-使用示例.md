@@ -3,6 +3,7 @@ title: jQuery DataTable 使用示例
 date: 2022-04-23 20:10:57
 tags: [JS, 教程, jqueryDataTable, 表格]
 categories: JavaScript
+description: JQuery DataTable 常用案例
 ---
 
 示例代码

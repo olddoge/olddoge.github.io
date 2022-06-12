@@ -3,6 +3,7 @@ title: Clean Code PHP
 date: 2021-11-14 19:09:04
 tags: [PHP, 规范]
 categories: PHP
+description:
 ---
 
 # Clean Code PHP
@@ -14,7 +15,7 @@ Software engineering principles, from Robert C. Martin's book
 [*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882),
 adapted for PHP. This is not a style guide. It's a guide to producing
 readable, reusable, and refactorable software in PHP.
-
+<!--more-->
 Not every principle herein has to be strictly followed, and even fewer will be universally
 agreed upon. These are guidelines and nothing more, but they are ones codified over many
 years of collective experience by the authors of *Clean Code*.

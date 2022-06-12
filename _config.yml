@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # 站点
-title: Silver Bullet
+title: 七瀬丸のブログ
 subtitle: 'あいうえお'
-description: ''
+description: '◢₄₆此时,一位DD从坂道上经过'
 keywords:
-author: 赤井秀一
+author: 七瀬丸
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
 # URL
 ## 在此处设置您的网站网址。例如，如果您使用 GitHub Page，则将 url 设置为 'https://username.github.io/project'
-url: http://example.com
+url: https://matthew.olddoge.cn
 permalink: :year/:month/:hash/ #:year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -97,7 +97,7 @@ ignore:
 # 扩展
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: oranges
+theme: next
 
 # 图片懒加载
 # 需要先安装插件 npm install hexo-lazyload-image --save

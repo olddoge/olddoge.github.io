@@ -3,6 +3,7 @@ title: hexo 部署到云服务器
 date: 2022-04-23 19:40:24
 tags: [Hexo, JS, 教程]
 categories: 指南
+description:
 ---
 
 云服务器购买、git 安装、hexo 安装等基础部分略，只整理一些我部署时遇到的问题
@@ -11,6 +12,8 @@ categories: 指南
 # 1. 创建仓库
 
 首先创建一个空仓，这个仓库会存储`hexo`的相关代码（改动记录等）
+
+<!--more-->
 
 ```shell
 git init --bare [你的仓库名称]

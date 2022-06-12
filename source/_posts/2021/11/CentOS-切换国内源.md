@@ -3,6 +3,7 @@ title: CentOS 切换国内源
 date: 2021-11-14 18:58:30
 tags: [Linux]
 categories: Linux
+description: CentOS 切换国内源的方法
 ---
 
 ### 备份现有源

@@ -3,6 +3,7 @@ title: 群晖 Video Station 插件开发文档翻译
 date: 2022-03-12 21:07:00
 tags: [群晖,Video Station, 翻译]
 categories: 指南
+description:
 ---
 
 > 群晖 Video Station 插件官方开发文档翻译
@@ -15,6 +16,7 @@ categories: 指南
 使用视频信息插件功能检索电影和电视节目的视频信息。
 本文件规定了信息检索工作流程、文件要求、包装
 视频信息插件的说明和测试详细信息。 
+<!--more-->
 
 [下载示例代码](https://global.download.synology.com/download/Addons/VideoStation/com.synology.TMDBExample.zip)
 
@@ -77,16 +79,16 @@ INFO 文件提供插件 ID、支持的视频类型、入口文件位置和测试
 
 **表1. INFO 文件的内容**
 
-|key|类型|描述|是否必须|
-|:--:|:--:|:--:|:--:|
-|id|string|唯一的插件ID，应该和插件一样,作为文件夹名称。如果插件ID重复，插件不能上传| 必须|
-|entry_file|string|入口文件loader.sh的相对文件路径。 | 必须|
-|type|array of string|插件支持的视频类型，必须是以下之一：['movie']、['tvshow'] 或 ['movie', 'tvshow']。 | 必须|
-|version|string|插件的版本号|可选|
-|description|string|插件的描述信息|可选|
-|site|string|插件的源地址|可选|
-|language|array of string|插件支持的语言 (e.g. ['cht', 'enu'])|可选|
-|test_example|JSON object|此值可确保您的插件在您使用时可用上传或测试插件的连接。 这是一个测试_电影的例子："movie": {"title": "Harry Potter", "original_available": "2001-11-16"}，如果插件支持电视剧类型的视频，这里提供一个相关类型的例子："tvshow": {"title": "Game of Thrones", "original_available": "2011-04-17"},"tvshow_episode": {"title": "Game of Thrones", "original_available": "2011-04-17", "season": 1, "episode": 1}|必须|
+|     key      |      类型       |                                                                                                                                                                                                    描述                                                                                                                                                                                                    | 是否必须 |
+| :----------: | :-------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------: |
+|      id      |     string      |                                                                                                                                                                 唯一的插件ID，应该和插件一样,作为文件夹名称。如果插件ID重复，插件不能上传                                                                                                                                                                  |   必须   |
+|  entry_file  |     string      |                                                                                                                                                                                     入口文件loader.sh的相对文件路径。                                                                                                                                                                                      |   必须   |
+|     type     | array of string |                                                                                                                                                             插件支持的视频类型，必须是以下之一：['movie']、['tvshow'] 或 ['movie', 'tvshow']。                                                                                                                                                             |   必须   |
+|   version    |     string      |                                                                                                                                                                                                插件的版本号                                                                                                                                                                                                |   可选   |
+| description  |     string      |                                                                                                                                                                                               插件的描述信息                                                                                                                                                                                               |   可选   |
+|     site     |     string      |                                                                                                                                                                                                插件的源地址                                                                                                                                                                                                |   可选   |
+|   language   | array of string |                                                                                                                                                                                    插件支持的语言 (e.g. ['cht', 'enu'])                                                                                                                                                                                    |   可选   |
+| test_example |   JSON object   | 此值可确保您的插件在您使用时可用上传或测试插件的连接。 这是一个测试_电影的例子："movie": {"title": "Harry Potter", "original_available": "2001-11-16"}，如果插件支持电视剧类型的视频，这里提供一个相关类型的例子："tvshow": {"title": "Game of Thrones", "original_available": "2011-04-17"},"tvshow_episode": {"title": "Game of Thrones", "original_available": "2011-04-17", "season": 1, "episode": 1} |   必须   |
 
 ## 3.2 loader.sh
 
@@ -100,13 +102,13 @@ Video Station 将执行 loader.sh 以检索视频信息。 您可以使用 PHP �
 
 **表2. 发送给 loader.sh 的参数说明**
 
-|参数|类型|描述|是否必须|
-|:--:|:--:|:--:|:--:|
-|input|JSON object|查询输入必须是 JSON 对象，包括以下内容：title（必填）和 original_available（可选）。搜索电视剧集的信息时，必须包含 episode 和 season | 必须|
-|lang|string|首选语言（必须是以下任何一种：chs、cht, csy, dan, enu, fre, ger, hun, ita, jpn, krn, nld, nor, plk, ptb, ptg、rus、spn、sve、trk、tha)| 必须|
-|type|string|查询的视频类型, 必须是下列的一种: movie, tvshow, tvshow_episode|必须|
-|limit|int|允许的最大结果数|必须|
-|allowguess|boolean|如果 title guessing 功能支持的时候才可用| 可选|
+|    参数    |    类型     |                                                                  描述                                                                  | 是否必须 |
+| :--------: | :---------: | :------------------------------------------------------------------------------------------------------------------------------------: | :------: |
+|   input    | JSON object |  查询输入必须是 JSON 对象，包括以下内容：title（必填）和 original_available（可选）。搜索电视剧集的信息时，必须包含 episode 和 season  |   必须   |
+|    lang    |   string    | 首选语言（必须是以下任何一种：chs、cht, csy, dan, enu, fre, ger, hun, ita, jpn, krn, nld, nor, plk, ptb, ptg、rus、spn、sve、trk、tha) |   必须   |
+|    type    |   string    |                                    查询的视频类型, 必须是下列的一种: movie, tvshow, tvshow_episode                                     |   必须   |
+|   limit    |     int     |                                                            允许的最大结果数                                                            |   必须   |
+| allowguess |   boolean   |                                                如果 title guessing 功能支持的时候才可用                                                |   可选   |
 
 
 > 1. 如果电视剧的 season 值为 0，意味着这是季的特别篇（e.g. 日剧的SP）。如果输入的参数没有 tvshow_episode (集的信息)，意味着将获得 season 的全部集信息
@@ -269,10 +271,10 @@ Video Station 将执行 loader.sh 以检索视频信息。 您可以使用 PHP �
 根据发生的错误类型，显示以下状态代码
 
 
-|错误码| 描述|
-|:--:|:--:|
-|1003| 该代码表示搜索失败。 例如，插件可能无法连接到源网站或无法检索请求的数据。|
-|1004| 该代码表示无法解析响应结果。 这可能是由于缺少必填信息或其他意外错误|
+| 错误码 |                                   描述                                    |
+| :----: | :-----------------------------------------------------------------------: |
+|  1003  | 该代码表示搜索失败。 例如，插件可能无法连接到源网站或无法检索请求的数据。 |
+|  1004  |    该代码表示无法解析响应结果。 这可能是由于缺少必填信息或其他意外错误    |
 
 
 # 5. 打包你的插件
@@ -313,14 +315,14 @@ sudo -u nobody  /var/packages/VideoStation/target/plugins/syno_plugin_tester/loa
 
 **下面是插件测试器的参数说明**
 
-|参数| 类型 |描述| 是否强制|
-|:--:|:--:|:--:|:--:|
-|input| JSON object| input 字段必须是 JSON object 并且包含下列内容: title (必填) 和 original_available (可选).  如果搜索的是 tvshow_episode, input 必须包含 episode 和 season|必须|
-|lang |string| 语言选项必须是下列中的一种 : chs, cht, csy, dan, enu, fre, ger, hun, ita, jpn, krn, nld, nor, plk, ptb, ptg, rus, spn, sve, trk, tha.|必须|
-|type| string |查询视频的类型，必须是下列的一种: movie, tvshow, tvshow_episode.|必须|
-|limit |int |插件返回的最大查询结果数|必须|
-|path| string |入口文件的绝对路径|必须|
-|pluginid| string |插件ID| 必须|
+|   参数   |    类型     |                                                                           描述                                                                           | 是否强制 |
+| :------: | :---------: | :------------------------------------------------------------------------------------------------------------------------------------------------------: | :------: |
+|  input   | JSON object | input 字段必须是 JSON object 并且包含下列内容: title (必填) 和 original_available (可选).  如果搜索的是 tvshow_episode, input 必须包含 episode 和 season |   必须   |
+|   lang   |   string    |          语言选项必须是下列中的一种 : chs, cht, csy, dan, enu, fre, ger, hun, ita, jpn, krn, nld, nor, plk, ptb, ptg, rus, spn, sve, trk, tha.           |   必须   |
+|   type   |   string    |                                             查询视频的类型，必须是下列的一种: movie, tvshow, tvshow_episode.                                             |   必须   |
+|  limit   |     int     |                                                                 插件返回的最大查询结果数                                                                 |   必须   |
+|   path   |   string    |                                                                    入口文件的绝对路径                                                                    |   必须   |
+| pluginid |   string    |                                                                          插件ID                                                                          |   必须   |
 
 ## 6.2 完整测试
 

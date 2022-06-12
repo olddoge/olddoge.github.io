@@ -3,6 +3,7 @@ title: Select2 插件使用示例
 date: 2022-04-23 20:27:30
 tags: [JS, 教程, select2, 下拉选择]
 categories: JavaScript
+description: Select2 下拉框使用案例
 ---
 
 示例代码
