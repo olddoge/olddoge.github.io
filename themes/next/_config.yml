@@ -99,8 +99,8 @@ creative_commons:
 
 # Schemes
 # scheme: Muse
-# scheme: Mist
-scheme: Pisces
+scheme: Mist
+# scheme: Pisces
 # scheme: Gemini
 
 # Dark Mode
@@ -164,7 +164,7 @@ sidebar:
 # Sidebar Avatar
 avatar:
   # Replace the default image and set the url here.
-  url: /pictures/avatar_asuka.jpg
+  url: /pictures/avatar_akai.jpg
   # If true, the avatar will be dispalyed in circle.
   rounded: true
   # If true, the avatar will be rotated with the cursor.
