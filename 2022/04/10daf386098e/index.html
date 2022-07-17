@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"matthew.olddoge.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="JQuery DataTable 常用案例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery DataTable 使用示例">
+<meta property="og:url" content="https://matthew.olddoge.cn/2022/04/10daf386098e/index.html">
+<meta property="og:site_name" content="七瀬丸のブログ">
+<meta property="og:description" content="JQuery DataTable 常用案例">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-23T12:10:57.000Z">
+<meta property="article:modified_time" content="2022-07-17T10:09:52.418Z">
+<meta property="article:author" content="◢₄₆七瀬丸">
+<meta property="article:tag" content="JS">
+<meta property="article:tag" content="教程">
+<meta property="article:tag" content="jqueryDataTable">
+<meta property="article:tag" content="表格">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://matthew.olddoge.cn/2022/04/10daf386098e/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>jQuery DataTable 使用示例 | 七瀬丸のブログ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">七瀬丸のブログ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">あいうえお</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">21</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://matthew.olddoge.cn/2022/04/10daf386098e/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/pictures/avatar_akai.jpg">
+      <meta itemprop="name" content="◢₄₆七瀬丸">
+      <meta itemprop="description" content="あいうえおかきくけこ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="七瀬丸のブログ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          jQuery DataTable 使用示例
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-23 20:10:57" itemprop="dateCreated datePublished" datetime="2022-04-23T20:10:57+08:00">2022-04-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-17 18:09:52" itemprop="dateModified" datetime="2022-07-17T18:09:52+08:00">2022-07-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">JQuery DataTable 常用案例</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>示例代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> settings = &#123;</span><br><span class="line">    <span class="attr">bAutoWidth</span>: <span class="literal">false</span>,  <span class="comment">// 自动宽度</span></span><br><span class="line">    <span class="attr">serverSide</span>: <span class="literal">true</span>,   <span class="comment">// 服务端启用分页，开启分页后，需要服务端计算总数，false 的时候，需要一次性返回所有数据给表格</span></span><br><span class="line">    <span class="attr">bFilter</span>: <span class="literal">false</span>, <span class="comment">// 自带搜索框是否显示</span></span><br><span class="line">    <span class="attr">ordering</span>: <span class="literal">false</span>,    <span class="comment">// 是否需要排序功能</span></span><br><span class="line">    <span class="attr">scrollY</span>: <span class="literal">false</span>,   <span class="comment">// 垂直滚动 这里后期改成窗口高度</span></span><br><span class="line">    <span class="attr">aoColumns</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">title</span>: <span class="string">&#x27;页面上显示的表格头标题&#x27;</span>,</span><br><span class="line">            <span class="attr">className</span>: <span class="string">&#x27;text-center&#x27;</span>,   <span class="comment">// 表头的样式</span></span><br><span class="line">            <span class="attr">orderable</span>: <span class="literal">false</span>,   <span class="comment">// 是否需要排序，全局排序为 false，这个值无意义</span></span><br><span class="line">            <span class="attr">width</span>: <span class="number">45</span>,  <span class="comment">// 表头的宽度</span></span><br><span class="line">            <span class="attr">data</span>: <span class="string">&#x27;id&#x27;</span>, <span class="comment">// 对应服务端响应数据的名称</span></span><br><span class="line">            <span class="attr">render</span>: <span class="function">(<span class="params">data, type, full, meta</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="comment">// data - 服务端返回的数据值</span></span><br><span class="line">                <span class="comment">// type</span></span><br><span class="line">                <span class="comment">// full - 服务端返回的全部数据</span></span><br><span class="line">                <span class="comment">// meta - 行索引 0 为起始</span></span><br><span class="line">                <span class="keyword">return</span> data</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">language</span>: &#123;</span><br><span class="line">        <span class="attr">decimal</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="attr">emptyTable</span>: <span class="string">&#x27;暂无数据&#x27;</span>,</span><br><span class="line">        <span class="attr">info</span>: <span class="string">&#x27;第 _START_ 到 _END_ 条，共 _TOTAL_ 条 | &#x27;</span>,</span><br><span class="line">        <span class="attr">infoEmpty</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="attr">infoFiltered</span>: <span class="string">&#x27;(从 _MAX_ 条结果中过滤)&#x27;</span>,</span><br><span class="line">        <span class="attr">infoPostFix</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="attr">thousands</span>: <span class="string">&#x27;,&#x27;</span>,</span><br><span class="line">        <span class="attr">lengthMenu</span>: <span class="string">&#x27;_MENU_ 条/页&#x27;</span>,</span><br><span class="line">        <span class="attr">loadingRecords</span>: <span class="string">&#x27;加载中...&#x27;</span>,</span><br><span class="line">        <span class="attr">processing</span>: <span class="string">&#x27;加载中...&#x27;</span>,</span><br><span class="line">        <span class="attr">search</span>: <span class="string">&#x27;搜索:&#x27;</span>,</span><br><span class="line">        <span class="attr">zeroRecords</span>: <span class="string">&#x27;暂无匹配数据&#x27;</span>,</span><br><span class="line">        <span class="attr">paginate</span>: &#123;</span><br><span class="line">            <span class="attr">first</span>: <span class="string">&#x27;第一页&#x27;</span>,</span><br><span class="line">            <span class="attr">last</span>: <span class="string">&#x27;最后一页&#x27;</span>,</span><br><span class="line">            <span class="attr">next</span>: <span class="string">&#x27;&gt;&#x27;</span>,</span><br><span class="line">            <span class="attr">previous</span>: <span class="string">&#x27;&lt;&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">aria</span>: &#123;</span><br><span class="line">            <span class="attr">sortAscending</span>: <span class="string">&#x27;: 以升序排列此列&#x27;</span>,</span><br><span class="line">            <span class="attr">sortDescending</span>: <span class="string">&#x27;: 以降序排列此列&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">select</span>: &#123;</span><br><span class="line">            <span class="attr">rows</span>: &#123;</span><br><span class="line">                <span class="attr">_</span>: <span class="string">&quot;选中 %d 行&quot;</span>,</span><br><span class="line">                <span class="number">0</span>: <span class="string">&quot;点击选中行&quot;</span>,</span><br><span class="line">                <span class="number">1</span>: <span class="string">&quot;选中 1 行&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">aaSorting</span>: [],  <span class="comment">// 允许排序的字段</span></span><br><span class="line">    <span class="attr">bProcessing</span>: <span class="literal">true</span>,  <span class="comment">// 加载表格的进度条</span></span><br><span class="line">    <span class="attr">buttons</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">text</span>: <span class="string">&#x27;按钮的文字&#x27;</span>,</span><br><span class="line">            <span class="attr">className</span>: <span class="string">&#x27;btn btn-xs btn-success jqtable-btn&#x27;</span>,    <span class="comment">// 按钮的类名</span></span><br><span class="line">            <span class="attr">action</span>: <span class="function">(<span class="params">event, dt, node, config</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="comment">// 当点击按钮时，需要做的事情</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    ],    <span class="comment">// 是否需要按钮，这个需要引入 jQuery.DataTables.button 这个 js</span></span><br><span class="line">    <span class="attr">select</span>: <span class="literal">false</span>,  <span class="comment">// 表格行是否可以被选中</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * DOM 参考</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * &lt;div class=&quot;row&quot;&gt;</span></span><br><span class="line"><span class="comment">     *     &lt;div class=&quot;col-xs-3&quot;&gt;&#123;Button - B&#125;&lt;/div&gt;</span></span><br><span class="line"><span class="comment">     *     &lt;div class=&quot;col-xs-9 search-area&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="comment">     *     &#123;process - r&#125;</span></span><br><span class="line"><span class="comment">     *     &#123;table - t&#125;</span></span><br><span class="line"><span class="comment">     *     &lt;div class=&quot;row&quot;&gt;</span></span><br><span class="line"><span class="comment">     *         &lt;div class=&quot;col-xs-6&quot;&gt;</span></span><br><span class="line"><span class="comment">     *             &lt;div class=&quot;inline&quot;&gt;&#123;info - i&#125;&lt;/div&gt;</span></span><br><span class="line"><span class="comment">     *             &lt;div class=&quot;inline&quot;&gt;&#123;length - l&#125;&lt;/div&gt;</span></span><br><span class="line"><span class="comment">     *         &lt;/div&gt;</span></span><br><span class="line"><span class="comment">     *         &lt;div class=&quot;col-xs-6&quot;&gt;&#123;page - p&#125;&lt;/div&gt;</span></span><br><span class="line"><span class="comment">     *     &lt;/div&gt;</span></span><br><span class="line"><span class="comment">     * &lt;/div&gt;</span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     *  B - Button 按钮</span></span><br><span class="line"><span class="comment">     *  r - process 进度条</span></span><br><span class="line"><span class="comment">     *  t - table 表格</span></span><br><span class="line"><span class="comment">     *  i - info 数据信息</span></span><br><span class="line"><span class="comment">     *  l - length 数据长度</span></span><br><span class="line"><span class="comment">     *  p - page 分页</span></span><br><span class="line"><span class="comment">     *  &lt; - &lt;div&gt;</span></span><br><span class="line"><span class="comment">     *  &gt; - &lt;/div&gt;</span></span><br><span class="line"><span class="comment">     *  &#x27;xxx&#x27; - &#x27;类名&#x27;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="attr">dom</span>: <span class="string">&quot;&lt;&#x27;row&#x27;&lt;&#x27;col-xs-3&#x27;B&gt;&lt;&#x27;col-xs-9 search-area&#x27;&gt;r&gt;t&lt;&#x27;row&#x27;&lt;&#x27;col-xs-6&#x27;&lt;&#x27;inline&#x27;i&gt;&lt;&#x27;inline&#x27;l&gt;&gt;&lt;&#x27;col-xs-6&#x27;p&gt;&gt;&quot;</span>,</span><br><span class="line">    <span class="attr">initComplete</span>: <span class="function">(<span class="params">settings, json</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 当表格第一次初始化后的事件</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">drawCallback</span>: <span class="function">(<span class="params">settings</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 当表格每次重绘的事件</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">ajax</span>: <span class="function">(<span class="params">data, callback, settings</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// ajax 请求获取数据</span></span><br><span class="line">        <span class="keyword">let</span> pagesize = data.length; <span class="comment">// 页面显示记录条数，在页面显示每页显示多少项的时候,页大小</span></span><br><span class="line">        <span class="keyword">let</span> start = data.start; <span class="comment">// 开始的记录序号</span></span><br><span class="line">        <span class="keyword">let</span> page = start / pagesize + <span class="number">1</span>; <span class="comment">//当前页码</span></span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            <span class="attr">type</span>: option.ajax.type || <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">            <span class="attr">url</span>: option.ajax.url,</span><br><span class="line">            <span class="attr">cache</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">            <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">                <span class="comment">// 成功请求后，一定要返回这个对象，对象的键参考如下</span></span><br><span class="line">                <span class="keyword">let</span> return_data = &#123;</span><br><span class="line">                    <span class="attr">recordsTotal</span>: response.total || <span class="number">0</span>,</span><br><span class="line">                    <span class="attr">recordsFiltered</span>: response.total || <span class="number">0</span>,</span><br><span class="line">                    <span class="attr">data</span>: response.data || []</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">complete</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">let</span> return_data = &#123;</span><br><span class="line">                    <span class="attr">recordsTotal</span>: <span class="number">0</span>,</span><br><span class="line">                    <span class="attr">recordsFiltered</span>: <span class="number">0</span>,</span><br><span class="line">                    <span class="attr">data</span>: []</span><br><span class="line">                &#125;</span><br><span class="line">                callback(return_data)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">&#x27;.elements&#x27;</span>).dataTable(settings)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 表格重载事件</span></span><br><span class="line">$(<span class="string">&#x27;.elements&#x27;</span>).api().ajax.reload()</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/JS/" rel="tag"><i class="fa fa-tag"></i> JS</a>
+              <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 教程</a>
+              <a href="/tags/jqueryDataTable/" rel="tag"><i class="fa fa-tag"></i> jqueryDataTable</a>
+              <a href="/tags/%E8%A1%A8%E6%A0%BC/" rel="tag"><i class="fa fa-tag"></i> 表格</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/12fb008f68d1/" rel="prev" title="hexo 部署到云服务器">
+      <i class="fa fa-chevron-left"></i> hexo 部署到云服务器
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/3191a260254e/" rel="next" title="Select2 插件使用示例">
+      Select2 插件使用示例 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="◢₄₆七瀬丸"
+      src="/pictures/avatar_akai.jpg">
+  <p class="site-author-name" itemprop="name">◢₄₆七瀬丸</p>
+  <div class="site-description" itemprop="description">あいうえおかきくけこ</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/olddoge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;olddoge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/40023111" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;40023111" rel="noopener" target="_blank">哔哩哔哩</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.themoviedb.org/u/olddoge" title="https:&#x2F;&#x2F;www.themoviedb.org&#x2F;u&#x2F;olddoge" rel="noopener" target="_blank">TMDB</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">@Matthew</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

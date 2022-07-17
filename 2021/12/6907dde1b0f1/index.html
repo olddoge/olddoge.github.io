@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"matthew.olddoge.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文转载自 到底什么是 RESTful ？  前言在学习 RESTful 风格接口之前，即使你不知道它是什么，但你肯定会好奇它能解决什么问题？有什么应用场景？听完下面描述我想你就会明白：在互联网并没有完全流行的初期，移动端也没有那么盛行，页面请求和并发量也不高，那时候人们对接口的要求没那么高，一些动态页面 (jsp) 就能满足绝大多数的使用需求。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RESTful 详解">
+<meta property="og:url" content="https://matthew.olddoge.cn/2021/12/6907dde1b0f1/index.html">
+<meta property="og:site_name" content="七瀬丸のブログ">
+<meta property="og:description" content="本文转载自 到底什么是 RESTful ？  前言在学习 RESTful 风格接口之前，即使你不知道它是什么，但你肯定会好奇它能解决什么问题？有什么应用场景？听完下面描述我想你就会明白：在互联网并没有完全流行的初期，移动端也没有那么盛行，页面请求和并发量也不高，那时候人们对接口的要求没那么高，一些动态页面 (jsp) 就能满足绝大多数的使用需求。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://matthew.olddoge.cn/pictures/post/2021/12/1.webp">
+<meta property="og:image" content="https://matthew.olddoge.cn/pictures/post/2021/12/2.webp">
+<meta property="og:image" content="https://matthew.olddoge.cn/pictures/post/2021/12/3.webp">
+<meta property="og:image" content="https://matthew.olddoge.cn/pictures/post/2021/12/4.webp">
+<meta property="og:image" content="https://matthew.olddoge.cn/pictures/post/2021/12/5.webp">
+<meta property="article:published_time" content="2021-12-02T00:53:37.000Z">
+<meta property="article:modified_time" content="2022-07-17T10:09:52.417Z">
+<meta property="article:author" content="◢₄₆七瀬丸">
+<meta property="article:tag" content="指南">
+<meta property="article:tag" content="RESTful">
+<meta property="article:tag" content="规范">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://matthew.olddoge.cn/pictures/post/2021/12/1.webp">
+
+<link rel="canonical" href="https://matthew.olddoge.cn/2021/12/6907dde1b0f1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>RESTful 详解 | 七瀬丸のブログ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">七瀬丸のブログ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">あいうえお</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">21</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://matthew.olddoge.cn/2021/12/6907dde1b0f1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/pictures/avatar_akai.jpg">
+      <meta itemprop="name" content="◢₄₆七瀬丸">
+      <meta itemprop="description" content="あいうえおかきくけこ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="七瀬丸のブログ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RESTful 详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-02 08:53:37" itemprop="dateCreated datePublished" datetime="2021-12-02T08:53:37+08:00">2021-12-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-17 18:09:52" itemprop="dateModified" datetime="2022-07-17T18:09:52+08:00">2022-07-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8C%87%E5%8D%97/" itemprop="url" rel="index"><span itemprop="name">指南</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文转载自 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/um5kDYBscf5sy7FUhmP7ww">到底什么是 RESTful ？</a> </p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在学习 RESTful 风格接口之前，即使你不知道它是什么，但你肯定会好奇它能解决什么问题？有什么应用场景？听完下面描述我想你就会明白：<br>在互联网并没有完全流行的初期，移动端也没有那么盛行，页面请求和并发量也不高，那时候人们对接口的要求没那么高，一些动态页面 (jsp) 就能满足绝大多数的使用需求。</p>
+<span id="more"></span>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/pictures/post/2021/12/1.webp" alt="1"></p>
+<p>但是随着互联网和移动设备的发展，人们对Web应用的使用需求也增加，传统的动态页面由于低效率而渐渐被 HTML + JavaScript(Ajax) 的前后端分离所取代，并且安卓、IOS、小程序等形式客户端层出不穷，客户端的种类出现多元化，而<strong>客户端和服务端就需要接口进行通信</strong>，但接口的<strong>规范性</strong>就又成了一个问题：</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/pictures/post/2021/12/2.webp" alt="2"></p>
+<p>所以一套<strong>结构清晰、符合标准、易于理解、扩展方便</strong>让大部分人都能够理解接受的接口风格就显得越来越重要，而 RESTful 风格的接口 (RESTful API) 刚好有以上特点，就逐渐被实践应用而变得流行起来。</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/pictures/post/2021/12/3.webp" alt="3"></p>
+<p>现在，RESTful是目前最流行的接口设计规范，在很多公司有着广泛的应用，其中 Github 的 API 设计就是很标准的 RESTful API，你可以参考学习。<br>在开发实践中我们很多人可能还是使用传统API进行请求交互，很多人其实并不特别了解 RESTful API，对 RESTful API 的认知可能会停留在：</p>
+<ul>
+<li>面向资源类型的</li>
+<li>是一种风格</li>
+<li>(误区)接口传递参数使用斜杠(/)分割而不用问号(?)传参。</li>
+</ul>
+<p>而其实一个很大的误区不要认为没有查询字符串就是 RESTful API，也不要认为用了查询字符串就不是 RESTful API，更不要认为用了 JSON 传输的 API 就是 RESTful API。</p>
+<h1 id="一、REST介绍"><a href="#一、REST介绍" class="headerlink" title="一、REST介绍"></a>一、REST介绍</h1><p>REST 涉及一些概念性的东西可能比较多，在实战 RESTful API 之前，要对 REST 相关的知识有个系统的认知。</p>
+<h2 id="REST的诞生"><a href="#REST的诞生" class="headerlink" title="REST的诞生"></a>REST的诞生</h2><p>REST（英文：Representational State Transfer，简称 REST，直译过来表现层状态转换）是一种软件架构风格、设计风格，而不是标准，只是提供了一组设计原则和约束条件。它主要用于客户端和服务器交互类的软件。基于这个风格设计的软件可以更简洁，更有层次，更易于实现缓存等机制。</p>
+<p>它首次出现在 2000 年 Roy Thomas Fielding 的博士论文中，这篇论文定义并详细介绍了表述性状态转移（Representational State Transfer，REST）的架构风格，并且描述了 如何使用 REST 来指导现代 Web 架构的设计和开发。用他自己的原话说：</p>
+<blockquote>
+<p>写这篇文章的目的是：在符合架构原理前提下，理解和评估基于网络的应用软件的架构设计，得到一个功能强、性能好、适宜通信的架构。</p>
+</blockquote>
+<p>需要注意的是 REST 并没有一个明确的标准，而更像是一种设计的风格，满足这种设计风格的程序或接口我们称之为 RESTful (从单词字面来看就是一个形容词)。所以 RESTful API 就是满足 REST 架构风格的接口。</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/pictures/post/2021/12/4.webp" alt="Fielding博士答辩"></p>
+<p>Fielding 博士当时提出的是 REST 架构在很久的时间内并没有被关注太多，而近些年 REST 在国内才变得越来越流行。下面开始详细学习 REST 架构特征。</p>
+<h2 id="REST架构特征"><a href="#REST架构特征" class="headerlink" title="REST架构特征"></a>REST架构特征</h2><p>既然知道 REST 和 RESTful 的联系和区别，现在就要开始好好了解 RESTful 的一些约束条件和规则，RESTful 是一种风格而不是标准，而这个风格大致有以下几个主要<strong>特征</strong>：</p>
+<p><strong>以资源为基础</strong> ：资源可以是一个图片、音乐、一个 XML 格式、HTML 格式或者 JSON 格式等网络上的一个实体，除了一些二进制的资源外普通的文本资源更多以 JSON 为载体、面向用户的一组数据(通常从数据库中查询而得到)。</p>
+<p><strong>统一接口</strong>: 对资源的操作包括获取、创建、修改和删除，这些操作正好对应 HTTP 协议提供的 GET、POST、PUT 和 DELETE 方法。换言而知，使用 RESTful 风格的接口但从接口上你可能只能定位其资源，但是无法知晓它具体进行了什么操作，需要具体了解其发生了什么操作动作要从其 HTTP 请求方法类型上进行判断。具体的 HTTP 方法和方法含义如下：</p>
+<ul>
+<li><p>GET（SELECT）：从服务器取出资源（一项或多项）。</p>
+</li>
+<li><p>POST（CREATE）：在服务器新建一个资源。</p>
+</li>
+<li><p>PUT（UPDATE）：在服务器更新资源（客户端提供完整资源数据）。</p>
+</li>
+<li><p>PATCH（UPDATE）：在服务器更新资源（客户端提供需要修改的资源数据）。</p>
+</li>
+<li><p>DELETE（DELETE）：从服务器删除资源。</p>
+</li>
+</ul>
+<p>当然也有很多在具体使用的时候使用 PUT 表示更新。从请求的流程来看，RESTful API 和传统 API 大致架构如下：</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/pictures/post/2021/12/5.webp" alt="5"></p>
+<p><strong>URI指向资源</strong>：URI = Universal Resource Identifier 统一资源标志符，用来标识抽象或物理资源的一个紧凑字符串。URI 包括 URL 和 URN，在这里更多时候可能代指URL(统一资源定位符)。RESTful 是面向资源的，每种资源可能由一个或多个 URI 对应，但一个 URI 只指向一种资源。</p>
+<p><strong>无状态</strong>：服务器不能保存客户端的信息， 每一次从客户端发送的请求中，要包含所有必须的状态信息，会话信息由客户端保存， 服务器端根据这些状态信息来处理请求。当客户端可以切换到一个新状态的时候发送请求信息， 当一个或者多个请求被发送之后, 客户端就处于一个状态变迁过程中。每一个应用的状态描述可以被客户端用来初始化下一次的状态变迁。</p>
+<h2 id="REST架构限制条件"><a href="#REST架构限制条件" class="headerlink" title="REST架构限制条件"></a>REST架构限制条件</h2><p>Fielding 在论文中提出 REST 架构的 6 个<strong>限制条件</strong>，也可称为 RESTful 6 大原则， 标准的 REST 约束应满足以下 6 个<strong>原则</strong>：</p>
+<ul>
+<li><p><strong>客户端-服务端（Client-Server）</strong>: 这个更专注客户端和服务端的分离，服务端独立可更好服务于前端、安卓、IOS 等客户端设备。</p>
+</li>
+<li><p><strong>无状态（Stateless）</strong>：服务端不保存客户端状态，客户端保存状态信息每次请求携带状态信息。</p>
+</li>
+<li><p><strong>可缓存性（Cacheability）</strong>：服务端需回复是否可以缓存以让客户端甄别是否缓存提高效率。</p>
+</li>
+<li><p><strong>统一接口（Uniform Interface）</strong>：通过一定原则设计接口降低耦合，简化系统架构，这是 RESTful 设计的基本出发点。当然这个内容除了上述特点提到部分具体内容比较多详细了解可以参考这篇 REST 论文内容。</p>
+</li>
+<li><p><strong>分层系统（Layered System）</strong>：客户端无法直接知道连接的到终端还是中间设备，分层允许你灵活的部署服务端项目。</p>
+</li>
+<li><p><strong>按需代码（Code-On-Demand，可选）</strong>：按需代码允许我们灵活的发送一些看似特殊的代码给客户端例如 JavaScript 代码。</p>
+</li>
+</ul>
+<p>REST 架构的一些风格和限制条件就先介绍到这里，后面就对 RESTful 风格 API 具体介绍。</p>
+<h1 id="二、RESTful-API设计规范"><a href="#二、RESTful-API设计规范" class="headerlink" title="二、RESTful API设计规范"></a>二、RESTful API设计规范</h1><p>既然了解了 RESTful 的一些规则和特性，那么具体该怎么去设计一个 RESTful API 呢？要从 URL 路径、HTTP 请求动词、状态码和返回结果等方面详细考虑。至于其他的方面例如错误处理、过滤信息等规范这里就不详细介绍了。</p>
+<h2 id="URL-设计规范"><a href="#URL-设计规范" class="headerlink" title="URL 设计规范"></a>URL 设计规范</h2><p>URL 为统一资源定位器,接口属于服务端资源，首先要通过 URL 定位到资源才能去访问，而通常一个完整的 URL 组成由以下几个部分构成：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">URI = scheme &quot;://&quot; host  &quot;:&quot;  port &quot;/&quot; path [ &quot;?&quot; query ][ &quot;#&quot; fragment ]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>scheme: 指底层用的协议，如 http、https、ftp</li>
+<li>host: 服务器的 IP 地址或者域名</li>
+<li>port: 端口，http 默认为 80 端口</li>
+<li>path: 访问资源的路径，就是各种 web 框架中定义的 route 路由</li>
+<li>query: 查询字符串，为发送给服务器的参数，在这里更多发送数据分页、排序等参数。</li>
+<li>fragment: 锚点，定位到页面的资源</li>
+</ul>
+<p>我们在设计 API 时 URL 的 path 是需要认真考虑的，而 RESTful 对 path 的设计做了一些规范，通常一个 RESTful API 的 path 组成如下：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/&#123;version&#125;/&#123;resources&#125;/&#123;resource_id&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>version：API 版本号，有些版本号放置在头信息中也可以，通过控制版本号有利于应用迭代。</li>
+<li>resources：资源，RESTful API 推荐用小写英文单词的复数形式。</li>
+<li>resource_id：资源的 id，访问或操作该资源。</li>
+</ul>
+<p>当然，有时候可能资源级别较大，其下还可细分很多子资源也可以灵活设计 URL 的 path，例如：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/&#123;version&#125;/&#123;resources&#125;/&#123;resource_id&#125;/&#123;subresources&#125;/&#123;subresource_id&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此外，有时可能增删改查无法满足业务要求，可以在 URL 末尾加上 action，例如</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/&#123;version&#125;/&#123;resources&#125;/&#123;resource_id&#125;/action</span><br></pre></td></tr></table></figure>
+
+<p>其中 action 就是对资源的操作。</p>
+<p>从大体样式了解 URL 路径组成之后，对于 RESTful API 的 URL 具体设计的规范如下：</p>
+<ol>
+<li>不用大写字母，所有单词使用英文且小写。</li>
+<li>连字符用中杠<code>&quot;-&quot;</code>而不用下杠<code>&quot;_&quot;</code></li>
+<li>正确使用 <code>&quot;/&quot;</code>表示层级关系, URL 的层级不要过深，并且越靠前的层级应该相对越稳定</li>
+<li>结尾不要包含正斜杠分隔符<code>&quot;/&quot;</code></li>
+<li><code>URL</code> 中不出现动词，用请求方式表示动作</li>
+<li>资源表示用复数不要用单数</li>
+<li>不要使用文件扩展名</li>
+</ol>
+<h2 id="HTTP动词"><a href="#HTTP动词" class="headerlink" title="HTTP动词"></a>HTTP动词</h2><p>在 RESTful API 中，不同的 HTTP 请求方法有各自的含义，这里就展示 GET, POST, PUT, DELETE 几种请求 API 的设计与含义分析。针对不同操作，具体的含义如下：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET /collection：从服务器查询资源的列表（数组）</span><br><span class="line">GET /collection/resource：从服务器查询单个资源</span><br><span class="line">POST /collection：在服务器创建新的资源</span><br><span class="line">PUT /collection/resource：更新服务器资源</span><br><span class="line">DELETE /collection/resource：从服务器删除资源</span><br></pre></td></tr></table></figure>
+
+<p>在非 RESTful 风格的 API 中，我们通常使用 GET 请求和 POST 请求完成增删改查以及其他操作，查询和删除一般使用 GET 方式请求，更新和插入一般使用 POST 请求。从请求方式上无法知道 API 具体是干嘛的，所有在 URL 上都会有操作的动词来表示 API 进行的动作，例如：query，add，update，delete 等等。</p>
+<p>而 RESTful 风格的 API 则要求在 URL 上都以名词的方式出现，从几种请求方式上就可以看出想要进行的操作，这点与非 RESTful 风格的 API 形成鲜明对比。</p>
+<p>在谈及 GET,POST,PUT,DELETE 的时候，就必须提一下接口的安全性和幂等性，其中安全性是指方法不会修改资源状态，即读的为安全的，写的操作为非安全的。而幂等性的意思是操作一次和操作多次的最终效果相同，客户端重复调用也只返回同一个结果。</p>
+<p>上述四个 HTTP 请求方法的安全性和幂等性如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">HTTP Method</th>
+<th align="center">安全性</th>
+<th align="center">幂等性</th>
+<th align="center">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">GET</td>
+<td align="center">安全</td>
+<td align="center">幂等</td>
+<td align="center">读操作安全，查询一次多次结果一致</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">非安全</td>
+<td align="center">非幂等</td>
+<td align="center">写操作非安全，每多插入一次都会出现新结果</td>
+</tr>
+<tr>
+<td align="center">PUT</td>
+<td align="center">非安全</td>
+<td align="center">幂等</td>
+<td align="center">写操作非安全，一次和多次更新结果一致</td>
+</tr>
+<tr>
+<td align="center">DELETE</td>
+<td align="center">非安全</td>
+<td align="center">幂等</td>
+<td align="center">写操作非安全，一次和多次删除结果一致</td>
+</tr>
+</tbody></table>
+<h2 id="状态码和返回数据"><a href="#状态码和返回数据" class="headerlink" title="状态码和返回数据"></a>状态码和返回数据</h2><p>服务端处理完成后客户端也可能不知道具体成功了还是失败了，服务器响应时，包含<strong>状态码</strong>和<strong>返回数据</strong>两个部分。</p>
+<h3 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h3><p>我们首先要正确使用各类状态码来表示该请求的处理执行结果。状态码主要分为五大类：</p>
+<blockquote>
+<p>1xx：相关信息<br>2xx：操作成功<br>3xx：重定向<br>4xx：客户端错误<br>5xx：服务器错误</p>
+</blockquote>
+<p>每一大类有若干小类，状态码的种类比较多，而主要常用状态码罗列在下面：</p>
+<p>200 <code>OK - [GET]</code>：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）。<br>201 <code>CREATED - [POST/PUT/PATCH]</code>：用户新建或修改数据成功。<br>202 <code>Accepted - [*]</code>：表示一个请求已经进入后台排队（异步任务）<br>204 <code>NO CONTENT - [DELETE]</code>：用户删除数据成功。<br>400 <code>INVALID REQUEST - [POST/PUT/PATCH]</code>：用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的。<br>401 <code>Unauthorized - [*]</code>：表示用户没有权限（令牌、用户名、密码错误）。<br>403 <code>Forbidden - [*]</code> 表示用户得到授权（与 401 错误相对），但是访问是被禁止的。<br>404 <code>NOT FOUND - [*]</code>：用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的。<br>406 <code>Not Acceptable - [GET]</code>：用户请求的格式不可得（比如用户请求 JSON 格式，但是只有 XML 格式）。<br>410 <code>Gone -[GET]</code>：用户请求的资源被永久删除，且不会再得到的。<br>422 <code>Unprocesable entity - [POST/PUT/PATCH]</code> 当创建一个对象时，发生一个验证错误。<br>500 <code>INTERNAL SERVER ERROR - [*]</code>：服务器发生错误，用户将无法判断发出的请求是否成功。</p>
+<p><strong>返回结果</strong></p>
+<p>针对不同操作，服务器向用户返回数据，而各个团队或公司封装的返回实体类也不同，但都返回 JSON 格式数据给客户端。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>RESTful 风格的 API 固然很好很规范，但大多数互联网公司并没有按照或者完全按照其规则来设计，因为 REST 是一种风格，而不是一种约束或规则，过于理想的 RESTful API 会付出太多的成本。</p>
+<p>比如 RESTful API 也有一些缺点</p>
+<p>比如操作方式繁琐，RESTful API 通常根据 GET、POST、PUT、DELETE 来区分操作资源的动作，而 HTTP Method 本身不可直接见，是隐藏的，而如果将动作放到 URL 的 path 上反而清晰可见，更利于团队的理解和交流。</p>
+<p>并且有些浏览器对 GET,POST 之外的请求支持不太友好，还需要特殊额外的处理。</p>
+<p>过分强调资源，而实际业务 API 可能有各种需求比较复杂，单单使用资源的增删改查可能并不能有效满足使用需求，强行使用 RESTful 风格 API 只会增加开发难度和成本。</p>
+<p>所以，当你或你们的技术团队在设计 API 的时候，如果使用场景和 REST 风格很匹配，那么你们可以采用 RESTful 风格 API。但是如果业务需求和 RESTful 风格 API 不太匹配或者很麻烦，那也可以不用 RESTful 风格 API 或者可以借鉴一下，毕竟无论那种风格的 API 都是为了方便团队开发、协商以及管理，不能墨守成规。</p>
+<p>不同的人对 RESTful API 可能有着不同的理解，但存在即合理，RESTful API 有着其鲜明的优势和特点，目前也是一种 API 设计的主要选型之一，所以掌握和理解 RESTful API 还是相当重要的!</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%8C%87%E5%8D%97/" rel="tag"><i class="fa fa-tag"></i> 指南</a>
+              <a href="/tags/RESTful/" rel="tag"><i class="fa fa-tag"></i> RESTful</a>
+              <a href="/tags/%E8%A7%84%E8%8C%83/" rel="tag"><i class="fa fa-tag"></i> 规范</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/7e6b9fedc0f5/" rel="prev" title="在 ThinkPHP5.1 中使用 blade 模板">
+      <i class="fa fa-chevron-left"></i> 在 ThinkPHP5.1 中使用 blade 模板
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/b3a54c4c40e8/" rel="next" title="群晖 Video Station 插件开发文档翻译">
+      群晖 Video Station 插件开发文档翻译 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81REST%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">一、REST介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#REST%E7%9A%84%E8%AF%9E%E7%94%9F"><span class="nav-number">2.1.</span> <span class="nav-text">REST的诞生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#REST%E6%9E%B6%E6%9E%84%E7%89%B9%E5%BE%81"><span class="nav-number">2.2.</span> <span class="nav-text">REST架构特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#REST%E6%9E%B6%E6%9E%84%E9%99%90%E5%88%B6%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">REST架构限制条件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81RESTful-API%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83"><span class="nav-number">3.</span> <span class="nav-text">二、RESTful API设计规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#URL-%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83"><span class="nav-number">3.1.</span> <span class="nav-text">URL 设计规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8A%A8%E8%AF%8D"><span class="nav-number">3.2.</span> <span class="nav-text">HTTP动词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E7%A0%81%E5%92%8C%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE"><span class="nav-number">3.3.</span> <span class="nav-text">状态码和返回数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">3.3.1.</span> <span class="nav-text">状态码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="◢₄₆七瀬丸"
+      src="/pictures/avatar_akai.jpg">
+  <p class="site-author-name" itemprop="name">◢₄₆七瀬丸</p>
+  <div class="site-description" itemprop="description">あいうえおかきくけこ</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/olddoge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;olddoge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/40023111" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;40023111" rel="noopener" target="_blank">哔哩哔哩</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.themoviedb.org/u/olddoge" title="https:&#x2F;&#x2F;www.themoviedb.org&#x2F;u&#x2F;olddoge" rel="noopener" target="_blank">TMDB</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">@Matthew</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

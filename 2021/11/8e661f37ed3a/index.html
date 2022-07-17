@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"matthew.olddoge.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="FreeRadius 服务官网：http:&#x2F;&#x2F;freeradius.org&#x2F;Daloradius Web 管理页面官网：https:&#x2F;&#x2F;sourceforge.net&#x2F;projects&#x2F;daloradius&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS7 下搭建 LAMP + FreeRadius + Daloradius Web 管理">
+<meta property="og:url" content="https://matthew.olddoge.cn/2021/11/8e661f37ed3a/index.html">
+<meta property="og:site_name" content="七瀬丸のブログ">
+<meta property="og:description" content="FreeRadius 服务官网：http:&#x2F;&#x2F;freeradius.org&#x2F;Daloradius Web 管理页面官网：https:&#x2F;&#x2F;sourceforge.net&#x2F;projects&#x2F;daloradius&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-22T12:42:34.000Z">
+<meta property="article:modified_time" content="2022-07-17T10:09:52.414Z">
+<meta property="article:author" content="◢₄₆七瀬丸">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="FreeRadius">
+<meta property="article:tag" content="Radius">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://matthew.olddoge.cn/2021/11/8e661f37ed3a/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CentOS7 下搭建 LAMP + FreeRadius + Daloradius Web 管理 | 七瀬丸のブログ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">七瀬丸のブログ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">あいうえお</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">21</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://matthew.olddoge.cn/2021/11/8e661f37ed3a/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/pictures/avatar_akai.jpg">
+      <meta itemprop="name" content="◢₄₆七瀬丸">
+      <meta itemprop="description" content="あいうえおかきくけこ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="七瀬丸のブログ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CentOS7 下搭建 LAMP + FreeRadius + Daloradius Web 管理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-22 20:42:34" itemprop="dateCreated datePublished" datetime="2021-11-22T20:42:34+08:00">2021-11-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-17 18:09:52" itemprop="dateModified" datetime="2022-07-17T18:09:52+08:00">2022-07-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>FreeRadius 服务官网：<a target="_blank" rel="noopener" href="http://freeradius.org/">http://freeradius.org/</a><br>Daloradius Web 管理页面官网：<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/daloradius/">https://sourceforge.net/projects/daloradius/</a></p>
+</blockquote>
+<span id="more"></span>
+<h1 id="创建-radius-数据库"><a href="#创建-radius-数据库" class="headerlink" title="创建 radius 数据库"></a>创建 radius 数据库</h1><p>创建 radius 数据库和用户名密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql -h 127.0.0.1 -u root -p</span><br><span class="line"><span class="meta">#</span><span class="bash"> 下列在 mysql 命令行中操作</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> create database radius;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> grant all on radius.* to radius@<span class="string">&quot;localhost&quot;</span> identified by <span class="string">&quot;radpass&quot;</span>;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> flush privileges;</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> <span class="built_in">exit</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="安装-FreeRadius"><a href="#安装-FreeRadius" class="headerlink" title="安装 FreeRadius"></a>安装 FreeRadius</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install freeradius freeradius-utils freeradius-mysql</span><br><span class="line">systemctl start radiusd.service</span><br><span class="line">systemctl enable radiusd.service</span><br></pre></td></tr></table></figure>
+<p>查看 Radius 使用的端口，然后添加 Radius 服务到防火墙中；也可以直接关闭防火墙</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/lib/firewalld/services/radius.xml</span><br><span class="line">firewall-cmd --state # 查看防火墙状态，启动状态才能添加规则</span><br><span class="line">firewall-cmd --add-service=radius --permanent # 添加 Radius 服务到 firewalld 防火墙中。</span><br><span class="line">firewall-cmd --reload # 让配置的防火墙策略立即生效</span><br><span class="line">firewall-cmd --list-services # 列举区域中启用的服务</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置-FreeRadius"><a href="#配置-FreeRadius" class="headerlink" title="配置 FreeRadius"></a>配置 FreeRadius</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/raddb/mods-config/sql/main/mysql/</span><br><span class="line"><span class="meta">#</span><span class="bash"> 备份 setup.sql 配置文件</span></span><br><span class="line">mv setup.sql setup.sql-backup </span><br><span class="line"><span class="meta">#</span><span class="bash"> 过滤有 <span class="comment"># 注释符号的信息行</span></span></span><br><span class="line">grep -v &quot;#&quot; /etc/raddb/mods-config/sql/main/mysql/setup.sql-backup &gt; /etc/raddb/mods-config/sql/main/mysql/setup.sql </span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入数据库命令行操作</span></span><br><span class="line">mysql -h 127.0.0.1 -u root -p</span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> <span class="built_in">source</span> /etc/raddb/mods-config/sql/main/mysql/setup.sql</span> </span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> use radius</span> </span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> <span class="built_in">source</span> /etc/raddb/mods-config/sql/main/mysql/schema.sql</span> </span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> <span class="built_in">exit</span>;</span> </span><br></pre></td></tr></table></figure>
+<p>导入完成后，可以看到如下的表结构</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+------------------+</span><br><span class="line">| Tables_in_radius |</span><br><span class="line">+------------------+</span><br><span class="line">| nas              |</span><br><span class="line">| radacct          |</span><br><span class="line">| radcheck         |</span><br><span class="line">| radgroupcheck    |</span><br><span class="line">| radgroupreply    |</span><br><span class="line">| radpostauth      |</span><br><span class="line">| radreply         |</span><br><span class="line">| radusergroup     |</span><br><span class="line">+------------------+</span><br></pre></td></tr></table></figure>
+
+<p><code>MySQL</code> 中表结构的定义<br>针对 <code>FreeRadius3</code>，数据表的设计和结构定义在下面的文件中：<code>/etc/raddb/sql/mysql/schema.sql</code><br>主数据库定义，8个表，包括<br><code>nas # 网络设备表</code><br><code>radacct # 计费情况表</code><br><code>radcheck # 用户检查信息表</code><br><code>radgroupcheck # 用户组检查信息表</code><br><code>radgroupreply # 用户组回复信息表</code><br><code>radpostauth # 认证后处理信息，可以包括认证请求成功和拒绝的记录。</code><br><code>radreply # 用户回复信息表</code><br><code>radusergroup # 用户和组关系表 </code></p>
+<p>为 <code>/etc/raddb/mods-enabled</code> 创建软连接（涉及到后续 Radius 验证是否使用数据库）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /etc/raddb/mods-available/sql /etc/raddb/mods-enabled/</span><br></pre></td></tr></table></figure>
+<p>配置 <code>SQL</code> 模块 <code>/raddb/mods-available/sql</code>，并更改数据库连接参数，以适合自己的配置环境：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/raddb/mods-available/sql</span><br></pre></td></tr></table></figure>
+<figure class="highlight apacheconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">31</span> # driver = <span class="string">&quot;rlm_sql_null&quot;</span> # 注释掉这行</span><br><span class="line"><span class="attribute">32</span> driver = <span class="string">&quot;rlm_sql_mysql&quot;</span> # 新增这行，表示使用 MySQL 数据库</span><br><span class="line"><span class="attribute">88</span> # dialect = <span class="string">&quot;sqlite&quot;</span>  # 注释掉这行</span><br><span class="line"><span class="attribute">89</span> dialect = <span class="string">&quot;mysql&quot;</span> # 修改连接类型为 MySQL</span><br><span class="line"><span class="attribute">90</span></span><br><span class="line"><span class="attribute">91</span> # Connection info:</span><br><span class="line"><span class="attribute">92</span> # (这里可以改成root账号) </span><br><span class="line"><span class="attribute">93</span> server = <span class="string">&quot;localhost&quot;</span></span><br><span class="line"><span class="attribute">94</span> port = <span class="number">3306</span></span><br><span class="line"><span class="attribute">95</span> login = <span class="string">&quot;radius&quot;</span></span><br><span class="line"><span class="attribute">96</span> password = <span class="string">&quot;radpass&quot;</span> # 对应数据库密码</span><br><span class="line"><span class="attribute">97</span></span><br><span class="line"><span class="attribute">98</span> # Database table configuration for everything except Oracle</span><br><span class="line"><span class="attribute">99</span> radius_db = <span class="string">&quot;radius&quot;</span></span><br><span class="line"><span class="attribute">247</span> read_clients = yes</span><br><span class="line"><span class="attribute">250</span> client_table = <span class="string">&quot;nas&quot;</span></span><br><span class="line">其他配置默认无需更改。</span><br></pre></td></tr></table></figure>
+<p>然后，将 <code>/etc/raddb/mods-enabled/sql</code> 所属组更改为 <code>radiusd</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chgrp -h radiusd /etc/raddb/mods-enabled/sql</span><br></pre></td></tr></table></figure>
+
+<p>添加启动服务，调整 <code>FreeRadius</code> 与 <code>MariaDB</code> 的启动顺序，<code>FreeRadius</code> 必须在 <code>MariaDB</code> 启动之后启动，在 <code>[Unit]</code> 部分，增加 <code>After=mariadb.service</code>，如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable radiusd.service</span><br><span class="line">vi /etc/systemd/system/multi-user.target.wants/radiusd.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight apacheconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="attribute">Unit</span>]</span><br><span class="line"><span class="attribute">Description</span>=FreeRADIUS high performance RADIUS server.</span><br><span class="line"><span class="attribute">After</span>=syslog.target network.target ipa.service dirsrv.target krb<span class="number">5</span>kdc.service</span><br><span class="line"><span class="attribute">After</span>=mysqld.service</span><br></pre></td></tr></table></figure>
+<p>添加客户端（路由器、交换机等设备）连接设置，ip 可以自由更改。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mv /etc/raddb/clients.conf /etc/raddb/clients.conf-backup</span><br><span class="line">grep -v &quot;#&quot; /etc/raddb/clients.conf-backup &gt; /etc/raddb/clients.conf # 过滤有 # 注释符号的信息行 </span><br><span class="line">vi /etc/raddb/clients.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight apacheconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">client</span> localhost &#123;</span><br><span class="line">    <span class="attribute">ipaddr</span> = <span class="number">127.0.0.1</span></span><br><span class="line">    <span class="attribute">proto</span> = *</span><br><span class="line">    <span class="attribute">secret</span> = testing<span class="number">123</span></span><br><span class="line">    <span class="attribute">require_message_authenticator</span> = no</span><br><span class="line">    <span class="attribute">limit</span> &#123;</span><br><span class="line">        <span class="attribute">max_connections</span> = <span class="number">16</span></span><br><span class="line">        <span class="attribute">lifetime</span> = <span class="number">0</span></span><br><span class="line">        <span class="attribute">idle_timeout</span> = <span class="number">30</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意，上面配置的 <code>127.0.0.1</code> 主要用于测试，将来真正的客户端要按照下面的信息进行补充：<br>将来你真正的 <code>raidus</code> 客户端，如路由器、交换机等需要在这里配置 <code>ip</code> 信息，例如：</p>
+<figure class="highlight apacheconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这里的 x.x.x.x 就是交换机或者路由器等设备的IP地址</span></span><br><span class="line"><span class="attribute">client</span> x.x.x.x &#123;</span><br><span class="line">    <span class="attribute">ipaddr</span> = x.x.x.x # 交换机或者路由器等设备的IP地址</span><br><span class="line">    <span class="attribute">secret</span> = xxxxxxxxxx # 自己定义的交换机或者路由器等设备和 radius 服务器的连接密码</span><br><span class="line">    <span class="comment"># require_message_authenticator = no # 这个可以注释掉，不用管</span></span><br><span class="line">    </span><br><span class="line">    <span class="attribute">client</span> <span class="number">0.0.0.0</span>/<span class="number">0</span> &#123;</span><br><span class="line">        <span class="attribute">secret</span> = testing<span class="number">123</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以执行 <code>cat /var/log/radius/radius.log</code> 去查看 <code>radius</code> 服务的日志看有没有错误。</p>
+<h1 id="安装-FreeRADIUS-管理界面-Daloradius"><a href="#安装-FreeRADIUS-管理界面-Daloradius" class="headerlink" title="安装 FreeRADIUS 管理界面 Daloradius"></a>安装 FreeRADIUS 管理界面 Daloradius</h1><p>进入 <code>Apache</code> 网站根目录，下载 <code>daloradius</code> 源文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install -y php-pear-DB</span><br><span class="line">cd /var/www/html/</span><br><span class="line">wget https://github.com/lirantal/daloradius/archive/master.zip</span><br><span class="line">unzip master.zip</span><br><span class="line">mv daloradius-master/ daloradius</span><br></pre></td></tr></table></figure>
+<p>下载 <code>daloradius-0.9-9.tar.gz</code>，解压后合并到 <code>daloradius</code> 文件夹中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://liquidtelecom.dl.sourceforge.net/project/daloradius/daloradius/daloradius0.9-9/daloradius-0.9-9.tar.gz</span><br><span class="line">tar -zxvf daloradius-0.9-9.tar.gz</span><br><span class="line">mv daloradius-0.9-9 daloradius</span><br></pre></td></tr></table></figure>
+<p>进入 <code>daloradius</code> 目录，导入 <code>daloradius</code> 数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd daloradius</span><br><span class="line">mysql -h 127.0.0.1 -u root -p radius &lt; contrib/db/fr2-mysql-daloradius-and-freeradius.sql</span><br><span class="line">mysql -h 127.0.0.1 -u root -p radius &lt; contrib/db/mysql-daloradius.sql</span><br></pre></td></tr></table></figure>
+
+<p>复制一份 <code>daloradius.conf.php.sample</code> 为 <code>daloradius.conf.php</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv /var/www/html/daloradius/library/daloradius.conf.php.sample /var/www/html/daloradius/library/daloradius.conf.php</span><br></pre></td></tr></table></figure>
+<p>设置 <code>daloradius</code> 目录用户组和用户，设置 <code>daloradius.conf.php</code> 权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown -R apache:apache /var/www/html/daloradius/</span><br><span class="line">chmod 664 /var/www/html/daloradius/library/daloradius.conf.php</span><br></pre></td></tr></table></figure>
+
+<p>设置 <code>daloradius</code> 数据库连接信息，打开 <code>daloradius.conf.php</code> 文件，修改 <code>CONFIG_DB_USER</code>，<code>CONFIG_DB_PASS</code>，<code>CONFIG_DB_NAME</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /var/www/html/daloradius/library/daloradius.conf.php</span><br></pre></td></tr></table></figure>
+<p>找到下列变量进行修改</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// （28-33行）</span></span><br><span class="line"><span class="variable">$configValues</span>[<span class="string">&#x27;CONFIG_DB_ENGINE&#x27;</span>] = <span class="string">&#x27;mysql&#x27;</span>;</span><br><span class="line"><span class="variable">$configValues</span>[<span class="string">&#x27;CONFIG_DB_HOST&#x27;</span>] = <span class="string">&#x27;127.0.0.1&#x27;</span>;</span><br><span class="line"><span class="variable">$configValues</span>[<span class="string">&#x27;CONFIG_DB_PORT&#x27;</span>] = <span class="string">&#x27;3306&#x27;</span>; <span class="comment">// 连接 mysql 数据库的端口</span></span><br><span class="line"><span class="variable">$configValues</span>[<span class="string">&#x27;CONFIG_DB_USER&#x27;</span>] = <span class="string">&#x27;root&#x27;</span>; <span class="comment">// 连接 mysql 数据库的账户</span></span><br><span class="line"><span class="variable">$configValues</span>[<span class="string">&#x27;CONFIG_DB_PASS&#x27;</span>] = <span class="string">&#x27; &#x27;</span>;  <span class="comment">// 连接 mysql 数据库账号的密码</span></span><br><span class="line"><span class="variable">$configValues</span>[<span class="string">&#x27;CONFIG_DB_NAME&#x27;</span>] = <span class="string">&#x27;radius&#x27;</span>; <span class="comment">// 连接 mysql 的 radius 数据库</span></span><br><span class="line"><span class="comment">// 下面还有几个 daloradius 的 bug，默认配置中有几个文件路径和我们导入的不一样，把它改过来：</span></span><br><span class="line"><span class="variable">$configValues</span>[<span class="string">&#x27;CONFIG_FILE_RADIUS_PROXY&#x27;</span>] = <span class="string">&#x27;/etc/raddb/proxy.conf&#x27;</span>; <span class="comment">//（68行）</span></span><br><span class="line"><span class="variable">$configValues</span>[<span class="string">&#x27;CONFIG_PATH_DALO_VARIABLE_DATA&#x27;</span>] = <span class="string">&#x27;/var/www/html/daloradius/var&#x27;</span>; <span class="comment">// （70行）</span></span><br><span class="line"><span class="variable">$configValues</span>[<span class="string">&#x27;CONFIG_MAINT_TEST_USER_RADIUSSECRET&#x27;</span>] = <span class="string">&#x27;testing123&#x27;</span>; <span class="comment">// （88行） # 注意这条，要和 /etc/raddb/clients.conf 文件设置的secret = xxxxxxxxxx 值一样。</span></span><br></pre></td></tr></table></figure>
+
+<p>配置完成后保存退出<br>重启 <code>radius</code>、<code>mysql</code>、<code>http</code> 服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart radiusd</span><br><span class="line">systemctl restart mysqld</span><br><span class="line">systemctl restart httpd</span><br></pre></td></tr></table></figure>
+<p>如果提示： <code>Warning: radiusd.service changed on disk. Run ‘systemctl daemon-reload’ to reload units.</code> 执行以下的命令，没有上面提示就忽略此步</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload # 重新加载守护进程</span><br><span class="line">systemctl restart radiusd</span><br></pre></td></tr></table></figure>
+<p>现在打开浏览器访问 <code>http://your ip address//</code> 就可以看到 <code>daloradius</code> 的界面了，默认登录的用户名和密码分别为 <code>username: administrator</code>, <code>password: radius</code><br>至此 <code>LAMP</code> + <code>FreeRadius</code> + <code>Daloradius Web</code> 管理界面已经安装成功，下面是 Web 界面汉化教程。</p>
+<h1 id="Daloradius-中文版设置"><a href="#Daloradius-中文版设置" class="headerlink" title="Daloradius 中文版设置"></a>Daloradius 中文版设置</h1><p>进入 <code>Daloradius</code> 文件目录,修改 <code>config-lang.php</code>,添加中文选项：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /var/www/html/daloradius/config-lang.php</span><br><span class="line"><span class="meta">#</span><span class="bash"> Simplified Chinese （79行）</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="RADIUS-操作命令"><a href="#RADIUS-操作命令" class="headerlink" title="RADIUS 操作命令"></a>RADIUS 操作命令</h1><ol>
+<li>启动 <code>RADIUS</code> 服务(调试模式)</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop radiusd</span><br><span class="line">radiusd -X</span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line">2. 配置文件添加账号</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">vi /etc/raddb/users</span><br><span class="line"><span class="meta">#</span><span class="bash">steve Cleartext-Password := <span class="string">&quot;testing&quot;</span>（这个注释去掉）</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>允许外部访问</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/raddb/clients.conf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight apacheconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">client</span> <span class="number">192.168.0.0</span>/<span class="number">24</span> &#123; # 地址根据实际情况去配置</span><br><span class="line">    <span class="attribute">secret</span> = testing<span class="number">123</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>远程客户端登录 <code>RADIUS</code> 服务器</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">radtest steve testing 192.168.70.116 1812 testing123 </span><br></pre></td></tr></table></figure>
+<p>访问成功会收到 <code>Access-Accept</code> 的提示</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+              <a href="/tags/FreeRadius/" rel="tag"><i class="fa fa-tag"></i> FreeRadius</a>
+              <a href="/tags/Radius/" rel="tag"><i class="fa fa-tag"></i> Radius</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/5a52d619023a/" rel="prev" title="HTTP API 设计指南">
+      <i class="fa fa-chevron-left"></i> HTTP API 设计指南
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/7e6b9fedc0f5/" rel="next" title="在 ThinkPHP5.1 中使用 blade 模板">
+      在 ThinkPHP5.1 中使用 blade 模板 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-radius-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">创建 radius 数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-FreeRadius"><span class="nav-number">2.</span> <span class="nav-text">安装 FreeRadius</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-FreeRadius"><span class="nav-number">3.</span> <span class="nav-text">配置 FreeRadius</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-FreeRADIUS-%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2-Daloradius"><span class="nav-number">4.</span> <span class="nav-text">安装 FreeRADIUS 管理界面 Daloradius</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Daloradius-%E4%B8%AD%E6%96%87%E7%89%88%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">Daloradius 中文版设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RADIUS-%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">RADIUS 操作命令</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="◢₄₆七瀬丸"
+      src="/pictures/avatar_akai.jpg">
+  <p class="site-author-name" itemprop="name">◢₄₆七瀬丸</p>
+  <div class="site-description" itemprop="description">あいうえおかきくけこ</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/olddoge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;olddoge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/40023111" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;40023111" rel="noopener" target="_blank">哔哩哔哩</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.themoviedb.org/u/olddoge" title="https:&#x2F;&#x2F;www.themoviedb.org&#x2F;u&#x2F;olddoge" rel="noopener" target="_blank">TMDB</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">@Matthew</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

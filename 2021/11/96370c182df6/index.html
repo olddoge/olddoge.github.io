@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"matthew.olddoge.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="PHP常用代码片段记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP常用代码片段">
+<meta property="og:url" content="https://matthew.olddoge.cn/2021/11/96370c182df6/index.html">
+<meta property="og:site_name" content="七瀬丸のブログ">
+<meta property="og:description" content="PHP常用代码片段记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-13T13:20:21.000Z">
+<meta property="article:modified_time" content="2022-07-17T10:09:52.415Z">
+<meta property="article:author" content="◢₄₆七瀬丸">
+<meta property="article:tag" content="PHP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://matthew.olddoge.cn/2021/11/96370c182df6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>PHP常用代码片段 | 七瀬丸のブログ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">七瀬丸のブログ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">あいうえお</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">21</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://matthew.olddoge.cn/2021/11/96370c182df6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/pictures/avatar_akai.jpg">
+      <meta itemprop="name" content="◢₄₆七瀬丸">
+      <meta itemprop="description" content="あいうえおかきくけこ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="七瀬丸のブログ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PHP常用代码片段
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-13 21:20:21" itemprop="dateCreated datePublished" datetime="2021-11-13T21:20:21+08:00">2021-11-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-17 18:09:52" itemprop="dateModified" datetime="2022-07-17T18:09:52+08:00">2022-07-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">PHP常用代码片段记录</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="1-获取上一周-上月-前几天时间"><a href="#1-获取上一周-上月-前几天时间" class="headerlink" title="1.获取上一周/上月/前几天时间"></a>1.获取上一周/上月/前几天时间</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">date(<span class="string">&quot;Y-m-d&quot;</span>,strtotime(<span class="string">&quot;-1 week&quot;</span>)); </span><br><span class="line">date(<span class="string">&quot;Y-m-d&quot;</span>,strtotime(<span class="string">&quot;-1 month&quot;</span>));</span><br><span class="line">date(<span class="string">&quot;Y-m-d&quot;</span>,strtotime(<span class="string">&quot;-1 day&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-二维数组去重"><a href="#2-二维数组去重" class="headerlink" title="2.二维数组去重"></a>2.二维数组去重</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">remove_duplicate</span>(<span class="params"><span class="variable">$arr</span>,<span class="variable">$key</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 建立一个目标数组 </span></span><br><span class="line">	<span class="variable">$result</span> = []; </span><br><span class="line">	<span class="keyword">foreach</span> (<span class="variable">$arr</span> <span class="keyword">as</span> <span class="variable">$value</span>)&#123; </span><br><span class="line">		<span class="comment">// 查看有没有重复项 </span></span><br><span class="line">		<span class="variable">$if_exit</span> = <span class="keyword">isset</span>(<span class="variable">$result</span>[<span class="variable">$value</span>[<span class="variable">$key</span>]]); </span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$if_exit</span>) &#123; </span><br><span class="line">			<span class="keyword">unset</span>(<span class="variable">$value</span>[<span class="variable">$key</span>]); </span><br><span class="line">		&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">			<span class="variable">$result</span>[<span class="variable">$value</span>[<span class="variable">$key</span>]] = <span class="variable">$value</span>; </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">foreach</span>(<span class="variable">$result</span> <span class="keyword">as</span> <span class="variable">$key</span> =&gt; <span class="variable">$row</span>) &#123;</span><br><span class="line">		<span class="variable">$result</span>[] = <span class="variable">$row</span>; </span><br><span class="line">		<span class="keyword">unset</span>(<span class="variable">$result</span>[<span class="variable">$key</span>]); </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$result</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-多维数组中按-7-个分成一组"><a href="#3-多维数组中按-7-个分成一组" class="headerlink" title="3.多维数组中按 7 个分成一组"></a>3.多维数组中按 7 个分成一组</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$memberList</span> = []; </span><br><span class="line"><span class="variable">$length</span> = ceil(count(<span class="variable">$allMember</span>));</span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="variable">$length</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">	<span class="variable">$memberList</span>[] = array_slice(<span class="variable">$allMember</span>, <span class="variable">$i</span> * <span class="number">7</span>, <span class="number">7</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-二维数组按特定值排序"><a href="#4-二维数组按特定值排序" class="headerlink" title="4.二维数组按特定值排序"></a>4.二维数组按特定值排序</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$data</span> = [</span><br><span class="line">	[ <span class="string">&#x27;id&#x27;</span> =&gt; <span class="number">5698</span>, <span class="string">&#x27;first_name&#x27;</span> =&gt; <span class="string">&#x27;Bill&#x27;</span>, <span class="string">&#x27;last_name&#x27;</span> =&gt; <span class="string">&#x27;Gates&#x27;</span>], </span><br><span class="line">	[ <span class="string">&#x27;id&#x27;</span> =&gt; <span class="number">4767</span>, <span class="string">&#x27;first_name&#x27;</span> =&gt; <span class="string">&#x27;Steve&#x27;</span>, <span class="string">&#x27;last_name&#x27;</span> =&gt; <span class="string">&#x27;Aobs&#x27;</span>],</span><br><span class="line">	[ <span class="string">&#x27;id&#x27;</span> =&gt; <span class="number">3809</span>, <span class="string">&#x27;first_name&#x27;</span> =&gt; <span class="string">&#x27;Mark&#x27;</span>, <span class="string">&#x27;last_name&#x27;</span> =&gt; <span class="string">&#x27;Zuckerberg&#x27;</span>]</span><br><span class="line">]; </span><br><span class="line"><span class="comment">//根据字段last_name对数组$data进行降序排列 </span></span><br><span class="line"><span class="variable">$last_names</span> = array_column(<span class="variable">$data</span>,<span class="string">&#x27;last_name&#x27;</span>); </span><br><span class="line">array_multisort(<span class="variable">$last_names</span>,SORT_DESC,<span class="variable">$data</span>);</span><br><span class="line">var_dump(<span class="variable">$data</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-将中文拆分成数组"><a href="#5-将中文拆分成数组" class="headerlink" title="5.将中文拆分成数组"></a>5.将中文拆分成数组</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mb_str_split</span>(<span class="params"><span class="variable">$str</span></span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> preg_split(<span class="string">&#x27;/(?&lt;!^)(?!$)/u&#x27;</span>, <span class="variable">$str</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-模拟发送-POST-请求"><a href="#6-模拟发送-POST-请求" class="headerlink" title="6.模拟发送 POST 请求"></a>6.模拟发送 POST 请求</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curl_post</span>(<span class="params"><span class="variable">$url</span> , <span class="variable">$data</span>=[]</span>)</span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	<span class="variable">$ch</span> = curl_init(); </span><br><span class="line">	curl_setopt(<span class="variable">$ch</span>, CURLOPT_URL, <span class="variable">$url</span>); 	<span class="comment">// 要访问的地址</span></span><br><span class="line">	curl_setopt(<span class="variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="number">1</span>); 	<span class="comment">// 获取的信息以文件流的形式返回</span></span><br><span class="line">	curl_setopt(<span class="variable">$ch</span>, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>); 	<span class="comment">// 对认证证书来源的检查</span></span><br><span class="line">	curl_setopt(<span class="variable">$ch</span>, CURLOPT_SSL_VERIFYHOST, <span class="literal">FALSE</span>); 	<span class="comment">// 从证书中检查SSL加密算法是否存在</span></span><br><span class="line">	<span class="comment">// POST数据 </span></span><br><span class="line">	curl_setopt(<span class="variable">$ch</span>, CURLOPT_POST, <span class="number">1</span>); </span><br><span class="line">	<span class="comment">// 把post的变量加上 </span></span><br><span class="line">	curl_setopt(<span class="variable">$ch</span>, CURLOPT_POSTFIELDS, <span class="variable">$data</span>); </span><br><span class="line">	<span class="variable">$output</span> = curl_exec(<span class="variable">$ch</span>); </span><br><span class="line">	curl_close(<span class="variable">$ch</span>); </span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$output</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-美化输出变量"><a href="#7-美化输出变量" class="headerlink" title="7.美化输出变量"></a>7.美化输出变量</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">p</span>(<span class="params"><span class="variable">$data</span></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 定义样式</span></span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&#x27;&lt;pre style=&quot;display: block;padding: 9.5px;margin: 44px 0 0 0;font-size: 13px;line-height: 1.42857;color: #333;word-break: break-all;word-wrap: break-word;background-color: #F5F5F5;border: 1px solid #CCC;border-radius: 4px;&quot;&gt;&#x27;</span>;</span><br><span class="line">    <span class="comment">// 如果是boolean或者null直接显示文字；否则print</span></span><br><span class="line">    <span class="keyword">if</span> (is_bool(<span class="variable">$data</span>)) &#123;</span><br><span class="line">        <span class="variable">$show_data</span> = <span class="variable">$data</span> ? <span class="string">&#x27;true&#x27;</span> : <span class="string">&#x27;false&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">elseif</span>(is_null(<span class="variable">$data</span>)) &#123;</span><br><span class="line">        <span class="variable">$show_data</span> = <span class="string">&#x27;null&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable">$show_data</span> = print_r(<span class="variable">$data</span>,<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$str</span> .= <span class="variable">$show_data</span>;</span><br><span class="line">    <span class="variable">$str</span> .= <span class="string">&#x27;&lt;/pre&gt;&#x27;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$str</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-支持中文的字符串截取"><a href="#8-支持中文的字符串截取" class="headerlink" title="8.支持中文的字符串截取"></a>8.支持中文的字符串截取</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 字符串截取，支持中文和其他编码</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> string $str 需要转换的字符串</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> string $start 开始位置</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> string $length 截取长度</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> string $suffix 截断显示字符</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> string $charset 编码格式</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">re_substr</span>(<span class="params"><span class="variable">$str</span>, <span class="variable">$start</span>=<span class="number">0</span>, <span class="variable">$length</span>, <span class="variable">$suffix</span>=<span class="literal">true</span>, <span class="variable">$charset</span>=<span class="string">&quot;utf-8&quot;</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(function_exists(<span class="string">&quot;mb_substr&quot;</span>)) &#123;</span><br><span class="line">		<span class="variable">$slice</span> = mb_substr(<span class="variable">$str</span>, <span class="variable">$start</span>, <span class="variable">$length</span>, <span class="variable">$charset</span>);</span><br><span class="line">	&#125; <span class="keyword">elseif</span>(function_exists(<span class="string">&#x27;iconv_substr&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable">$slice</span> = iconv_substr(<span class="variable">$str</span>,<span class="variable">$start</span>,<span class="variable">$length</span>,<span class="variable">$charset</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable">$re</span>[<span class="string">&#x27;utf-8&#x27;</span>] = <span class="string">&quot;/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf]&#123;2&#125;|[\xf0-\xff][\x80-\xbf]&#123;3&#125;/&quot;</span>;</span><br><span class="line">        <span class="variable">$re</span>[<span class="string">&#x27;gb2312&#x27;</span>] = <span class="string">&quot;/[\x01-\x7f]|[\xb0-\xf7][\xa0-\xfe]/&quot;</span>;</span><br><span class="line">        <span class="variable">$re</span>[<span class="string">&#x27;gbk&#x27;</span>]  = <span class="string">&quot;/[\x01-\x7f]|[\x81-\xfe][\x40-\xfe]/&quot;</span>;</span><br><span class="line">        <span class="variable">$re</span>[<span class="string">&#x27;big5&#x27;</span>] = <span class="string">&quot;/[\x01-\x7f]|[\x81-\xfe]([\x40-\x7e]|\xa1-\xfe])/&quot;</span>;</span><br><span class="line">        preg_match_all(<span class="variable">$re</span>[<span class="variable">$charset</span>], <span class="variable">$str</span>, <span class="variable">$match</span>);</span><br><span class="line">        <span class="variable">$slice</span> = join(<span class="string">&quot;&quot;</span>,array_slice(<span class="variable">$match</span>[<span class="number">0</span>], <span class="variable">$start</span>, <span class="variable">$length</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$omit</span> = mb_strlen(<span class="variable">$str</span>) &gt;= <span class="variable">$length</span> ? <span class="string">&#x27;...&#x27;</span> : <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$suffix</span> ? <span class="variable">$slice</span>.<span class="variable">$omit</span> : <span class="variable">$slice</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-获取一定范围内的随机数字"><a href="#9-获取一定范围内的随机数字" class="headerlink" title="9.获取一定范围内的随机数字"></a>9.获取一定范围内的随机数字</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取一定范围内的随机数字</span></span><br><span class="line"><span class="comment"> * 跟rand()函数的区别是 位数不足补零 例如</span></span><br><span class="line"><span class="comment"> * rand(1,9999)可能会得到 465</span></span><br><span class="line"><span class="comment"> * rand_number(1,9999)可能会得到 0465  保证是4位的</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> integer $min 最小值</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> integer $max 最大值</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rand_number</span> (<span class="params"><span class="variable">$min</span>=<span class="number">1</span>, <span class="variable">$max</span>=<span class="number">9999</span></span>) </span>&#123;</span><br><span class="line">	<span class="variable">$strlen</span> = strlen(<span class="variable">$max</span>);</span><br><span class="line">    <span class="keyword">return</span> sprintf(<span class="string">&quot;%0&quot;</span> . <span class="variable">$strlen</span> . <span class="string">&quot;d&quot;</span>, mt_rand(<span class="variable">$min</span>, <span class="variable">$max</span>));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-生成一定数量的随机数，并且不重复"><a href="#10-生成一定数量的随机数，并且不重复" class="headerlink" title="10.生成一定数量的随机数，并且不重复"></a>10.生成一定数量的随机数，并且不重复</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成一定数量的随机数，并且不重复</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> integer $number 数量</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> string $len 长度</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> string $type 字串类型</span></span><br><span class="line"><span class="comment"> * 0 字母 1 数字 其它 混合</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">build_count_rand</span> (<span class="params"><span class="variable">$number</span>, <span class="variable">$length</span>=<span class="number">4</span>, <span class="variable">$mode</span>=<span class="number">1</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$mode</span> == <span class="number">1</span> &amp;&amp; <span class="variable">$length</span> &lt; strlen(<span class="variable">$number</span>)) &#123;</span><br><span class="line">        <span class="comment">//不足以生成一定数量的不重复数字</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$rand</span> = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="variable">$number</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">        <span class="variable">$rand</span>[] = rand_string(<span class="variable">$length</span>, <span class="variable">$mode</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$unqiue</span> = array_unique(<span class="variable">$rand</span>);</span><br><span class="line">    <span class="keyword">if</span>(count(<span class="variable">$unqiue</span>) == count(<span class="variable">$rand</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$rand</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$count</span> = count(<span class="variable">$rand</span>) - count(<span class="variable">$unqiue</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="variable">$count</span>*<span class="number">3</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">        <span class="variable">$rand</span>[] = rand_string(<span class="variable">$length</span>, <span class="variable">$mode</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$rand</span> = array_slice(array_unique(<span class="variable">$rand</span>), <span class="number">0</span>, <span class="variable">$number</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$rand</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-生成不重复的随机数"><a href="#11-生成不重复的随机数" class="headerlink" title="11.生成不重复的随机数"></a>11.生成不重复的随机数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成不重复的随机数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  int $start  需要生成的数字开始范围</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  int $end 结束范围</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  int $length 需要生成的随机数个数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> array       生成的随机数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_rand_number</span>(<span class="params"><span class="variable">$start</span> = <span class="number">1</span>, <span class="variable">$end</span> = <span class="number">10</span>, <span class="variable">$length</span> = <span class="number">4</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$connt</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="variable">$temp</span> = [];</span><br><span class="line">    <span class="keyword">while</span>(<span class="variable">$connt</span> &lt; <span class="variable">$length</span>)&#123;</span><br><span class="line">        <span class="variable">$temp</span>[] = rand(<span class="variable">$start</span>, <span class="variable">$end</span>);</span><br><span class="line">        <span class="variable">$data</span> = array_unique(<span class="variable">$temp</span>);</span><br><span class="line">        <span class="variable">$connt</span> = count(<span class="variable">$data</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    sort(<span class="variable">$data</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$data</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="12-curl-获取远程数据"><a href="#12-curl-获取远程数据" class="headerlink" title="12.curl 获取远程数据"></a>12.curl 获取远程数据</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用curl获取远程数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string $url url连接</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> string      获取到的数据</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curl_get_contents</span>(<span class="params"><span class="variable">$url</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$ch</span> = curl_init();</span><br><span class="line">    curl_setopt(<span class="variable">$ch</span>, CURLOPT_URL, <span class="variable">$url</span>);                <span class="comment">//设置访问的url地址</span></span><br><span class="line">    <span class="comment">// curl_setopt($ch,CURLOPT_HEADER,1);               //是否显示头部信息</span></span><br><span class="line">    curl_setopt(<span class="variable">$ch</span>, CURLOPT_TIMEOUT, <span class="number">5</span>);               <span class="comment">//设置超时</span></span><br><span class="line">    curl_setopt(<span class="variable">$ch</span>, CURLOPT_USERAGENT, <span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_USER_AGENT&#x27;</span>]);   <span class="comment">//用户访问代理 User-Agent</span></span><br><span class="line">    curl_setopt(<span class="variable">$ch</span>, CURLOPT_REFERER,<span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_HOST&#x27;</span>]);        <span class="comment">//设置 referer</span></span><br><span class="line">    curl_setopt(<span class="variable">$ch</span>,CURLOPT_FOLLOWLOCATION,<span class="number">1</span>);          <span class="comment">//跟踪301</span></span><br><span class="line">    curl_setopt(<span class="variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);        <span class="comment">//返回结果</span></span><br><span class="line">    <span class="variable">$r</span> = curl_exec(<span class="variable">$ch</span>);</span><br><span class="line">    curl_close(<span class="variable">$ch</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$r</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-不区分大小写的-in-array"><a href="#13-不区分大小写的-in-array" class="headerlink" title="13.不区分大小写的 in_array"></a>13.不区分大小写的 in_array</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 不区分大小写的in_array()</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string $str   检测的字符</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  array  $array 数组</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> boolear       是否in_array</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">in_iarray</span>(<span class="params"><span class="variable">$str</span>,<span class="variable">$array</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$str</span> = strtolower(<span class="variable">$str</span>);</span><br><span class="line">    <span class="variable">$array</span> = array_map(<span class="string">&#x27;strtolower&#x27;</span>, <span class="variable">$array</span>);</span><br><span class="line">    <span class="keyword">if</span> (in_array(<span class="variable">$str</span>, <span class="variable">$array</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-根据时间戳计算距离现在的时间"><a href="#14-根据时间戳计算距离现在的时间" class="headerlink" title="14.根据时间戳计算距离现在的时间"></a>14.根据时间戳计算距离现在的时间</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 传入时间戳,计算距离现在的时间</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  number $time 时间戳</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> string     返回多少以前</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">word_time</span>(<span class="params"><span class="variable">$time</span></span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$time</span> = (<span class="keyword">int</span>) substr(<span class="variable">$time</span>, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">    <span class="variable">$int</span> = time() - <span class="variable">$time</span>;</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$int</span> &lt;= <span class="number">2</span>)&#123;</span><br><span class="line">        <span class="variable">$str</span> = sprintf(<span class="string">&#x27;刚刚&#x27;</span>, <span class="variable">$int</span>);</span><br><span class="line">    &#125; <span class="keyword">elseif</span> (<span class="variable">$int</span> &lt; <span class="number">60</span>)&#123;</span><br><span class="line">        <span class="variable">$str</span> = sprintf(<span class="string">&#x27;%d秒前&#x27;</span>, <span class="variable">$int</span>);</span><br><span class="line">    &#125;<span class="keyword">elseif</span> (<span class="variable">$int</span> &lt; <span class="number">3600</span>)&#123;</span><br><span class="line">        <span class="variable">$str</span> = sprintf(<span class="string">&#x27;%d分钟前&#x27;</span>, floor(<span class="variable">$int</span> / <span class="number">60</span>));</span><br><span class="line">    &#125;<span class="keyword">elseif</span> (<span class="variable">$int</span> &lt; <span class="number">86400</span>)&#123;</span><br><span class="line">        <span class="variable">$str</span> = sprintf(<span class="string">&#x27;%d小时前&#x27;</span>, floor(<span class="variable">$int</span> / <span class="number">3600</span>));</span><br><span class="line">    &#125;<span class="keyword">elseif</span> (<span class="variable">$int</span> &lt; <span class="number">1728000</span>)&#123;</span><br><span class="line">        <span class="variable">$str</span> = sprintf(<span class="string">&#x27;%d天前&#x27;</span>, floor(<span class="variable">$int</span> / <span class="number">86400</span>));</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable">$str</span> = date(<span class="string">&#x27;Y-m-d H:i:s&#x27;</span>, <span class="variable">$time</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$str</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="15-获取访问设备的类型"><a href="#15-获取访问设备的类型" class="headerlink" title="15.获取访问设备的类型"></a>15.获取访问设备的类型</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取当前访问的设备类型</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> integer 1：其他  2：iOS  3：Android</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_device_type</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//全部变成小写字母</span></span><br><span class="line">    <span class="variable">$agent</span> = strtolower(<span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_USER_AGENT&#x27;</span>]);</span><br><span class="line">    <span class="variable">$type</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//分别进行判断</span></span><br><span class="line">    <span class="keyword">if</span>(strpos(<span class="variable">$agent</span>, <span class="string">&#x27;iphone&#x27;</span>) !== <span class="literal">false</span> || strpos(<span class="variable">$agent</span>, <span class="string">&#x27;ipad&#x27;</span>) !== <span class="literal">false</span>)&#123;</span><br><span class="line">        <span class="variable">$type</span> = <span class="number">2</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">if</span>(strpos(<span class="variable">$agent</span>, <span class="string">&#x27;android&#x27;</span>) !== <span class="literal">false</span>)&#123;</span><br><span class="line">        <span class="variable">$type</span> = <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$type</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="16-下载文件"><a href="#16-下载文件" class="headerlink" title="16.下载文件"></a>16.下载文件</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">download</span>(<span class="params"><span class="variable">$file_url</span>, <span class="variable">$new_name</span> = <span class="string">&#x27;&#x27;</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;    </span><br><span class="line">	<span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$file_url</span>) || trim(<span class="variable">$file_url</span>) == <span class="string">&#x27;&#x27;</span>)&#123;  </span><br><span class="line">		<span class="keyword">return</span> <span class="string">&#x27;500&#x27;</span>;  </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!file_exists(<span class="variable">$file_url</span>))&#123; </span><br><span class="line">		<span class="comment">//检查文件是否存在  </span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">&#x27;404&#x27;</span>;  </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$file_name</span> = basename(<span class="variable">$file_url</span>);  </span><br><span class="line">	<span class="variable">$file_type</span> = explode(<span class="string">&#x27;.&#x27;</span>, <span class="variable">$file_url</span>);  </span><br><span class="line">	<span class="variable">$file_type</span> = <span class="variable">$file_type</span>[count(<span class="variable">$file_type</span>) - <span class="number">1</span>];  </span><br><span class="line">	<span class="variable">$file_name</span> = trim(<span class="variable">$new_name</span> == <span class="string">&#x27;&#x27;</span>) ? <span class="variable">$file_name</span> : urlencode(<span class="variable">$new_name</span>) .<span class="string">&#x27;.&#x27;</span>. <span class="variable">$file_type</span>;  </span><br><span class="line">	<span class="variable">$file_type</span> = fopen(<span class="variable">$file_url</span>, <span class="string">&#x27;r&#x27;</span>); <span class="comment">//打开文件  </span></span><br><span class="line">	<span class="comment">//输入文件标签  </span></span><br><span class="line">	header(<span class="string">&quot;Content-type: application/octet-stream&quot;</span>);  </span><br><span class="line">	header(<span class="string">&quot;Accept-Ranges: bytes&quot;</span>);  </span><br><span class="line">	header(<span class="string">&quot;Accept-Length: &quot;</span>.filesize(<span class="variable">$file_url</span>));  </span><br><span class="line">	header(<span class="string">&quot;Content-Disposition: attachment; filename=&quot;</span>.<span class="variable">$file_name</span>);  </span><br><span class="line">	<span class="comment">//输出文件内容  </span></span><br><span class="line">	<span class="keyword">echo</span> fread(<span class="variable">$file_type</span>, filesize(<span class="variable">$file_url</span>));  </span><br><span class="line">	fclose(<span class="variable">$file_type</span>);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i> PHP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/be55dc4abd4f/" rel="prev" title="ThinkPHP 3.2 字母函数指南">
+      <i class="fa fa-chevron-left"></i> ThinkPHP 3.2 字母函数指南
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/174b54c388cb/" rel="next" title="PHP实现常见算法">
+      PHP实现常见算法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%8E%B7%E5%8F%96%E4%B8%8A%E4%B8%80%E5%91%A8-%E4%B8%8A%E6%9C%88-%E5%89%8D%E5%87%A0%E5%A4%A9%E6%97%B6%E9%97%B4"><span class="nav-number">1.</span> <span class="nav-text">1.获取上一周&#x2F;上月&#x2F;前几天时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D"><span class="nav-number">2.</span> <span class="nav-text">2.二维数组去重</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E6%8C%89-7-%E4%B8%AA%E5%88%86%E6%88%90%E4%B8%80%E7%BB%84"><span class="nav-number">3.</span> <span class="nav-text">3.多维数组中按 7 个分成一组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%8C%89%E7%89%B9%E5%AE%9A%E5%80%BC%E6%8E%92%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">4.二维数组按特定值排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%B0%86%E4%B8%AD%E6%96%87%E6%8B%86%E5%88%86%E6%88%90%E6%95%B0%E7%BB%84"><span class="nav-number">5.</span> <span class="nav-text">5.将中文拆分成数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%A8%A1%E6%8B%9F%E5%8F%91%E9%80%81-POST-%E8%AF%B7%E6%B1%82"><span class="nav-number">6.</span> <span class="nav-text">6.模拟发送 POST 请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E7%BE%8E%E5%8C%96%E8%BE%93%E5%87%BA%E5%8F%98%E9%87%8F"><span class="nav-number">7.</span> <span class="nav-text">7.美化输出变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E6%94%AF%E6%8C%81%E4%B8%AD%E6%96%87%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%AA%E5%8F%96"><span class="nav-number">8.</span> <span class="nav-text">8.支持中文的字符串截取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E8%8E%B7%E5%8F%96%E4%B8%80%E5%AE%9A%E8%8C%83%E5%9B%B4%E5%86%85%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%AD%97"><span class="nav-number">9.</span> <span class="nav-text">9.获取一定范围内的随机数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-%E7%94%9F%E6%88%90%E4%B8%80%E5%AE%9A%E6%95%B0%E9%87%8F%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%EF%BC%8C%E5%B9%B6%E4%B8%94%E4%B8%8D%E9%87%8D%E5%A4%8D"><span class="nav-number">10.</span> <span class="nav-text">10.生成一定数量的随机数，并且不重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E7%94%9F%E6%88%90%E4%B8%8D%E9%87%8D%E5%A4%8D%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">11.</span> <span class="nav-text">11.生成不重复的随机数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-curl-%E8%8E%B7%E5%8F%96%E8%BF%9C%E7%A8%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">12.</span> <span class="nav-text">12.curl 获取远程数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-%E4%B8%8D%E5%8C%BA%E5%88%86%E5%A4%A7%E5%B0%8F%E5%86%99%E7%9A%84-in-array"><span class="nav-number">13.</span> <span class="nav-text">13.不区分大小写的 in_array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-%E6%A0%B9%E6%8D%AE%E6%97%B6%E9%97%B4%E6%88%B3%E8%AE%A1%E7%AE%97%E8%B7%9D%E7%A6%BB%E7%8E%B0%E5%9C%A8%E7%9A%84%E6%97%B6%E9%97%B4"><span class="nav-number">14.</span> <span class="nav-text">14.根据时间戳计算距离现在的时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-%E8%8E%B7%E5%8F%96%E8%AE%BF%E9%97%AE%E8%AE%BE%E5%A4%87%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">15.</span> <span class="nav-text">15.获取访问设备的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6"><span class="nav-number">16.</span> <span class="nav-text">16.下载文件</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="◢₄₆七瀬丸"
+      src="/pictures/avatar_akai.jpg">
+  <p class="site-author-name" itemprop="name">◢₄₆七瀬丸</p>
+  <div class="site-description" itemprop="description">あいうえおかきくけこ</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/olddoge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;olddoge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/40023111" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;40023111" rel="noopener" target="_blank">哔哩哔哩</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.themoviedb.org/u/olddoge" title="https:&#x2F;&#x2F;www.themoviedb.org&#x2F;u&#x2F;olddoge" rel="noopener" target="_blank">TMDB</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">@Matthew</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

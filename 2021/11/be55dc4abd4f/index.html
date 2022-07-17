@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"matthew.olddoge.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="A 方法用于在内部实例化控制器，调用格式： 123&#x2F;&#x2F; A(&amp;#x27;[项目:&#x2F;&#x2F;][分组&#x2F;]模块&amp;#x27;,&amp;#x27;控制器层名称&amp;#x27;)$User &#x3D; A(&amp;#x27;User&amp;#x27;);$User &#x3D; A(&amp;#x27;Admin:&#x2F;&#x2F;User&amp;#x27;);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ThinkPHP 3.2 字母函数指南">
+<meta property="og:url" content="https://matthew.olddoge.cn/2021/11/be55dc4abd4f/index.html">
+<meta property="og:site_name" content="七瀬丸のブログ">
+<meta property="og:description" content="A 方法用于在内部实例化控制器，调用格式： 123&#x2F;&#x2F; A(&amp;#x27;[项目:&#x2F;&#x2F;][分组&#x2F;]模块&amp;#x27;,&amp;#x27;控制器层名称&amp;#x27;)$User &#x3D; A(&amp;#x27;User&amp;#x27;);$User &#x3D; A(&amp;#x27;Admin:&#x2F;&#x2F;User&amp;#x27;);">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-13T13:12:29.000Z">
+<meta property="article:modified_time" content="2022-07-17T10:09:52.416Z">
+<meta property="article:author" content="◢₄₆七瀬丸">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="ThinkPHP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://matthew.olddoge.cn/2021/11/be55dc4abd4f/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ThinkPHP 3.2 字母函数指南 | 七瀬丸のブログ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">七瀬丸のブログ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">あいうえお</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">21</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://matthew.olddoge.cn/2021/11/be55dc4abd4f/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/pictures/avatar_akai.jpg">
+      <meta itemprop="name" content="◢₄₆七瀬丸">
+      <meta itemprop="description" content="あいうえおかきくけこ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="七瀬丸のブログ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ThinkPHP 3.2 字母函数指南
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-13 21:12:29" itemprop="dateCreated datePublished" datetime="2021-11-13T21:12:29+08:00">2021-11-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-17 18:09:52" itemprop="dateModified" datetime="2022-07-17T18:09:52+08:00">2022-07-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="A-方法"><a href="#A-方法" class="headerlink" title="A 方法"></a>A 方法</h1><p>用于在内部实例化控制器，调用格式：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A(&#x27;[项目://][分组/]模块&#x27;,&#x27;控制器层名称&#x27;)</span></span><br><span class="line"><span class="variable">$User</span> = A(<span class="string">&#x27;User&#x27;</span>);</span><br><span class="line"><span class="variable">$User</span> = A(<span class="string">&#x27;Admin://User&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>实例化控制器后，就可以调用该控制器中的方法，不过需要注意的情况是，在跨项目调用的情况下，如果你的操作方法 有针对当前控制器的特殊变量操作，会有一些未知的问题，所以，一般来说，官方建议需要公共调用的控制器层单独开发，不要有太多的依赖关系。</p>
+<h1 id="B-方法"><a href="#B-方法" class="headerlink" title="B 方法"></a>B 方法</h1><p>这是随着行为应运而生的新生函数，可以执行某个行为，例如</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B(<span class="string">&#x27;app_begin&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>就是在项目开始之前，执行这个行为定义的所有函数。支持 2 个参数，第二个参数支持需要接受一个数组，例如</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B(<span class="string">&#x27;app_begin&#x27;</span>, [<span class="string">&quot;name&quot;</span> =&gt; <span class="string">&quot;tdweb&quot;</span>,<span class="string">&quot;time&quot;</span>=&gt;time()]);</span><br></pre></td></tr></table></figure>
+
+<h1 id="C-方法"><a href="#C-方法" class="headerlink" title="C 方法"></a>C 方法</h1><p>C 方法是 Think 用于设置、获取，以及保存配置参数的方法，使用频率较高。</p>
+<p>动态设置配置参数，配置参数不区分大小写，但是建议保持统一大写的配置定义规范。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C(<span class="string">&#x27;DB_NAME&#x27;</span>,<span class="string">&#x27;think&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>支持二级配置参数的设置，配置参数不建议超过二级。例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C(<span class="string">&#x27;USER.USER_ID&#x27;</span>,<span class="number">8</span>);</span><br></pre></td></tr></table></figure>
+
+<p>如果要设置多个参数，可以使用批量设置，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$config</span>[<span class="string">&#x27;user_id&#x27;</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="variable">$config</span>[<span class="string">&#x27;user_type&#x27;</span>] = <span class="number">1</span>;</span><br><span class="line">C(<span class="variable">$config</span>);</span><br></pre></td></tr></table></figure>
+
+<p>如果传入的配置参数为空，表示获取全部的参数：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$config</span> = C();</span><br></pre></td></tr></table></figure>
+
+<h1 id="D-方法"><a href="#D-方法" class="headerlink" title="D 方法"></a>D 方法</h1><p>D 方法应该是用的比较多的方法了，用于实例化自定义模型类，是 Think 框架对 Model 类实例化的一种封装，并实现了单例模式，支持跨项目和分组调用，调用格式如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D(<span class="string">&#x27;[项目://][分组/]模型&#x27;</span>,<span class="string">&#x27;模型层名称&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>方法的返回值是实例化的模型对象。</p>
+<p>D 方法可以自动检测模型类，如果存在自定义的模型类，则实例化自定义模型类，如果不存在，则会实例化 Model 基类，同时对于已实例化过的模型，不会重复去实例化。</p>
+<p>D 方法最常用的用法就是实例化当前项目的某个自定义模型，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例化 User 模型</span></span><br><span class="line"><span class="variable">$User</span> = D(<span class="string">&#x27;User&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="F-方法"><a href="#F-方法" class="headerlink" title="F 方法"></a>F 方法</h1><p>F 方法其实是 S 方法的一个子集功能，仅用于简单数据缓存，并且只能支持文件形式，不支持缓存有效期，因为采用的是返回方式，所以其效率较 S 方法较高，因此我们也称之为快速缓存方法。</p>
+<p>F 方法的特点是：</p>
+<ul>
+<li>简单数据缓存；</li>
+<li>文件形式保存；</li>
+<li>采用返回数据方式加载缓存；</li>
+<li>支持子目录缓存以及自动创建；</li>
+<li>支持删除缓存和批量删除；</li>
+</ul>
+<p>写入和读取缓存</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F(<span class="string">&#x27;data&#x27;</span>,<span class="string">&#x27;test data&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>默认的保存起始路径是 <em>DATA_PATH</em>（该常量在默认配置位于 <em>RUNTIME_PATH.’Data/‘</em> 下面），也就是说会生成文件名为 <em>DATA_PATH.’data.’</em> 的缓存文件。</p>
+<p>注意：确保你的缓存标识的唯一，避免数据覆盖和冲突。</p>
+<p>下次读取缓存数据的时候，使用：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$Data</span> = F(<span class="string">&#x27;data&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我们可以采用子目录方式保存，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">F(<span class="string">&#x27;user/data&#x27;</span>,<span class="variable">$data</span>); <span class="comment">// 缓存写入</span></span><br><span class="line">F(<span class="string">&#x27;user/data&#x27;</span>); <span class="comment">// 读取缓存</span></span><br></pre></td></tr></table></figure>
+
+<p>就会生成 <em>DATA_PATH.’user/data.’</em> 缓存文件，如果 user 子目录不存在的话，则会自动创建，也可以支持多级子目录，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F(<span class="string">&#x27;level1/level2/data&#x27;</span>,<span class="variable">$data</span>);</span><br></pre></td></tr></table></figure>
+
+<p>如果需要指定缓存的起始目录，可以用下面的方式：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F(<span class="string">&#x27;data&#x27;</span>,<span class="variable">$data</span>,TEMP_PATH);</span><br></pre></td></tr></table></figure>
+
+<p>删除缓存</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F(<span class="string">&#x27;data&#x27;</span>,<span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="G-方法"><a href="#G-方法" class="headerlink" title="G 方法"></a>G 方法</h1><p>G 方法的作用包括标记位置和区间统计两个功能，下面来看下具体用法：</p>
+<h2 id="标记位置"><a href="#标记位置" class="headerlink" title="标记位置"></a>标记位置</h2><p>G 方法的第一个用法就是标记位置，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">G(<span class="string">&#x27;begin&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>表示把当前位置标记为 begin 标签，并且记录当前位置的执行时间，如果环境支持的话，还能记录内存占用情况。可以在任何位置调用 G 方法标记。</p>
+<h2 id="运行时间统计"><a href="#运行时间统计" class="headerlink" title="运行时间统计"></a>运行时间统计</h2><p>标记位置后，我们就可以再次调用 G 方法进行区间统计了，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">G(<span class="string">&#x27;begin&#x27;</span>);</span><br><span class="line"><span class="comment">// ...其他代码段</span></span><br><span class="line">G(<span class="string">&#x27;end&#x27;</span>);</span><br><span class="line"><span class="comment">// ...也许这里还有其他代码</span></span><br><span class="line"><span class="comment">// 进行统计区间</span></span><br><span class="line"><span class="keyword">echo</span> G(<span class="string">&#x27;begin&#x27;</span>,<span class="string">&#x27;end&#x27;</span>).<span class="string">&#x27;s&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p><em>G(‘begin’,’end’)</em> 表示统计 begin 位置到 end 位置的执行时间（单位是秒），begin 必须是一个已经标记过的位置，如果这个时候 end 位置还没被标记过，则会自动把当前位置标记为 end 标签，输出的结果类似于：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.0056</span>s</span><br></pre></td></tr></table></figure>
+
+<p>默认的统计精度是小数点后 4 位，如果觉得这个统计精度不够，还可以设置例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">G(<span class="string">&#x27;begin&#x27;</span>,<span class="string">&#x27;end&#x27;</span>,<span class="number">6</span>).<span class="string">&#x27;s&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>内存开销统计</p>
+<p>如果你的环境支持内存占用统计的话，还可以使用 G 方法进行区间内存开销统计（单位为 kb），例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> G(<span class="string">&#x27;begin&#x27;</span>,<span class="string">&#x27;end&#x27;</span>,<span class="string">&#x27;m&#x27;</span>).<span class="string">&#x27;kb&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>第三个参数使用 m 表示进行内存开销统计，输出的结果可能是：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">625</span>kb</span><br></pre></td></tr></table></figure>
+
+<h1 id="I-方法"><a href="#I-方法" class="headerlink" title="I 方法"></a>I 方法</h1><p>正如你所见到的一样，I 方法是 Thinkphp 众多单字母函数中的新成员，其命名来自于英文 Input（输入），主要用于更加方便和安全的获取系统输入变量，可以用于任何地方，用法格式如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I(<span class="string">&#x27;变量类型.变量名&#x27;</span>,[<span class="string">&#x27;默认值&#x27;</span>],[<span class="string">&#x27;过滤方法&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>变量类型是指请求方式或者输入类型，包括：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方式</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">get</td>
+<td align="center">获取 GET 参数</td>
+</tr>
+<tr>
+<td align="center">post</td>
+<td align="center">获取 POST 参数</td>
+</tr>
+<tr>
+<td align="center">param</td>
+<td align="center">自动判断请求类型获取 GET、POST 或者 PUT 参数</td>
+</tr>
+<tr>
+<td align="center">request</td>
+<td align="center">获取 REQUEST 参数</td>
+</tr>
+<tr>
+<td align="center">put</td>
+<td align="center">获取 PUT 参数</td>
+</tr>
+<tr>
+<td align="center">session</td>
+<td align="center">获取 $_SESSION 参数</td>
+</tr>
+<tr>
+<td align="center">cookie</td>
+<td align="center">获取 $_COOKIE 参数</td>
+</tr>
+<tr>
+<td align="center">server</td>
+<td align="center">获取 $_SERVER 参数</td>
+</tr>
+<tr>
+<td align="center">globals</td>
+<td align="center">获取 $GLOBALS 参数</td>
+</tr>
+</tbody></table>
+<p>注意：变量类型不区分大小写。变量名则严格区分大小写。</p>
+<p>默认值和过滤方法均属于可选参数。</p>
+<h1 id="L-方法"><a href="#L-方法" class="headerlink" title="L 方法"></a>L 方法</h1><p>L 方法用于启用多语言的情况下，设置和获取当前的语言定义。</p>
+<p>调用格式：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">L(<span class="string">&#x27;语言变量&#x27;</span>,[<span class="string">&#x27;语言值&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<h1 id="M-方法"><a href="#M-方法" class="headerlink" title="M 方法"></a>M 方法</h1><p>M 方法用于实例化一个基础模型类，和 D 方法的区别在于：</p>
+<ul>
+<li>不需要自定义模型类，减少 IO 加载，性能较好；</li>
+<li>实例化后只能调用基础模型类（默认是 Model 类）中的方法；</li>
+<li>可以在实例化的时候指定表前缀、数据库和数据库的连接信息；</li>
+</ul>
+<p>D 方法的强大则体现在你封装的自定义模型类有多强，不过随着新版 Think 框架的基础模型类的功能越来越强大，M 方法也比 D 方法越来越实用了。</p>
+<p>M 方法的调用格式：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">M(<span class="string">&#x27;[基础模型名:]模型名&#x27;</span>,<span class="string">&#x27;数据表前缀&#x27;</span>,<span class="string">&#x27;数据库连接信息&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="R-方法"><a href="#R-方法" class="headerlink" title="R 方法"></a>R 方法</h1><p>R 方法用于调用某个控制器的操作方法，是 A 方法的进一步增强和补充。</p>
+<p>R 方法的调用格式：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R(<span class="string">&#x27;[项目://][分组/]模块/操作&#x27;</span>,<span class="string">&#x27;参数&#x27;</span>,<span class="string">&#x27;控制器层名称&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可以通过 R 方法在其他控制器里面调用这个操作方法（一般 R 方法用于跨模块调用）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$data</span> = R(<span class="string">&#x27;User/detail&#x27;</span>,<span class="keyword">array</span>(<span class="string">&#x27;5&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<p>官方的建议是不要在同一层多太多调用，会引起逻辑的混乱，被公共调用的部分应该封装成单独的接口，可以借助3.1的新特性多层控制器，单独添加一个控制器层用于接口调用</p>
+<h1 id="S-方法"><a href="#S-方法" class="headerlink" title="S 方法"></a>S 方法</h1><p>S 方法还支持对当前的缓存方式传入缓存参数，例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">S(<span class="string">&#x27;data&#x27;</span>,<span class="variable">$Data</span>,<span class="number">3600</span>,<span class="string">&#x27;File&#x27;</span>,<span class="keyword">array</span>(<span class="string">&#x27;length&#x27;</span>=&gt;<span class="number">10</span>,<span class="string">&#x27;temp&#x27;</span>=&gt;RUNTIME_PATH.<span class="string">&#x27;temp/&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<h1 id="T-方法"><a href="#T-方法" class="headerlink" title="T 方法"></a>T 方法</h1><p>为了更方便的输出模板文件，新版封装了一个 T 函数用于生成模板文件名。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T([资源:<span class="comment">//][模块@][主题/][控制器/]操作,[视图分层])</span></span><br></pre></td></tr></table></figure>
+
+<p>T 函数的返回值是一个完整的模板文件名，可以直接用于 display 和 fetch 方法进行渲染输出。</p>
+<h1 id="U-方法"><a href="#U-方法" class="headerlink" title="U 方法"></a>U 方法</h1><p>U 方法用于完成对 URL 地址的组装，特点在于可以自动根据当前的 URL 模式和设置生成对应的 URL 地址，格式为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">U(<span class="string">&#x27;地址&#x27;</span>,<span class="string">&#x27;参数&#x27;</span>,<span class="string">&#x27;伪静态&#x27;</span>,<span class="string">&#x27;是否跳转&#x27;</span>,<span class="string">&#x27;显示域名&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在模板中使用 U 方法而不是固定写死 URL 地址的好处在于，一旦你的环境变化或者参数设置改变，你不需要更改模板中的任何代码。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i> PHP</a>
+              <a href="/tags/ThinkPHP/" rel="tag"><i class="fa fa-tag"></i> ThinkPHP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/96370c182df6/" rel="next" title="PHP常用代码片段">
+      PHP常用代码片段 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">A 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">B 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">C 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D-%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">D 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#F-%E6%96%B9%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">F 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#G-%E6%96%B9%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">G 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0%E4%BD%8D%E7%BD%AE"><span class="nav-number">6.1.</span> <span class="nav-text">标记位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E7%BB%9F%E8%AE%A1"><span class="nav-number">6.2.</span> <span class="nav-text">运行时间统计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I-%E6%96%B9%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">I 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#L-%E6%96%B9%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">L 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#M-%E6%96%B9%E6%B3%95"><span class="nav-number">9.</span> <span class="nav-text">M 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#R-%E6%96%B9%E6%B3%95"><span class="nav-number">10.</span> <span class="nav-text">R 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#S-%E6%96%B9%E6%B3%95"><span class="nav-number">11.</span> <span class="nav-text">S 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#T-%E6%96%B9%E6%B3%95"><span class="nav-number">12.</span> <span class="nav-text">T 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#U-%E6%96%B9%E6%B3%95"><span class="nav-number">13.</span> <span class="nav-text">U 方法</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="◢₄₆七瀬丸"
+      src="/pictures/avatar_akai.jpg">
+  <p class="site-author-name" itemprop="name">◢₄₆七瀬丸</p>
+  <div class="site-description" itemprop="description">あいうえおかきくけこ</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/olddoge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;olddoge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/40023111" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;40023111" rel="noopener" target="_blank">哔哩哔哩</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.themoviedb.org/u/olddoge" title="https:&#x2F;&#x2F;www.themoviedb.org&#x2F;u&#x2F;olddoge" rel="noopener" target="_blank">TMDB</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">@Matthew</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
