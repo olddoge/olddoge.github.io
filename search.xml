@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>MySQL 中使用 find_in_set 方法处理字段中存储多 ID 的情况</title>
+      <link href="/2022/08/c7e62ac275f6/"/>
+      <url>/2022/08/c7e62ac275f6/</url>
+      
+        <content type="html"><![CDATA[<p>开发中经常会遇到用在某一张表的某个字段中存储另一张表<code>id</code>的情况，通常情况下，会采用其他语言先查询出结果，再对这个字段做拆分，接着用拆分的字段去另一张表做查询。</p><p>实际上，这种方法效率较低，<code>MySQL</code>中有一个现成的方法可以很好的处理这种情况。</p><h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>现在假设有下面 2 张表，一张<code>教师表（teachers）</code>，一张<code>学生表（students）</code></p><ul><li>Teachers Table</li></ul><table><thead><tr><th align="center">id</th><th align="center">name</th><th align="center">student_ids</th></tr></thead><tbody><tr><td align="center">1</td><td align="center">老师A</td><td align="center">1,2,3</td></tr><tr><td align="center">2</td><td align="center">老师B</td><td align="center">4,5,6</td></tr><tr><td align="center">3</td><td align="center">老师C</td><td align="center">2</td></tr><tr><td align="center">4</td><td align="center">老师D</td><td align="center"></td></tr></tbody></table><ul><li>Students Table</li></ul><table><thead><tr><th align="center">id</th><th align="center">name</th></tr></thead><tbody><tr><td align="center">1</td><td align="center">学生A</td></tr><tr><td align="center">2</td><td align="center">学生B</td></tr><tr><td align="center">3</td><td align="center">学生C</td></tr><tr><td align="center">4</td><td align="center">学生D</td></tr><tr><td align="center">5</td><td align="center">学生E</td></tr><tr><td align="center">6</td><td align="center">学生F</td></tr></tbody></table><h1 id="FIND-IN-SET-函数"><a href="#FIND-IN-SET-函数" class="headerlink" title="FIND_IN_SET 函数"></a>FIND_IN_SET 函数</h1><blockquote><p>官方说明<br>FIND_IN_SET(str,strlist) : str 要查询的字符串，strlist  需查询的字段，参数以 <strong>“,”</strong> 分隔，形式如 (1,2,6,8,10,22)；该函数的作用是查询字段(strlist)中是否包含(str)的结果，返回结果为null或记录。</p></blockquote><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FIND_IN_SET(<span class="string">&#x27;被关联的ID&#x27;</span>, <span class="string">&#x27;用英文逗号连接来存储ID集合的字段&#x27;</span>)</span><br></pre></td></tr></table></figure><p><em><strong>只有以<span style="color:red">英文逗号分隔</span>的字段值，才能使用</strong></em></p><h1 id="实际使用"><a href="#实际使用" class="headerlink" title="实际使用"></a>实际使用</h1><p>现在我们要将<code>教师表</code>和<code>学生表</code>做关联，得到每一位教师底下所拥有的学生，期望的结果如下表：</p><ul><li>Results table</li></ul><table><thead><tr><th align="center">id</th><th align="center">teacher</th><th align="center">student</th></tr></thead><tbody><tr><td align="center">1</td><td align="center">老师A</td><td align="center">学生A,学生B,学生C</td></tr><tr><td align="center">2</td><td align="center">老师B</td><td align="center">学生D,学生E,学生F</td></tr><tr><td align="center">3</td><td align="center">老师C</td><td align="center">学生B</td></tr><tr><td align="center">4</td><td align="center">老师D</td><td align="center"></td></tr></tbody></table><p>每一位教师的学生字段值，显示的是用逗号连接的学生名，原先比较笨的实现方法是，先查出所有教师的数据，然后拆分学生<code>id</code>，再用<code>id</code>去学生表查询出(好一点用<code>IN</code>查询)学生名字，最后组成结果。</p><p>现在可以用<code>FIND_IN_SET</code>和<code>GROUP_CONCAT</code>结合的方式做联表查询</p><p>具体语句如下：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    t.id,</span><br><span class="line">    t.name <span class="keyword">AS</span> teacher,</span><br><span class="line">    GROUP_CONCAT(s.name) <span class="keyword">AS</span> student</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    teachers <span class="keyword">AS</span> t</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> </span><br><span class="line">    students <span class="keyword">AS</span> s <span class="keyword">ON</span> FIND_IN_SET(s.id, t.student_ids)</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span></span><br><span class="line">    t.id;   <span class="comment">-- 这里一定要 group by 一下，不然会出现结果丢失</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><p>这样就能得到我们想要的结果了。</p><h1 id="其他注意点"><a href="#其他注意点" class="headerlink" title="其他注意点"></a>其他注意点</h1><p>*** GROUP_CONCAT() 方法有最大字符限制 ***</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> SQL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>最新Jetbrains IDE激活教程</title>
       <link href="/2022/07/eb61ef635dda/"/>
       <url>/2022/07/eb61ef635dda/</url>
@@ -223,11 +250,11 @@
       
         <tags>
             
-            <tag> 指南 </tag>
-            
             <tag> RESTful </tag>
             
             <tag> 规范 </tag>
+            
+            <tag> 指南 </tag>
             
         </tags>
       
@@ -308,11 +335,11 @@
       
         <tags>
             
-            <tag> RESTful </tag>
-            
             <tag> API </tag>
             
             <tag> HTTP </tag>
+            
+            <tag> RESTful </tag>
             
             <tag> 设计指南 </tag>
             
@@ -366,9 +393,9 @@
       
         <tags>
             
-            <tag> 规范 </tag>
-            
             <tag> PHP </tag>
+            
+            <tag> 规范 </tag>
             
         </tags>
       
@@ -420,9 +447,9 @@
       
         <tags>
             
-            <tag> 规范 </tag>
-            
             <tag> PHP </tag>
+            
+            <tag> 规范 </tag>
             
         </tags>
       
