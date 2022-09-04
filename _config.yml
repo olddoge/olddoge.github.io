@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # 站点
-title: 七瀬丸のブログ
-subtitle: 'あいうえお'
+title: Danielのブログ
+subtitle: 'おきた そうじ'
 description: 'あいうえおかきくけこ'
 keywords:
-author: ◢₄₆七瀬丸
+author: ◢₄₆Daniel
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
@@ -97,7 +97,7 @@ ignore:
 # 扩展
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: oranges
 
 # 图片懒加载
 # 需要先安装插件 npm install hexo-lazyload-image --save

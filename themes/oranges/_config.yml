@@ -25,8 +25,8 @@ favicon:
 
 # 用户头像与昵称
 avatar:
-  author_photo: /pictures/avatar_asuka.jpg
-  author_nickname: ななせまる
+  author_photo: /pictures/simple.jpg
+  author_nickname: Daniel
   path: /
 
 # Google 分析
@@ -169,9 +169,9 @@ footer:
     -
       name: Copyright © Oranges 2021
       path: https://github.com/zchengsite/hexo-theme-oranges
-    -
-      name: Theme:Oranges | Powered by Hexo
-      path: https://github.com/zchengsite/hexo-theme-oranges
+    # -
+      # name: Theme:Oranges | Powered by Hexo
+      # path: https://github.com/zchengsite/hexo-theme-oranges
 
 
 
