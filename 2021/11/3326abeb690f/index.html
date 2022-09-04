@@ -1,258 +1,177 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<html lang="zh-CN" color-mode="light">
 
-<link rel="stylesheet" href="/css/main.css">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="◢₄₆Daniel" />
+  <meta name="description" content="あいうえおかきくけこ" />
+  
+  
+  <title>
+    
+      PHP版的代码整洁之道 
+      
+      
+      |
+    
+     Danielのブログ
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/pictures/favicon.ico">
+    <link rel="icon" href="/pictures/favicon.ico">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/color-scheme.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/comments.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"matthew.olddoge.cn","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  <!-- fancybox -->
+  <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
   </script>
 
-  <meta name="description" content="Clean Code PHP介绍本文参考自 Robert C. Martin的Clean Code  书中的软件工程师的原则,适用于PHP。 这不是风格指南。 这是一个关于开发可读、可复用并且可重构的PHP软件指南。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="PHP版的代码整洁之道">
-<meta property="og:url" content="https://matthew.olddoge.cn/2021/11/3326abeb690f/index.html">
-<meta property="og:site_name" content="七瀬丸のブログ">
-<meta property="og:description" content="Clean Code PHP介绍本文参考自 Robert C. Martin的Clean Code  书中的软件工程师的原则,适用于PHP。 这不是风格指南。 这是一个关于开发可读、可复用并且可重构的PHP软件指南。">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-11-14T11:26:33.000Z">
-<meta property="article:modified_time" content="2022-07-17T10:09:52.415Z">
-<meta property="article:author" content="◢₄₆七瀬丸">
-<meta property="article:tag" content="规范">
-<meta property="article:tag" content="PHP">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="https://matthew.olddoge.cn/2021/11/3326abeb690f/">
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/pictures/simple.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Daniel</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">主页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">分类</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> -->
+<script src="https://cdn.bootcdn.net/ajax/libs/babel-polyfill/7.12.1/polyfill.min.js"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
 </script>
 
-  <title>PHP版的代码整洁之道 | 七瀬丸のブログ</title>
+
+
   
 
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">七瀬丸のブログ</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">あいうえお</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">8</span></a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">31</span></a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">23</span></a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
   
+
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://matthew.olddoge.cn/2021/11/3326abeb690f/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/pictures/avatar_akai.jpg">
-      <meta itemprop="name" content="◢₄₆七瀬丸">
-      <meta itemprop="description" content="あいうえおかきくけこ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="七瀬丸のブログ">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          PHP版的代码整洁之道
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-14 19:26:33" itemprop="dateCreated datePublished" datetime="2021-11-14T19:26:33+08:00">2021-11-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">PHP版的代码整洁之道</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2021-11-14 19:26:33
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="分类"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/PHP/" title="PHP">
+                    <b>#</b> PHP
+                  </a>
                 </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-07-17 18:09:52" itemprop="dateModified" datetime="2022-07-17T18:09:52+08:00">2022-07-17</time>
+                
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
-                </span>
-            </span>
-
           
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h1 id="Clean-Code-PHP"><a href="#Clean-Code-PHP" class="headerlink" title="Clean Code PHP"></a>Clean Code PHP</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>本文参考自 Robert C. Martin的<a target="_blank" rel="noopener" href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"><em>Clean Code</em></a>  书中的软件工程师的原则<br>,适用于PHP。 这不是风格指南。 这是一个关于开发可读、可复用并且可重构的PHP软件指南。</p>
-<span id="more"></span>
-<p>并不是这里所有的原则都得遵循，甚至很少的能被普遍接受。 这些虽然只是指导，但是都是<em>Clean Code</em>作者多年总结出来的。</p>
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="标签"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/PHP/" title="PHP">
+                    <b>#</b> PHP
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/%E8%A7%84%E8%8C%83/" title="规范">
+                    <b>#</b> 规范
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>并不是这里所有的原则都得遵循，甚至很少的能被普遍接受。 这些虽然只是指导，但是都是<em>Clean Code</em>作者多年总结出来的。</p>
 <p>本文受到 <a target="_blank" rel="noopener" href="https://github.com/ryanmcdermott/clean-code-javascript">clean-code-javascript</a> 的启发</p>
 <p>虽然很多开发者还在使用PHP5，但是本文中的大部分示例的运行环境需要PHP 7.1+。</p>
 <h2 id="翻译说明"><a href="#翻译说明" class="headerlink" title="翻译说明"></a>翻译说明</h2><p>翻译完成度100%，最后更新时间2020-10-26。本文由 php-cpm 基于 <a target="_blank" rel="noopener" href="https://github.com/yangweijie/clean-code-php">yangweijie版本</a> 的<a target="_blank" rel="noopener" href="https://github.com/jupeter/clean-code-php">clean-code-php</a>翻译并同步大量原文内容。</p>
@@ -683,231 +602,331 @@
 </li>
 </ul>
 <p><strong><a href="#%E7%9B%AE%E5%BD%95">⬆ 返回顶部</a></strong></p>
-
-    </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-          
-          <div class="post-tags">
-              <a href="/tags/%E8%A7%84%E8%8C%83/" rel="tag"><i class="fa fa-tag"></i> 规范</a>
-              <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i> PHP</a>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/11/2fdcec466251/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
           </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/11/2fdcec466251/" rel="prev" title="ThinkPHP5.1 实现 ThinkPHP3.1 的 SessionDB 类">
-      <i class="fa fa-chevron-left"></i> ThinkPHP5.1 实现 ThinkPHP3.1 的 SessionDB 类
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/11/7be1c7eb6db2/" rel="next" title="中文文案排版指南">
-      中文文案排版指南 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2021-11-14 19:26:33
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="分类"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/PHP/" title="PHP">
+                        <b>#</b> PHP
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="标签"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/PHP/" title="PHP">
+                        <b>#</b> PHP
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/%E8%A7%84%E8%8C%83/" title="规范">
+                        <b>#</b> 规范
+                      </a>
+                    </span>
+                    
+                  </span>
+              
           </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
+          <div class="post-foot-prev">
+            
+              <a href="/2021/11/7be1c7eb6db2/" target="_self">
+                <span>下一页</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Clean-Code-PHP"><span class="nav-number">1.</span> <span class="nav-text">Clean Code PHP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BF%BB%E8%AF%91%E8%AF%B4%E6%98%8E"><span class="nav-number">1.2.</span> <span class="nav-text">翻译说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%A7%81%E5%AD%97%E7%9F%A5%E6%84%8F%E7%9A%84%E5%8F%98%E9%87%8F%E5%90%8D"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用见字知意的变量名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BD%93%E8%A6%81%E7%94%A8%E7%9B%B8%E5%90%8C%E7%9A%84%E5%8F%98%E9%87%8F%E5%90%8D"><span class="nav-number">1.3.2.</span> <span class="nav-text">同一个实体要用相同的变量名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%BE%BF%E4%BA%8E%E6%90%9C%E7%B4%A2%E7%9A%84%E5%90%8D%E7%A7%B0-part-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">使用便于搜索的名称 (part 1)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%BE%BF%E4%BA%8E%E6%90%9C%E7%B4%A2%E7%9A%84%E5%90%8D%E7%A7%B0-part-2"><span class="nav-number">1.3.4.</span> <span class="nav-text">使用便于搜索的名称 (part 2)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%87%AA%E8%A7%A3%E9%87%8A%E5%9E%8B%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.5.</span> <span class="nav-text">使用自解释型变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E6%B7%B1%E5%B1%82%E5%B5%8C%E5%A5%97%EF%BC%8C%E5%B0%BD%E6%97%A9%E8%BF%94%E5%9B%9E-part-1"><span class="nav-number">1.3.6.</span> <span class="nav-text">避免深层嵌套，尽早返回 (part 1)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E6%B7%B1%E5%B1%82%E5%B5%8C%E5%A5%97%EF%BC%8C%E5%B0%BD%E6%97%A9%E8%BF%94%E5%9B%9E-part-2"><span class="nav-number">1.3.7.</span> <span class="nav-text">避免深层嵌套，尽早返回 (part 2)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%91%E7%94%A8%E6%97%A0%E6%84%8F%E4%B9%89%E7%9A%84%E5%8F%98%E9%87%8F%E5%90%8D"><span class="nav-number">1.3.8.</span> <span class="nav-text">少用无意义的变量名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E8%A6%81%E6%B7%BB%E5%8A%A0%E4%B8%8D%E5%BF%85%E8%A6%81%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">1.3.9.</span> <span class="nav-text">不要添加不必要上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E7%90%86%E4%BD%BF%E7%94%A8%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC%EF%BC%8C%E6%B2%A1%E5%BF%85%E8%A6%81%E5%9C%A8%E6%96%B9%E6%B3%95%E9%87%8C%E5%86%8D%E5%81%9A%E9%BB%98%E8%AE%A4%E5%80%BC%E6%A3%80%E6%B5%8B"><span class="nav-number">1.3.10.</span> <span class="nav-text">合理使用参数默认值，没必要在方法里再做默认值检测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.4.</span> <span class="nav-text">表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%81%92%E7%AD%89%E5%BC%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">使用恒等式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Null-coalescing-operator"><span class="nav-number">1.4.2.</span> <span class="nav-text">Null coalescing operator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%EF%BC%88%E6%9C%80%E5%A5%BD%E5%B0%91%E4%BA%8E2%E4%B8%AA%EF%BC%89"><span class="nav-number">1.5.1.</span> <span class="nav-text">函数参数（最好少于2个）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%90%8D%E5%BA%94%E4%BD%93%E7%8E%B0%E4%BB%96%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%E4%BA%8B"><span class="nav-number">1.5.2.</span> <span class="nav-text">函数名应体现他做了什么事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E9%87%8C%E5%BA%94%E5%BD%93%E5%8F%AA%E6%9C%89%E4%B8%80%E5%B1%82%E6%8A%BD%E8%B1%A1abstraction"><span class="nav-number">1.5.3.</span> <span class="nav-text">函数里应当只有一层抽象abstraction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E8%A6%81%E7%94%A8flag%E4%BD%9C%E4%B8%BA%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">1.5.4.</span> <span class="nav-text">不要用flag作为函数的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E5%89%AF%E4%BD%9C%E7%94%A8"><span class="nav-number">1.5.5.</span> <span class="nav-text">避免副作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E8%A6%81%E5%86%99%E5%85%A8%E5%B1%80%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.6.</span> <span class="nav-text">不要写全局函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.5.7.</span> <span class="nav-text">不要使用单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.5.8.</span> <span class="nav-text">封装条件语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E7%94%A8%E5%8F%8D%E4%B9%89%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="nav-number">1.5.9.</span> <span class="nav-text">避免用反义条件判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="nav-number">1.5.10.</span> <span class="nav-text">避免条件判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5-part-1"><span class="nav-number">1.5.11.</span> <span class="nav-text">避免类型检查 (part 1)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5-part-2"><span class="nav-number">1.5.12.</span> <span class="nav-text">避免类型检查 (part 2)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E5%83%B5%E5%B0%B8%E4%BB%A3%E7%A0%81"><span class="nav-number">1.5.13.</span> <span class="nav-text">移除僵尸代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.6.</span> <span class="nav-text">对象和数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-getters-%E5%92%8C-setters"><span class="nav-number">1.6.1.</span> <span class="nav-text">使用 getters 和 setters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99%E5%AF%B9%E8%B1%A1%E4%BD%BF%E7%94%A8%E7%A7%81%E6%9C%89%E6%88%96%E5%8F%97%E4%BF%9D%E6%8A%A4%E7%9A%84%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="nav-number">1.6.2.</span> <span class="nav-text">给对象使用私有或受保护的成员变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB"><span class="nav-number">1.7.</span> <span class="nav-text">类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%91%E7%94%A8%E7%BB%A7%E6%89%BF%E5%A4%9A%E7%94%A8%E7%BB%84%E5%90%88"><span class="nav-number">1.7.1.</span> <span class="nav-text">少用继承多用组合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E8%BF%9E%E8%B4%AF%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.7.2.</span> <span class="nav-text">避免连贯接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8-final-%E7%B1%BB"><span class="nav-number">1.7.3.</span> <span class="nav-text">推荐使用 final 类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SOLID"><span class="nav-number">1.8.</span> <span class="nav-text">SOLID</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99"><span class="nav-number">1.8.1.</span> <span class="nav-text">单一职责原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99"><span class="nav-number">1.8.2.</span> <span class="nav-text">开闭原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99"><span class="nav-number">1.8.3.</span> <span class="nav-text">里氏替换原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99"><span class="nav-number">1.8.4.</span> <span class="nav-text">接口隔离原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99"><span class="nav-number">1.8.5.</span> <span class="nav-text">依赖倒置原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%AB%E5%86%99%E9%87%8D%E5%A4%8D%E4%BB%A3%E7%A0%81-DRY"><span class="nav-number">1.9.</span> <span class="nav-text">别写重复代码 (DRY)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BF%BB%E8%AF%91"><span class="nav-number">1.10.</span> <span class="nav-text">翻译</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="◢₄₆七瀬丸"
-      src="/pictures/avatar_akai.jpg">
-  <p class="site-author-name" itemprop="name">◢₄₆七瀬丸</p>
-  <div class="site-description" itemprop="description">あいうえおかきくけこ</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">23</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">31</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/olddoge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;olddoge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-  </div>
-
-
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      链接
+      
     </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="https://space.bilibili.com/40023111" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;40023111" rel="noopener" target="_blank">哔哩哔哩</a>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Clean-Code-PHP"><span class="toc-text">Clean Code PHP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91%E8%AF%B4%E6%98%8E"><span class="toc-text">翻译说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%A7%81%E5%AD%97%E7%9F%A5%E6%84%8F%E7%9A%84%E5%8F%98%E9%87%8F%E5%90%8D"><span class="toc-text">使用见字知意的变量名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BD%93%E8%A6%81%E7%94%A8%E7%9B%B8%E5%90%8C%E7%9A%84%E5%8F%98%E9%87%8F%E5%90%8D"><span class="toc-text">同一个实体要用相同的变量名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BE%BF%E4%BA%8E%E6%90%9C%E7%B4%A2%E7%9A%84%E5%90%8D%E7%A7%B0-part-1"><span class="toc-text">使用便于搜索的名称 (part 1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BE%BF%E4%BA%8E%E6%90%9C%E7%B4%A2%E7%9A%84%E5%90%8D%E7%A7%B0-part-2"><span class="toc-text">使用便于搜索的名称 (part 2)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%87%AA%E8%A7%A3%E9%87%8A%E5%9E%8B%E5%8F%98%E9%87%8F"><span class="toc-text">使用自解释型变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E6%B7%B1%E5%B1%82%E5%B5%8C%E5%A5%97%EF%BC%8C%E5%B0%BD%E6%97%A9%E8%BF%94%E5%9B%9E-part-1"><span class="toc-text">避免深层嵌套，尽早返回 (part 1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E6%B7%B1%E5%B1%82%E5%B5%8C%E5%A5%97%EF%BC%8C%E5%B0%BD%E6%97%A9%E8%BF%94%E5%9B%9E-part-2"><span class="toc-text">避免深层嵌套，尽早返回 (part 2)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%91%E7%94%A8%E6%97%A0%E6%84%8F%E4%B9%89%E7%9A%84%E5%8F%98%E9%87%8F%E5%90%8D"><span class="toc-text">少用无意义的变量名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E8%A6%81%E6%B7%BB%E5%8A%A0%E4%B8%8D%E5%BF%85%E8%A6%81%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">不要添加不必要上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E7%90%86%E4%BD%BF%E7%94%A8%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC%EF%BC%8C%E6%B2%A1%E5%BF%85%E8%A6%81%E5%9C%A8%E6%96%B9%E6%B3%95%E9%87%8C%E5%86%8D%E5%81%9A%E9%BB%98%E8%AE%A4%E5%80%BC%E6%A3%80%E6%B5%8B"><span class="toc-text">合理使用参数默认值，没必要在方法里再做默认值检测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%81%92%E7%AD%89%E5%BC%8F"><span class="toc-text">使用恒等式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Null-coalescing-operator"><span class="toc-text">Null coalescing operator</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%EF%BC%88%E6%9C%80%E5%A5%BD%E5%B0%91%E4%BA%8E2%E4%B8%AA%EF%BC%89"><span class="toc-text">函数参数（最好少于2个）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%90%8D%E5%BA%94%E4%BD%93%E7%8E%B0%E4%BB%96%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%E4%BA%8B"><span class="toc-text">函数名应体现他做了什么事</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E9%87%8C%E5%BA%94%E5%BD%93%E5%8F%AA%E6%9C%89%E4%B8%80%E5%B1%82%E6%8A%BD%E8%B1%A1abstraction"><span class="toc-text">函数里应当只有一层抽象abstraction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E8%A6%81%E7%94%A8flag%E4%BD%9C%E4%B8%BA%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-text">不要用flag作为函数的参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E5%89%AF%E4%BD%9C%E7%94%A8"><span class="toc-text">避免副作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E8%A6%81%E5%86%99%E5%85%A8%E5%B1%80%E5%87%BD%E6%95%B0"><span class="toc-text">不要写全局函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-text">不要使用单例模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="toc-text">封装条件语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E7%94%A8%E5%8F%8D%E4%B9%89%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="toc-text">避免用反义条件判断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="toc-text">避免条件判断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5-part-1"><span class="toc-text">避免类型检查 (part 1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5-part-2"><span class="toc-text">避免类型检查 (part 2)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E9%99%A4%E5%83%B5%E5%B0%B8%E4%BB%A3%E7%A0%81"><span class="toc-text">移除僵尸代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">对象和数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-getters-%E5%92%8C-setters"><span class="toc-text">使用 getters 和 setters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%99%E5%AF%B9%E8%B1%A1%E4%BD%BF%E7%94%A8%E7%A7%81%E6%9C%89%E6%88%96%E5%8F%97%E4%BF%9D%E6%8A%A4%E7%9A%84%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="toc-text">给对象使用私有或受保护的成员变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB"><span class="toc-text">类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%91%E7%94%A8%E7%BB%A7%E6%89%BF%E5%A4%9A%E7%94%A8%E7%BB%84%E5%90%88"><span class="toc-text">少用继承多用组合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E8%BF%9E%E8%B4%AF%E6%8E%A5%E5%8F%A3"><span class="toc-text">避免连贯接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8-final-%E7%B1%BB"><span class="toc-text">推荐使用 final 类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SOLID"><span class="toc-text">SOLID</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99"><span class="toc-text">单一职责原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99"><span class="toc-text">开闭原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99"><span class="toc-text">里氏替换原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99"><span class="toc-text">接口隔离原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99"><span class="toc-text">依赖倒置原则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%AB%E5%86%99%E9%87%8D%E5%A4%8D%E4%BB%A3%E7%A0%81-DRY"><span class="toc-text">别写重复代码 (DRY)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/olddoge">
+            <i class="iconfont icon-github"></i>
+          </a>
         </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://www.themoviedb.org/u/olddoge" title="https:&#x2F;&#x2F;www.themoviedb.org&#x2F;u&#x2F;olddoge" rel="noopener" target="_blank">TMDB</a>
-        </li>
+      
     </ul>
   </div>
-
-      </div>
-
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © Oranges 2021</a>
+        
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
   
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">@Matthew</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
   </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
 
         
 
-
-
-
-
-
-
-
       </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<script>
+    </div>
+  <script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 preloadRatio: 1,
