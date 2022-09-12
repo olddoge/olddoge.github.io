@@ -11,7 +11,7 @@
   
   <title>
     
-      江同志如何走出舒适圈？ 
+      使用 Navicat 连接群晖的 PostgreSQL 数据库 
       
       
       |
@@ -134,19 +134,19 @@ MathJax = {
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">江同志如何走出舒适圈？</div>
+      <div class="post-title">使用 Navicat 连接群晖的 PostgreSQL 数据库</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime" title="更新时间"></i>
-          2022-08-21 14:04:08
+          2022-09-12 19:03:23
         </span>
         
               <span class="post-categories">
                 <i class="iconfont icon-bookmark" title="分类"></i>
                 
                 <span class="span--category">
-                  <a href="/categories/%E6%80%9D%E8%80%83/" title="思考">
-                    <b>#</b> 思考
+                  <a href="/categories/%E6%8C%87%E5%8D%97/" title="指南">
+                    <b>#</b> 指南
                   </a>
                 </span>
                 
@@ -156,20 +156,14 @@ MathJax = {
                 <i class="iconfont icon-tags" title="标签"></i>
                 
                 <span class="span--tag">
-                  <a href="/tags/%E6%BC%94%E8%AE%B2/" title="演讲">
-                    <b>#</b> 演讲
+                  <a href="/tags/%E6%95%99%E7%A8%8B/" title="教程">
+                    <b>#</b> 教程
                   </a>
                 </span>
                 
                 <span class="span--tag">
-                  <a href="/tags/%E8%BD%AC%E8%BD%BD/" title="转载">
-                    <b>#</b> 转载
-                  </a>
-                </span>
-                
-                <span class="span--tag">
-                  <a href="/tags/%E6%84%9F%E6%82%9F/" title="感悟">
-                    <b>#</b> 感悟
+                  <a href="/tags/PostgreSQL/" title="PostgreSQL">
+                    <b>#</b> PostgreSQL
                   </a>
                 </span>
                 
@@ -177,63 +171,45 @@ MathJax = {
           
       </div>
       <div class="markdown-body">
-        <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/pictures/post/2022/08/01.png" alt="01"><br>江同志第一份工作，上海粮服实验厂（海宁洋行）旧址。</p>
-<h2 id="01"><a href="#01" class="headerlink" title="01"></a>01</h2><p>时间来到1947年夏天，从交通大学毕业的江同志入职上海粮服实验厂。</p>
-<p>这是他的第一份工作。</p>
-<p>粮服实验厂是益民食品一厂的前身，当时正收购了美商的海宁洋行，又从海外引进了设备，企业实力在上海乃至中国的食品行业都是首屈一指的。</p>
-<p>在解放前风雨飘摇的环境里，能找到这样一份工作，想必是让人满意的。而且，江同志的岗位在电力供应部工程科，对学电机的他来说也算专业对口。</p>
-<p>从大学生到工程师，他要面对从理论到实践的转变。</p>
-<p>有一天，工人让江同志修理一台坏掉的马达。他却有点措手不及。在大学里虽然学过微积分，但没有学过修马达。</p>
-<p>他意识到，自己必须成为“修理东西的行家”。</p>
-<p><strong>个人能力要匹配企业需求，才能体现出价值。</strong> 1947年的粮服实验厂需要马达，不需要微积分。</p>
-<p>如果江同志当时说，“我不会”或者“这不该我负责”，那兴许没有以后的故事了。</p>
-<p>不久，江同志就担任了动力车间主任，负责为全厂的生产提供能源和动力保障，工作涉及的领域更广。</p>
-<p>据《日出江花》第一卷记载，有一回工厂的锅炉坏了。锅炉属于热能工程，跟电机关系不大。</p>
-<p>可江同志“把外衣一脱”，就钻进高温的炉膛检查，竟然很快发现了问题所在。</p>
-<p>面对陌生领域，无非就是学与不学，做与不做，试还是不试。</p>
-<p><strong>只要往前走一步，就是跳脱舒适圈。</strong></p>
-<p>当时见证了江同志修锅炉的老工人回忆说，“益民食品厂有他和没他是不一样的啊！”</p>
-<h2 id="02"><a href="#02" class="headerlink" title="02"></a>02</h2><p>为什么在职业生涯中，有的人能快速晋升，而有的人总是原地踏步呢？</p>
-<p>除去背景、天赋和机遇，我发现“跑得快”的人都有个共同点：<strong>爱折腾自己。</strong></p>
-<p>话说进厂两年多后，上海迎来了解放，粮服实验厂被华东工业部整合为旗下的益民食品一厂。江同志凭借共产党员的身份和出色的工作能力，被任命为主管生产的副厂长。</p>
-<p>他不仅是年轻的副厂长，而且从动力系统这样的支撑部门，切换到了食品生产的主营业务上。</p>
-<p>当时，工厂的主要产品是蛋黄粉和蛋白干，产品优质，可用于出口换汇。江同志一上任，很快恢复了因战乱中断的蛋类产品的生产。</p>
-<p>可他依然不满足，他的想法是：要做冰淇淋。</p>
-<p>当时，美商的“美女牌”冷饮系列很受欢迎，而益民厂也有冷饮生产线，为什么不利用起来呢？</p>
-<p>在这件事情上，江同志做的事远远超过一个“生产副厂长”该做的：</p>
-<p>他想出了品牌名称，而且请专人设计logo；他安排人联络媒体，大量投放“软文”；他动用大卡车沿街巡游，还组织棒冰销售的“流动大军”。</p>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/pictures/post/2022/08/02.jpeg" alt="02"><br>1950年夏天“光明牌”花车巡游场景。</p>
-<p>这个新创的品牌，就是如今鼎鼎大名的“光明牌”。在1950年的夏天，“光明牌”横空出世，迅速占领市场。</p>
-<p>这段故事详细记录在《日出江花》第一卷里。他的一整套打法，组合了品牌、媒介、渠道等等手段，读来让我这个做营销的人都十分佩服。</p>
-<p>他是无师自通的吗？</p>
-<p>江同志在宣传上的天赋固然有，但我认为，他背后一定是下了功夫去研究的。</p>
-<p>一个管生产的副厂长，硬是搞出了一个新品牌。换做我，这样的成就够吹一辈子。</p>
-<p>那年也是一个虎年，他只有24岁。</p>
-<h2 id="03"><a href="#03" class="headerlink" title="03"></a>03</h2><p>成功的底层逻辑往往都是相通的。</p>
-<p><strong>那些让人不舒适的难题，都是成功的垫脚石。</strong></p>
-<p>“光明牌”的产品在上海叫响之后，不光美商不高兴，很多食品行业的私企老板也不高兴。</p>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/pictures/post/2022/08/03.png" alt="03"></p>
-<p>食品行业间有行业公会，类似于今天的各种协会。益民厂虽是国企，但也是行业公会的一员。江同志作为企业的代表，需要出席公会举办的“星期聚餐会”。</p>
-<p>对他这样一个技术出身的“企业家”来说，或许是一个难题。</p>
-<p>聚会的参与者大多是上海滩的资本家，江同志的年龄和“盛名”，让他不得不面对挑衅。</p>
-<p>在饭桌上，资本家们一来就质问他：</p>
-<p>从前美商挤压我们，现在怎么你们国企也挤压我们。</p>
-<p>这些人说的，自然是“光明牌”行销，“抢”了他们市场份额的事。</p>
-<p>据书中记载，江同志理直气壮地说：</p>
-<p>你们这样说就不对了…我们是在为国家争光，你们过去和美商斗不也是为国家争光吗？现在不是把你们压垮，而是要和你们携起手来。</p>
-<p>江同志后来回忆说：“那时每次吃饭，资本家都会给我出一些难题，争论很激烈。”</p>
-<p>这难题也可算作他的“外事”初体验吧。</p>
-<p>……</p>
-<p>上面三段故事，正好是江同志工作生涯的前三年。短短的三年，他就完成了从见习生、车间主任到副厂长的跨越。</p>
-<p>这里面当然要考虑到历史的进程，但与个人的奋斗绝对是密不可分的。</p>
-<p><strong>当我们在讨论“走出舒适圈”时，不是在否定人追求舒适的本能，而是不能因为追求眼前的舒适，放弃未来的进步。</strong></p>
-<p>那样啊，是不行的。</p>
+        <p>群晖的类似 Moments、Audio station、Video Station 等套件都是使用群晖内置的一个 PostgreSQL 数据库，记录一下连接这个数据库的方法。温馨提示： 群晖多个套件均依赖此数据库，没有一定基础的同学，请做好备份，自行评估操作风险。</p>
+<h1 id="创建数据库用户并授权"><a href="#创建数据库用户并授权" class="headerlink" title="创建数据库用户并授权"></a>创建数据库用户并授权</h1><p>打开ssh 连接并群晖获取 root 权限，切换到 posgres 用户，进入 psql 交互命令行，创建新用户并授权：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 切换到postgres用户</span></span><br><span class="line">su - postgres</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入posql交互</span></span><br><span class="line">psql</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建用户</span></span><br><span class="line">CREATE USER 用户名 PASSWORD &#x27;密码&#x27;;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 授权所有权限</span></span><br><span class="line">ALTER USER 用户名 WITH SUPERUSER CREATEDB;</span><br><span class="line">ALTER USER 用户名 WITH CREATEDB;</span><br><span class="line">ALTER USER 用户名 WITH CREATEROLE;</span><br><span class="line">ALTER USER 用户名 WITH REPLICATION;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看用户列表 看是否执行成功</span></span><br><span class="line">\du</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 退出psql</span></span><br><span class="line">\q</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 退出postgres用户，回到root下</span></span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<p>修改 <code>pg_hba.conf</code>，将新建的用户授权登陆：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/postgresql/pg_hba.conf</span><br></pre></td></tr></table></figure>
+
+<p>原始内容为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span><br><span class="line"></span><br><span class="line">local   all             postgres                                peer map=pg_root</span><br><span class="line">local   all             all                                     peer</span><br></pre></td></tr></table></figure>
+
+<p>我们新增一行，<code>host all 用户名 127.0.0.1/0 md5</code>，修改之后内容为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span><br><span class="line">host    all             用户名           127.0.0.1/0             md5</span><br><span class="line">local   all             postgres                                peer map=pg_root</span><br><span class="line">local   all             all                                     peer</span><br></pre></td></tr></table></figure>
+
+<p>重新载入配置文件:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su -l postgres -c &quot;exec /usr/bin/pg_ctl reload&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="修改群晖-sshd-配置，允许端口转发"><a href="#修改群晖-sshd-配置，允许端口转发" class="headerlink" title="修改群晖 sshd 配置，允许端口转发"></a>修改群晖 sshd 配置，允许端口转发</h1><p>不进行此步操作，后面使用 <code>ssh</code> 隧道连接数据库的时候，终端会出现类似 <code>channel 4: open failed: administratively prohibited: open failed</code> 的报错。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>在约 <code>86</code> 行，找到<code>AllowTcpForwarding no</code> 将其改为 <code>AllowTcpForwarding yes</code>,保存退出。<br>直接登陆网页的 DSM 控制台，依次进入 控制面板——终端机和SNMP——终端机，将“启动SSH功能”取消勾选，应用之后，重新勾选并应用，即可重启 sshd 服务。</p>
+<h1 id="使用-Navicat-连接数据库"><a href="#使用-Navicat-连接数据库" class="headerlink" title="使用 Navicat 连接数据库"></a>使用 Navicat 连接数据库</h1><p>新建——PostgreSQL，连接名随意，主机填写<code>127.0.0.1</code>，端口填写 PostgreSQL 监听的端口 5432，初始数据库填写 <code>postgres</code>，用户名、密码为前面新建数据库用户设置的，在 “SSH” 页选择使用 SSH 通道，IP、用户名、密码使用群晖的 ssh 连接信息即可。</p>
+<p>　　使用 macOS 的同学如果 Navicat 自带的 SSH 通道兼容性有问题的，可以本地使用SSH隧道进行端口转发：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1234为本地监听的端口，5432 为群晖上postgreSQL的监听端口</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> root@192.168.1.2 -p 22 表示Alliot的群晖用户名为root，IP为192.168.1.2，sshd端口为22</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh -L 5432:127.0.0.1:1234 root@192.168.1.2 -p 22 (我是用这句成功的)</span></span><br><span class="line">ssh -L 5432:127.0.0.1:5432 root@192.168.1.2 -p 22</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看macOS本地监听的端口，出现1234端口的监听则OK</span></span><br><span class="line">netstat -AaLlnW</span><br></pre></td></tr></table></figure>
+<p>之后 Navicat 连接时，端口填 5432 。</p>
+<h1 id="删除用户，回收权限"><a href="#删除用户，回收权限" class="headerlink" title="删除用户，回收权限"></a>删除用户，回收权限</h1><p>操作完成后，如果需要回收权限，恢复到原样。只需要删除我们新增的那行 <code>pg_hba.conf</code> 配置文件的内容。进入 psql 交互命令中，执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop user 用户名;</span><br></pre></td></tr></table></figure>
+
+<p>即可。</p>
+
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2022/08/c7e62ac275f6/" target="_self">
+              <a href="/2022/08/ce2e6a4ad5c6/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>上一页</span>
               </a>
@@ -242,15 +218,15 @@ MathJax = {
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime" title="更新时间"></i>
-              2022-08-21 14:04:08
+              2022-09-12 19:03:23
             </span>
             
                   <span class="post-categories">
                     <i class="iconfont icon-bookmark" title="分类"></i>
                     
                     <span class="span--category">
-                      <a href="/categories/%E6%80%9D%E8%80%83/" title="思考">
-                        <b>#</b> 思考
+                      <a href="/categories/%E6%8C%87%E5%8D%97/" title="指南">
+                        <b>#</b> 指南
                       </a>
                     </span>
                     
@@ -260,20 +236,14 @@ MathJax = {
                     <i class="iconfont icon-tags" title="标签"></i>
                     
                     <span class="span--tag">
-                      <a href="/tags/%E6%BC%94%E8%AE%B2/" title="演讲">
-                        <b>#</b> 演讲
+                      <a href="/tags/%E6%95%99%E7%A8%8B/" title="教程">
+                        <b>#</b> 教程
                       </a>
                     </span>
                     
                     <span class="span--tag">
-                      <a href="/tags/%E8%BD%AC%E8%BD%BD/" title="转载">
-                        <b>#</b> 转载
-                      </a>
-                    </span>
-                    
-                    <span class="span--tag">
-                      <a href="/tags/%E6%84%9F%E6%82%9F/" title="感悟">
-                        <b>#</b> 感悟
+                      <a href="/tags/PostgreSQL/" title="PostgreSQL">
+                        <b>#</b> PostgreSQL
                       </a>
                     </span>
                     
@@ -281,11 +251,6 @@ MathJax = {
               
           </div>
           <div class="post-foot-prev">
-            
-              <a href="/2022/09/157c1b2f6f39/" target="_self">
-                <span>下一页</span>
-                <i class="iconfont icon-chevronright"></i>
-              </a>
             
           </div>
         </div>
@@ -298,7 +263,7 @@ MathJax = {
   <div class="post-catalog hidden" id="catalog">
     <div class="title">目录</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01"><span class="toc-text">01</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02"><span class="toc-text">02</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03"><span class="toc-text">03</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83"><span class="toc-text">创建数据库用户并授权</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%BE%A4%E6%99%96-sshd-%E9%85%8D%E7%BD%AE%EF%BC%8C%E5%85%81%E8%AE%B8%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="toc-text">修改群晖 sshd 配置，允许端口转发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Navicat-%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">使用 Navicat 连接数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7%EF%BC%8C%E5%9B%9E%E6%94%B6%E6%9D%83%E9%99%90"><span class="toc-text">删除用户，回收权限</span></a></li></ol>
     </div>
   </div>
 

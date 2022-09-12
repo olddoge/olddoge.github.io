@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>使用 Navicat 连接群晖的 PostgreSQL 数据库</title>
+      <link href="/2022/09/157c1b2f6f39/"/>
+      <url>/2022/09/157c1b2f6f39/</url>
+      
+        <content type="html"><![CDATA[<p>群晖的类似 Moments、Audio station、Video Station 等套件都是使用群晖内置的一个 PostgreSQL 数据库，记录一下连接这个数据库的方法。温馨提示： 群晖多个套件均依赖此数据库，没有一定基础的同学，请做好备份，自行评估操作风险。</p><h1 id="创建数据库用户并授权"><a href="#创建数据库用户并授权" class="headerlink" title="创建数据库用户并授权"></a>创建数据库用户并授权</h1><p>打开ssh 连接并群晖获取 root 权限，切换到 posgres 用户，进入 psql 交互命令行，创建新用户并授权：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 切换到postgres用户</span></span><br><span class="line">su - postgres</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入posql交互</span></span><br><span class="line">psql</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建用户</span></span><br><span class="line">CREATE USER 用户名 PASSWORD &#x27;密码&#x27;;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 授权所有权限</span></span><br><span class="line">ALTER USER 用户名 WITH SUPERUSER CREATEDB;</span><br><span class="line">ALTER USER 用户名 WITH CREATEDB;</span><br><span class="line">ALTER USER 用户名 WITH CREATEROLE;</span><br><span class="line">ALTER USER 用户名 WITH REPLICATION;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看用户列表 看是否执行成功</span></span><br><span class="line">\du</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 退出psql</span></span><br><span class="line">\q</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 退出postgres用户，回到root下</span></span><br><span class="line">exit</span><br></pre></td></tr></table></figure><p>修改 <code>pg_hba.conf</code>，将新建的用户授权登陆：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/postgresql/pg_hba.conf</span><br></pre></td></tr></table></figure><p>原始内容为：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span><br><span class="line"></span><br><span class="line">local   all             postgres                                peer map=pg_root</span><br><span class="line">local   all             all                                     peer</span><br></pre></td></tr></table></figure><p>我们新增一行，<code>host all 用户名 127.0.0.1/0 md5</code>，修改之后内容为：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span><br><span class="line">host    all             用户名           127.0.0.1/0             md5</span><br><span class="line">local   all             postgres                                peer map=pg_root</span><br><span class="line">local   all             all                                     peer</span><br></pre></td></tr></table></figure><p>重新载入配置文件:</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su -l postgres -c &quot;exec /usr/bin/pg_ctl reload&quot;</span><br></pre></td></tr></table></figure><h1 id="修改群晖-sshd-配置，允许端口转发"><a href="#修改群晖-sshd-配置，允许端口转发" class="headerlink" title="修改群晖 sshd 配置，允许端口转发"></a>修改群晖 sshd 配置，允许端口转发</h1><p>不进行此步操作，后面使用 <code>ssh</code> 隧道连接数据库的时候，终端会出现类似 <code>channel 4: open failed: administratively prohibited: open failed</code> 的报错。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure><p>在约 <code>86</code> 行，找到<code>AllowTcpForwarding no</code> 将其改为 <code>AllowTcpForwarding yes</code>,保存退出。<br>直接登陆网页的 DSM 控制台，依次进入 控制面板——终端机和SNMP——终端机，将“启动SSH功能”取消勾选，应用之后，重新勾选并应用，即可重启 sshd 服务。</p><h1 id="使用-Navicat-连接数据库"><a href="#使用-Navicat-连接数据库" class="headerlink" title="使用 Navicat 连接数据库"></a>使用 Navicat 连接数据库</h1><p>新建——PostgreSQL，连接名随意，主机填写<code>127.0.0.1</code>，端口填写 PostgreSQL 监听的端口 5432，初始数据库填写 <code>postgres</code>，用户名、密码为前面新建数据库用户设置的，在 “SSH” 页选择使用 SSH 通道，IP、用户名、密码使用群晖的 ssh 连接信息即可。</p><p>　　使用 macOS 的同学如果 Navicat 自带的 SSH 通道兼容性有问题的，可以本地使用SSH隧道进行端口转发：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1234为本地监听的端口，5432 为群晖上postgreSQL的监听端口</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> root@192.168.1.2 -p 22 表示Alliot的群晖用户名为root，IP为192.168.1.2，sshd端口为22</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh -L 5432:127.0.0.1:1234 root@192.168.1.2 -p 22 (我是用这句成功的)</span></span><br><span class="line">ssh -L 5432:127.0.0.1:5432 root@192.168.1.2 -p 22</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看macOS本地监听的端口，出现1234端口的监听则OK</span></span><br><span class="line">netstat -AaLlnW</span><br></pre></td></tr></table></figure><p>之后 Navicat 连接时，端口填 5432 。</p><h1 id="删除用户，回收权限"><a href="#删除用户，回收权限" class="headerlink" title="删除用户，回收权限"></a>删除用户，回收权限</h1><p>操作完成后，如果需要回收权限，恢复到原样。只需要删除我们新增的那行 <code>pg_hba.conf</code> 配置文件的内容。进入 psql 交互命令中，执行：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop user 用户名;</span><br></pre></td></tr></table></figure><p>即可。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+            <tag> PostgreSQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>江同志如何走出舒适圈？</title>
       <link href="/2022/08/ce2e6a4ad5c6/"/>
       <url>/2022/08/ce2e6a4ad5c6/</url>
@@ -279,11 +306,11 @@
       
         <tags>
             
-            <tag> 规范 </tag>
+            <tag> 指南 </tag>
             
             <tag> RESTful </tag>
             
-            <tag> 指南 </tag>
+            <tag> 规范 </tag>
             
         </tags>
       
@@ -364,11 +391,11 @@
       
         <tags>
             
+            <tag> RESTful </tag>
+            
             <tag> API </tag>
             
             <tag> HTTP </tag>
-            
-            <tag> RESTful </tag>
             
             <tag> 设计指南 </tag>
             
@@ -422,9 +449,9 @@
       
         <tags>
             
-            <tag> PHP </tag>
-            
             <tag> 规范 </tag>
+            
+            <tag> PHP </tag>
             
         </tags>
       
@@ -476,9 +503,9 @@
       
         <tags>
             
-            <tag> PHP </tag>
-            
             <tag> 规范 </tag>
+            
+            <tag> PHP </tag>
             
         </tags>
       
