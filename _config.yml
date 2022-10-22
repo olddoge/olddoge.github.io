@@ -125,5 +125,13 @@ deploy:
       #github: https://github.com/olddoge/olddoge.github.io  # 国内无法访问
       olddoge: git@codefever.olddoge.cn:Daniel/daniel_blog.git # 我的阿里云服务器的 codefever
     branch: master
+  - type: rsync
+    host: 120.27.133.113
+    user: root
+    port: 9222
+    root: /www/wwwroot/blog
+    delete: false
+    verbose: true
+    ignore_errors: false
   # Rsync 部署到云服务器
   # 需安装 npm install hexo-deployer-rsync --save

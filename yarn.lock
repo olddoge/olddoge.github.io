@@ -657,8 +657,8 @@
     "nunjucks" "^3.2.1"
 
 "hexo-deployer-rsync@^1.0.0":
-  "integrity" "sha1-dGS7kweLlXrWZTxz8yYnkCWh2OI="
-  "resolved" "https://registry.npm.taobao.org/hexo-deployer-rsync/download/hexo-deployer-rsync-1.0.0.tgz"
+  "integrity" "sha512-hylGRNEHctWsjHs67VZefvrOGwzcZ4gPQ7RdVJdbWYA/OQ75IE52vDe+N9jpcfOWl8Tkv8fbX1Afuh44cv2DUw=="
+  "resolved" "https://registry.npmjs.org/hexo-deployer-rsync/-/hexo-deployer-rsync-1.0.0.tgz"
   "version" "1.0.0"
   dependencies:
     "chalk" "^2.4.1"
