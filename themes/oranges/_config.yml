@@ -99,6 +99,11 @@ navbar:
     path: /friends/
     key: friends
   -
+    name: 坂道46
+    enable: true
+    path: /sakamichi46/
+    key: sakamichi46  
+  -
     name: 关于
     enable: true
     path: /about/
