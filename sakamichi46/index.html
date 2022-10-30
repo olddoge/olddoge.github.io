@@ -11,8 +11,8 @@
   
   <title>
     
-      标签 
-       : RESTful
+      坂道46 
+      
       
       |
     
@@ -109,39 +109,87 @@
 
 
       <div class="flex-container">
-        <!-- 标签详情页，展示某个标签下的文章列表，url形式：https://yoursite/tags/某个标签/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<div class="container tag-details">
-  <div class="content-title">
-    <h2>
-      <span>RESTful</span>
-    </h2>
+<!-- LaTex Display -->
+<!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> -->
+<script src="https://cdn.bootcdn.net/ajax/libs/babel-polyfill/7.12.1/polyfill.min.js"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">坂道46</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="更新时间"></i>
+          2022-10-30 20:53:47
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <h2 id="乃木坂46"><a href="#乃木坂46" class="headerlink" title="乃木坂46"></a>乃木坂46</h2><h2 id="樱坂46"><a href="#樱坂46" class="headerlink" title="樱坂46"></a>樱坂46</h2><h2 id="日向坂46"><a href="#日向坂46" class="headerlink" title="日向坂46"></a>日向坂46</h2><ul>
+<li><a href="/sakamichi46/hinatazaka46/blog">正源司陽子ブログ存档</a></li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="更新时间"></i>
+              2022-10-30 20:53:47
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
   </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="RESTful 详解">
-        <span class="time-m-d">2021-12-02</span>
-        <a href="/2021/12/6907dde1b0f1/">
-          <span>RESTful 详解</span>
-        </a>
-      </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">目录</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%83%E6%9C%A8%E5%9D%8246"><span class="toc-text">乃木坂46</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%B1%E5%9D%8246"><span class="toc-text">樱坂46</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%90%91%E5%9D%8246"><span class="toc-text">日向坂46</span></a></li></ol>
     </div>
+  </div>
+
   
-    <div class="post-list">
-      <div class="post-item" title="HTTP API 设计指南">
-        <span class="time-m-d">2021-11-16</span>
-        <a href="/2021/11/5a52d619023a/">
-          <span>HTTP API 设计指南</span>
-        </a>
-      </div>
-    </div>
-  
-  <nav class="post-navigation">
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-    <span class="page-num">1 / 1</span>
-    
-  </nav>
-</div>
+  </div>
+
 
         <div class="footer">
   <div class="social">
