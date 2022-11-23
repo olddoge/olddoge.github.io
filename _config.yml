@@ -122,7 +122,7 @@ deploy:
     repo:
       #alicloud: ssh://root@120.27.133.113:9222/mnt/gitrepo/MatthewBlog  # 自己的服务器
       gitee: https://gitee.com/olddoge/matthew  # 无page服务，纯备份
-      #github: https://github.com/olddoge/olddoge.github.io  # 国内无法访问
+      github: https://github.com/olddoge/olddoge.github.io  # 国内无法访问
       olddoge: git@codefever.olddoge.cn:Daniel/daniel_blog.git # 我的阿里云服务器的 codefever
     branch: master
   - type: rsync
