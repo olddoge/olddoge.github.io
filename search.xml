@@ -387,11 +387,11 @@
       
         <tags>
             
-            <tag> 指南 </tag>
+            <tag> 规范 </tag>
             
             <tag> RESTful </tag>
             
-            <tag> 规范 </tag>
+            <tag> 指南 </tag>
             
         </tags>
       
@@ -472,11 +472,11 @@
       
         <tags>
             
-            <tag> RESTful </tag>
-            
             <tag> API </tag>
             
             <tag> HTTP </tag>
+            
+            <tag> RESTful </tag>
             
             <tag> 设计指南 </tag>
             
@@ -530,9 +530,9 @@
       
         <tags>
             
-            <tag> 规范 </tag>
-            
             <tag> PHP </tag>
+            
+            <tag> 规范 </tag>
             
         </tags>
       
@@ -584,9 +584,9 @@
       
         <tags>
             
-            <tag> 规范 </tag>
-            
             <tag> PHP </tag>
+            
+            <tag> 规范 </tag>
             
         </tags>
       
